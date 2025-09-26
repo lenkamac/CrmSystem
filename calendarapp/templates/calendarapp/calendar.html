@@ -1,5 +1,156 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-	calendar
+
+    {% block css %}
+    	<link rel="stylesheet" href="{% static 'calendarapp/css/calendar.css' %}">
+    {% endblock %}
+
+    {% include 'core/partials/offcanvas_menu.html' %}
+
+    <div class="container-fluid">
+        <div class="row mt-lg-1">
+            <div class="col-lg-12 ">
+                <h1 class="text-center pt-lg-2" style="width:100vw;">Calendar</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-9">
+                <div id="calendar"></div>
+            </div>
+            <div class="col-lg-3">
+                <h3 class="text-start pt-lg-4">Upcoming Events  <button class="btn p-2 my-lg-2" data-bs-toggle="modal" data-bs-target="#addEventModal"
+                        id="addEventBtn"><i class="fa-solid fa-plus"></i>Add Event
+                </button></h3>
+                <ul id="upcoming-events-list" class="list-group"></ul>
+                <div id="upcoming-pagination" class="mt-2 text-center"></div>
+
+            </div>
+
+            <!-- Event Action Modal -->
+            <div class="modal fade" id="eventActionModal" tabindex="-1" aria-labelledby="eventActionModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="eventActionModalLabel">Event Actions</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p id="eventActionModalTitle"><!-- Event title here --></p>
+                            <input type="hidden" id="eventActionEventId">
+                            <button id="editEventBtn" class="btn btn-primary me-2">Edit</button>
+                            <button id="deleteEventBtn" class="btn btn-danger">Delete</button>
+                            <button id="detailEventBtn" type="button" class="btn btn-info">Show Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Event Modal -->
+            <div class="modal fade" id="addEventModal" tabindex="-1" aria-labelledby="addEventModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <form id="addEventForm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="addEventModalLabel">Add New Event</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="eventTitle" class="form-label">Title</label>
+                                    <input type="text" class="form-control" id="eventTitle" name="title" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="eventStart" class="form-label">Start</label>
+                                    <input type="datetime-local" class="form-control" id="eventStart" name="start" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="eventEnd" class="form-label">End</label>
+                                    <input type="datetime-local" class="form-control" id="eventEnd" name="end">
+                                </div>
+                                    <div class="mb-3">
+                                    <label for="eventDesc" class="form-label">Description</label>
+                                    <textarea class="form-control" id="eventDesc" name="description"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                              <button type="submit" class="btn btn-primary">Add Event</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+            <!-- Edit Event Modal -->
+            <div class="modal fade" id="editEventModal" tabindex="-1">
+                <div class="modal-dialog">
+                    <form id="editEventForm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5>Edit Event</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" id="editEventId">
+                                <div class="mb-3">
+                                    <label for="editEventTitle" class="form-label">Title</label>
+                                    <input type="text" id="editEventTitle" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editEventStart" class="form-label">Start date, time</label>
+                                    <input type="datetime-local" id="editEventStart" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editEventEnd" class="form-label">End date, time</label>
+                                    <input type="datetime-local" id="editEventEnd" class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label>Description</label>
+                                    <textarea id="editEventDesc" class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Event Details Modal -->
+            <div class="modal fade" id="eventDetailModal" tabindex="-1" aria-labelledby="eventDetailModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="eventDetailModalLabel">Event Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <p><strong>Title:</strong> <span id="detailEventTitle"></span></p>
+                    <p><strong>Start:</strong> <span id="detailEventStart"></span></p>
+                    <p><strong>End:</strong> <span id="detailEventEnd"></span></p>
+                    <p><strong>Description:</strong> <span id="detailEventDesc"></span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.min.js"></script>
+    <script>
+        // Pass event URL from Django to JS file
+        var calendarEventsUrl = "{% url 'calendarapp:events_json' %}";
+    </script>
+    <script src="{% static 'calendarapp/calendarapp.js' %}"></script>
+
+
 {% endblock %}

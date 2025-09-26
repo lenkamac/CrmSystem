@@ -1,0 +1,179 @@
+ body {
+    display: flex;
+    justify-content: center;  /* horizontal centering */
+    align-items: center;      /* vertical centering */
+    min-height: 100vh;
+  }
+
+  #calendar {
+    width: 75%;
+    min-height: 60vh;   /* Adjust as needed (e.g., 60vh, 80vh) */
+    height: 65vh;       /* You can use a fixed px or vh value */
+    background: white;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    border-radius: 8px;
+    margin-left: 320px;
+    margin-top: 25px;
+    padding: 7px;
+  }
+
+  /* Make sure the day grid table uses collapsed borders */
+.fc-theme-standard .fc-scrollgrid,
+.fc-theme-standard td,
+.fc-theme-standard th {
+  border: 1px solid #697272;
+  border-collapse: collapse !important;
+}
+
+/* Remove doubled-up right/bottom borders */
+.fc-theme-standard td:last-child,
+.fc-theme-standard th:last-child {
+  border-right: none;
+}
+.fc-theme-standard tr:last-child > td,
+.fc-theme-standard tr:last-child > th {
+  border-bottom: none;
+}
+
+
+  #upcoming-events-list {
+    margin-right: 35px;
+  }
+  #upcoming-events-list li {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    height: auto;
+  }
+
+
+  /* Base style for all calendar buttons */
+.fc .fc-button {
+  background: #4f8a8b;
+  color: #fff;
+  border: 1px solid #386471;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-weight: bold;
+  transition: background 0.2s, color 0.2s;
+}
+
+/* Active (selected) button */
+.fc .fc-button.fc-button-active {
+  background: #b5daf3;
+  color: #3a435e;
+}
+
+/* Button hover */
+.fc .fc-button:hover, .fc .fc-button:focus {
+  background: #43b29d;
+  color: #fff;
+}
+
+/* Disabled button */
+.fc .fc-button.fc-button-disabled {
+  background: #cccccc;
+  color: #999999;
+  border-color: #bbbbbb;
+}
+
+/* Specific button: Today button */
+.fc .fc-today-button {
+  background: #849c9d;
+  color: white;
+}
+
+/* Make toolbar spacing consistent */
+.fc .fc-toolbar {
+  margin-bottom: 20px;
+}
+
+#addEventBtn {
+  background: #0d3f3f;
+  color: #fff;
+  font-size: 1.1rem;
+  border: 1px solid #386471;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-weight: bold;
+  margin-left: 20px;
+  transition: background 0.2s, color 0.2s;
+}
+
+/* Example for a generic modal dialog */
+.modal-dialog {
+    width: auto;    /* Change this value as needed (default is usually 500px) */
+    min-width: 25vw;        /* Make it larger, e.g., 70% of viewport */   /* Optional: ensure a sensible minimum width */
+}
+
+.modal-content {
+    min-height: 25vh; /* Make taller if needed */
+    /* optionally, set max-height if needed */
+}
+
+
+/* Ensure the calendar table uses border-collapse for tight grid lines */
+.fc .fc-scrollgrid {
+  border-collapse: collapse !important;
+}
+
+/* Add all-side border to each day cell for maximum inner line visibility */
+.fc-daygrid-day {
+  border: 1px solid #d3d3d3 !important;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+/* Remove double border on rightmost (last) cell and bottom row */
+.fc-daygrid-day:last-child {
+  border-right: none !important;
+}
+.fc-daygrid-row:last-child .fc-daygrid-day {
+  border-bottom: none !important;
+}
+
+.fc-daygrid-day-frame {
+  border: 1px solid #d3d3d3 !important;
+  border-radius: 0;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* Edge case helper: Remove border on calendar's outer frame for smooth look */
+.fc .fc-scrollgrid-section > td {
+  border: none !important;
+}
+
+/* Show strong grid lines in time-based (timeGrid) views of FullCalendar 6+ */
+
+/* Vertical lines between days */
+.fc-timegrid-col {
+  border-right: 1px solid #d3d3d3 !important;
+  background: #fff;
+}
+
+.fc-timegrid-col:last-child {
+  border-right: none !important;
+}
+
+/* Horizontal lines between time slots */
+.fc-timegrid-slot {
+  border-bottom: 1px solid #e0e0e0 !important;
+  background: #fff;
+}
+
+/* Make the outer box a bit rounder and separate from background */
+.fc-timegrid-body {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #b0b0b0;
+}
+
+/* Remove possible double borders at the bottom */
+.fc-timegrid-slots tr:last-child .fc-timegrid-slot {
+  border-bottom: none !important;
+}
+
+/* If using 'timeGrid' view and want a visible line on now indicator */
+.fc .fc-timegrid-now-indicator-line {
+  border-top: 2px solid #43b29d !important;
+}

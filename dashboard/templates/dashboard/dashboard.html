@@ -1,5 +1,102 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dashboard{% endblock %}
 
 {% block content %}
-	dashboard
+
+    {% block css %}
+    	<link rel="stylesheet" href="{% static 'dashboard/dashboard.css' %}">
+    {% endblock %}
+
+    {% include 'core/partials/offcanvas_menu.html' %}
+
+    <!-- Page Content -->
+    <div class="container vh-100 w-100 my-lg-4">
+
+        <div class="row mx-lg-5 justify-content-center">
+            <div class="col-lg-10">
+                <div class="text-center">
+                    <h1 class="px-5 py-lg-3">Welcome to the dashboard "<span style="color: #0f5132;">{{ user.username }}</span>"</h1>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="text-center mt-3">
+                    <div id="dashboard-datetime" class="text-start fw-semibold" style="font-size: 1.1rem;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fa fa-users px-2"></i>Leads</h5>
+                        <p class="card-text display-4">{{ lead_count }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h3 class="card-title"><i class="fa fa-users px-2"></i>Clients</h3>
+                        <p class="card-text display-4">{{ client_count }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Latest Leads</h4>
+                <table>
+                    {% for lead in latest_leads %}
+                        <tr>
+                            <td>{{ lead.created_at }}</td>
+                            <td><a href="{% url 'lead:detail' lead.pk %}">{{ lead.last_name }}, {{ lead.first_name }}</a></td> <!-- or use the field(s) you prefer -->
+                            <td>{{ lead.company }}</td>
+                            <td>{{ lead.email }}</td>
+                            <td>{{ lead.priority }}</td>
+                        </tr>
+                    {% empty %}
+                        <li class="list-group-item">No leads found.</li>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="col-md-6">
+                <h4>Latest Clients</h4>
+                <table>
+                    {% for client in latest_clients %}
+                        <tr>
+                            <td>{{ client.created_at }}</td>
+                            <td><a href="{% url 'client:detail' client.pk %}">{{ client.last_name }}, {{ client.first_name }}</a></td> <!-- or use the field(s) you prefer -->
+                            <td>{{ client.company }}</td>
+                            <td>{{ client.email }}</td>
+                        </tr>
+                    {% empty %}
+                        <li class="list-group-item">No clients found.</li>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function updateDateTime() {
+            const now = new Date();
+            // Format: e.g. Thursday, 2025-09-18 14:05:03
+            const options = { weekday: 'long', year: 'numeric', month: '2-digit', day: '2-digit' };
+            const datePart = now.toLocaleDateString(undefined, options);
+            const timePart = now.toLocaleTimeString(undefined, { hour12: false });
+            document.getElementById('dashboard-datetime').textContent = datePart + ' ' + timePart;
+        }
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+    </script>
+
+
+
 {% endblock %}

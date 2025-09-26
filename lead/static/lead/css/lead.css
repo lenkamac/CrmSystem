@@ -1,0 +1,21 @@
+
+/* lead delete form*/
+#lead_delete_form {
+    display: inline;
+    padding-left: 25px;
+}
+
+/* Convert button */
+#convert {
+    text-decoration: underline;
+    color: #1c4e6a;
+    font-weight: bold;
+    font-size: 18px;
+}
+#convert:hover {
+    color: #387ea6;
+    font-weight: bold;
+    font-size: 22px;
+    text-decoration: underline;
+    cursor: pointer;
+}

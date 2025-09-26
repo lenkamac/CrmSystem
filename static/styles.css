@@ -1,0 +1,531 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+body {
+    background-color: #f1f1f5;
+    position: relative;
+    padding-bottom: 58px;
+    min-height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1050; /* Ensure it stays above the offcanvas */
+    background-color: #353E46;
+    height: 50px;
+}
+.navbar-brand {
+    color: whitesmoke;
+}
+.navbar-brand:hover {
+    color: #ABABAF;
+}
+.nav-item {
+    background-color: #C7C8CB;
+    margin-right: 20px;
+    width: 120px;
+    height: 30px;
+    border-radius: 5px;
+}
+.nav-link {
+    color: black;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 2px;
+}
+.nav-link:hover {
+    color: whitesmoke;
+    font-weight: bold;
+    background-color: #849c9d;
+}
+.nav-item-delete {
+    background-color: #C7C8CB;
+    margin-right: 20px;
+    width: 110px;
+    height: 30px;
+    border-radius: 5px;
+}
+.nav-item-delete:hover {
+    color: whitesmoke;
+    font-weight: bold;
+    background-color: #EFEFE6;
+}
+.nav-link-delete {
+    color: #710c0c;
+    text-align: center;
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: bold;
+    padding: 12px;
+}
+
+/* Footer */
+.footer {
+    font-size: 0.8rem;
+    padding: 20px;
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
+    width: 100%;
+    height: 58px;
+    background-color: #353E46;
+}
+.text-footer {
+    color: #b0c4de;
+}
+@media(max-width: 550px) {
+    .text-footer {
+       font-size: 14px;
+    }
+}
+
+
+/* main content*/
+main {
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+.main-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 400px; /* Adjust as needed */
+    position: relative;
+    background: #EFEFE6;
+    padding-top: 20px;
+}
+@media (max-width: 1280px) {
+    .main-container {
+        width: 95%;
+        margin-right: 0;
+    }
+}
+
+/* main header */
+h1 {
+    color: #353E46;
+}
+h2 {
+    color: #3D4851;
+}
+
+.span-detail {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #353E46;
+    margin-left: 10px;
+}
+.span-value {
+    font-size: 1.1rem;
+    color: #353E46;
+}
+
+/* Offcanvas style*/
+.offcanvas-custom {
+    position: fixed !important; /* Fix it on the left side */
+    top: 50px; /* Set the top offset */
+    left: 0;
+    bottom: 60px;
+    width: 250px; /* Set your desired width */
+    z-index: 1045; /* Set appropriate z-index */
+    background-color: #C7C8CB; /* Optional: Customize the background color */
+    border-right: 1px solid #b9b9bb; /* Optional: Add a border */
+     }
+.offcanvas-a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 1.6rem;
+    text-align: center;
+    padding: 20px;
+    margin: 5px;
+}
+.offcanvas-a:hover {
+    color: #353E46;
+    font-weight: bold;
+}
+.offcanvas-custom ul li a {
+    color:black;
+    font-size: 1.4rem;
+    text-decoration: none;
+    display: block;
+    padding: 10px 15px;
+    transition: color 0.2s;
+}
+.offcanvas-custom ul li a:hover {
+    color: #023564;
+    font-weight: bold;
+}
+.offcanvas-custom ul li a i {
+    margin-right: 15px; /* Space between icon and text */
+    font-size: 1.4rem; /* Adjust font size */
+    color: black; /* Icon color */
+}
+.offcanvas-custom ul li a i:hover {
+    color: #023564;
+}
+span {
+    font-weight: bold;
+    color: #23523c;
+    margin-left: 10px;
+}
+@media (max-width: 1280px) {
+    .offcanvas-custom {
+        width: 180px;
+    }
+    .offcanvas-custom ul li a {
+        font-size: 1rem;
+    }
+    .offcanvas-custom ul li a i {
+        font-size: 1rem;
+    }
+    .dashb-span {
+        font-size: 1rem;
+    }
+    .img-dashboard {
+        padding-right: 0;
+        height: 22px;
+    }
+}
+@media (max-width: 550px) {
+    .offcanvas-custom {
+        width: 100px;
+    }
+    .offcanvas-custom ul li a {
+        font-size: 0.6rem;
+    }
+    .offcanvas-custom ul li a i {
+        font-size: 0.6rem;
+    }
+    .img-dashboard {
+        height: 15px;
+        padding-right: 0;
+    }
+    .span {
+        font-size: 0.6rem;
+    }
+    .dashb-span {
+        font-size: 0.7rem;
+    }
+    .img-dashboard {
+        padding-right: 0;
+        height: 18px;
+    }
+}
+
+/* status */
+.status-open {
+   color: green;
+   font-weight: bold;
+}
+.status-in-progress {
+   color: orange;
+   font-weight: bold;
+}
+.status-completed {
+   color: blue;
+   font-weight: bold;
+}
+.status-canceled {
+   color: red;
+   font-weight: bold;
+}
+
+/* form style */
+.form-submit-btn {
+    background-color: #849c9d;
+    font-weight: bold;
+    font-size: 1.1rem;
+    width: 100px;
+    color: white;
+    border: 1px solid #1c4e6a;
+    border-radius: 5px;
+}
+.form-submit-btn:hover {
+    background-color: #697272;
+    color: white;
+}
+.form-label {}
+
+/* custom button*/
+.add-button {
+    background-color: #ABABAF;
+    font-weight: bold;
+    width: auto;
+    color: black;
+    font-size: 18px;
+}
+.add-button:hover {
+    background-color: #697272;
+    color: white;
+}
+.export-button {
+    background-color: #C7C8CB;
+    font-weight: bold;
+    width: auto;
+    color: black;
+    font-size: 18px;
+}
+.export-button:hover {
+    background-color: #697272;
+    color: white;
+}
+.btn-delete-selected {
+    width: auto;
+    background-color: #697272;
+    color: #e9ecf6;
+    font-weight: bold;
+    font-size: 18px;
+    border: none;
+    height: 40px;
+    border-radius: 5px;
+}
+.back-to-dashboard {
+    margin-top: auto;
+    display: block;
+    width: fit-content;
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.3rem;
+    padding-top: 30px;
+    transition: color 0.2s;
+    padding-left: 20px;
+}
+.back-to-dashboard:hover {
+  color: #697272;
+  text-decoration: underline;
+}
+.edit-btn {
+    background-color: #ABABAF;
+    font-weight: bold;
+    width: 200px;
+    color: black;
+    font-size: 1.2rem;
+}
+.btn-edit{
+    font-weight: bold;
+    color: #353E46;
+    font-size: 18px;
+    border: none;
+}
+.btn-edit:hover {
+    color: #697272;
+    font-weight: bold;
+    font-size: 22px;
+    border: none;
+}
+.btn-delete {
+    font-weight: bold;
+    font-size: 18px;
+    color: #bb0808;
+}
+.btn-delete:hover {
+    font-weight: bold;
+    font-size: 22px;
+    color: #b02a37;
+}
+
+/* Comment */
+.comment-p {
+    border-left: 3px solid #697272;
+    background-color: white;
+    height: auto;
+}
+.comment-label {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin: 5px;
+    padding: 5px;
+}
+.comment-btn {
+    background-color: #ABABAF;
+    text-align: center;
+    border-radius: 5px;
+    width: 100px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    height: 38px;
+}
+.comment-btn:hover {
+    background-color: #353E46;
+    color: white;
+}
+.comment-form {
+    width: 100%; /* Make the form span 100% of its parent container */
+    padding: 10px; /* Add some padding to improve aesthetics */
+    background-color: white; /* Optional: Add background to make it stand out */
+    border-radius: 5px; /* Optional: Rounded edges for better styling */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+}
+.comment-row {
+    margin: 0; /* Ensure no margin cuts into the column/grid space */
+    padding: 0; /* Reset padding for alignment */
+}
+.comment-content {
+    background-color: white;
+    padding: 10px;
+    margin: 0;
+}
+.comment {
+    font-size: 1.1rem;
+    background-color: white;
+    color: black;
+}
+
+/* nav for pagination */
+.nav-pagination {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.nav-pagination .page-link {
+    color: black;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+
+/* custom a edit*/
+.a-edit {
+    color: white;
+    text-decoration: none;
+}
+
+/* custom back to a*/
+.custom-back-a {
+    color: #113649;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+}
+.custom-back-a:hover {
+    color: #23523c;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+
+.card-detail {
+    background-color: white;
+    border-radius: 5px;
+    height: auto;
+    border: 1px solid gray;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
+}
+.card-detail-header {
+    background-color: #697272;
+    color: white;
+}
+
+/* not found message*/
+.not-found-message {
+    text-align: center;
+    padding-top: 6px;
+    font-size: 1.2rem;
+}
+
+/* custom table styling*/
+.table-responsive-custom {
+  width: 100%;
+  overflow-x: auto;
+}
+.table-responsive-custom table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px; /* Optional: set a minimum width for better horizontal scrolling */
+}
+.th-custom tr th {
+    background-color: rgba(137, 168, 165, 0.68);
+    font-size: 17px;
+    border: 1px solid #3b4869;
+    text-align: center;
+}
+tbody tr td a {
+    text-decoration: none;
+    font-size: 1.1rem;
+    color: #23523c;
+    font-weight: bold;
+}
+tbody tr td {
+    border: 1px solid #3b4869;
+    font-size: 16px;
+    text-align: center;
+}
+
+
+/* Styling for files*/
+.download-a {
+    padding-right: 5px;
+    padding-top: 2px;
+    font-size: 18px;
+    color: #414141;
+}
+.download-icon {
+    height: 40px;
+    width: 40px;
+}
+.files-p {
+    border-left: 3px solid #3b4869;
+    height: auto;
+    padding: 0 4px;
+    margin-top: 5px;
+    background-color: white;
+}
+.download-a:hover {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/* table for task on detail page*/
+#task-table {
+    border: none !important;
+}
+#task-table th, tr td {
+    border: none !important;
+}
+
+
+/* Page content adjustment for fixed nav/footer */
+.container {
+    margin-top: 80px; /* Adjust for the fixed navbar */
+    margin-bottom: 80px; /* Adjust for the fixed footer */
+}
+
+/* Index page */
+.index-p {
+    font-size: 1.3rem;
+    color: #023564;
+    font-weight: bold;
+}
+.p-index {
+    font-size: 1.1rem;
+    color: #023564;
+    text-align: justify;
+}
+.h5-index {
+    color: #023564;
+    text-align: center;
+}
+
+
+/* custom.css, link it in your base.html */
+.login-form input {
+    min-width: 0; /* so inputs don't overflow on very small screens */
+    width: 25%;
+}
+@media (max-width: 576px) {
+    .container {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+    .form-label {
+        font-size: 1rem;
+        width: 50%;
+        margin-left: 0;
+        padding: 2px;
+    }
+}

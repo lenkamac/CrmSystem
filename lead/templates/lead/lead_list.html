@@ -1,5 +1,232 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+	Leads
+{% endblock %}
 
 {% block content %}
-	lead
+
+   {% include 'core/partials/offcanvas_menu.html' %}
+
+    <style>
+         body {
+             background-image: url("{% static 'images/1402.jpg' %}");
+             background-size: cover;
+             background-repeat: no-repeat;
+             background-position: center;
+         }
+    </style>
+
+	<div class="container">
+
+        <div class="row mx-lg-5 justify-content-center">
+            <div class="col-12">
+                <div class="text-center">
+                    <h1>Leads</h1>
+                </div>
+            </div>
+            <div class="col-12">
+               <div class="text-center">
+                    <!-- Display messages -->
+                   {% if messages %}
+                       <div class="row justify-content-center">
+                           {% for message in messages %}
+                               <div class="alert alert-{{ message.tags }}" role="alert">
+                                   <div class="text-center">
+                                       {{ message }}
+                                   </div>
+                               </div>
+                           {% endfor %}
+                       </div>
+                   {% endif %}
+               </div>
+            </div>
+        </div>
+
+        <div class="row mt-lg-2 mx-lg-5 justify-content-center">
+            <div class="col-12">
+                <div class="row my-lg-3 mx-lg-5 py-lg-4 justify-content-center">
+                    <div class="col-lg-12 w-100 justify-content-center">
+                        <!-- Filters --><!-- Add this above your table -->
+                        <div class="row my-lg-3">
+                            <div class="col-lg-12">
+                                <form method="get">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="row">
+                                                <div class="col-lg-8">
+                                                    <input type="text" name="q" class="form-control"
+                                                   placeholder="Find lead by name, email, or company"
+                                                   value="{{ request.GET.q|default:'' }}">
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <button type="submit" class="btn mx-lg-0"
+                                                            style="background-color: #4f8a8b;color: white;">Search
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="row justify-content-end">
+                                                <a class="btn add-button mx-lg-2" href="{% url 'lead:add' %}">Add lead</a>
+
+                                                <a class="btn export-button mx-lg-2" href="{% url 'lead:export' %}">Export to csv</a>
+
+                                                <!-- Button to delete selected clients -->
+                                                <button type="submit"
+                                                        form="bulk-delete-form"
+                                                        class="btn-delete-selected mx-lg-2" id="delete-selected-btn"
+                                                        onclick="return confirm('Are you sure you want to delete selected leads?');">
+                                                    Delete Selected
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 w-100">
+                        <form id="bulk-delete-form" method="post" action="{% url 'lead:delete_bulk' %}">
+                            {% csrf_token %}
+                            <div class="row justify-content-center">
+                                <div class="col-12 my-lg-3">
+                                    <div class="table-responsive-custom">
+                                        <table class="table table-hover table-striped table-bordered table-sm">
+                                            <thead class="th-custom">
+                                                <tr>
+                                                    <th scope="col">
+                                                        <!-- Select All checkbox -->
+                                                        <label for="select-all"></label>
+                                                        <input type="checkbox" id="select-all" />
+                                                    </th>
+                                                    <th scope="col">Created at</th>
+                                                    <th scope="col">Company</th>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Email</th>
+                                                    <th scope="col">Status</th>
+                                                    <th scope="col">Status sales</th>
+                                                    <th scope="col">Detail</th>
+                                                    <th scope="col">Edit</th>
+                                                    <th scope="col">Delete</th>
+                                                </tr>
+                                            </thead>
+
+                                            {% if object_list %}
+                                                <tbody>
+                                                    {% for lead in object_list %}
+                                                        <tr>
+                                                            <td>
+                                                                <label>
+                                                                    <input type="checkbox"
+                                                                           name="lead_ids"
+                                                                           class="row-checkbox"
+                                                                           value="{{ lead.id }}"/>
+                                                                </label>
+                                                            </td>
+                                                            <td>{{ lead.created_at|date:"M-d-Y H:i" }}</td>
+                                                            <td>{{ lead.company }}</td>
+                                                            <td>{{ lead.last_name }}, {{ lead.first_name }}</td>
+                                                            <td>{{ lead.email }}</td>
+
+                                                            <td>{{ lead.get_status_display }}</td>
+                                                            <td>
+                                                                {% if lead.status_sale %}
+                                                                    {{ lead.status_sale }}
+                                                                    {% else %}
+                                                                    n/a
+                                                                {% endif %}
+                                                            </td>
+                                                            <td>
+                                                                <a href="{% url 'lead:detail' lead.pk %}"><i class="fa-solid fa-circle-info"></i></a>
+                                                            </td>
+                                                            <td>
+                                                                <a href="{% url 'lead:edit' lead.pk %}"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                            </td>
+                                                            <td>
+                                                                <button type="submit" class="delete-icon bg-transparent border-0">
+                                                                    <img src="{% static 'images/empty.png' %}"
+                                                                         alt="empty"
+                                                                         height="22">
+                                                                </button>
+                                                            </td>
+
+                                                        </tr>
+
+                                                    {% endfor %}
+                                                </tbody>
+                                            {% else %}
+                                                <p>There are no clients in the database yet...</p>
+                                            {% endif %}
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                {% if is_paginated %}
+                                    <nav aria-label="Page navigation">
+                                        <ul class="pagination justify-content-center">
+                                            {# Previous page #}
+                                            {% if page_obj.has_previous %}
+                                                <li class="page-item">
+                                                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&laquo;</a>
+                                                </li>
+                                            {% else %}
+                                                <li class="page-item disabled">
+                                                    <span class="page-link">&laquo;</span>
+                                                </li>
+                                            {% endif %}
+
+                                            {# Page numbers #}
+                                            {% for num in page_obj.paginator.page_range %}
+                                                {% if page_obj.number == num %}
+                                                    <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                                                {% elif num >= page_obj.number|add:'-2' and num <= page_obj.number|add:'2' %}
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ num }}</a>
+                                                    </li>
+                                                {% endif %}
+                                            {% endfor %}
+
+                                            {# Next page #}
+                                            {% if page_obj.has_next %}
+                                                <li class="page-item">
+                                                    <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&raquo;</a>
+                                                </li>
+                                            {% else %}
+                                                <li class="page-item disabled">
+                                                    <span class="page-link">&raquo;</span>
+                                                </li>
+                                            {% endif %}
+                                        </ul>
+                                    </nav>
+                                {% endif %}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-lg-2 mx-lg-3 justify-content-center">
+            <div class="col-lg-12">
+                <div class="text-start px-lg-5">
+                    <a href="{% url 'dashboard:dashboard' %}" class="back-to-dashboard">
+                        <i class="fa-solid fa-arrow-left px-3"></i>Back to the dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Include your JS file -->
+    <script src="{% static 'lead/js/lead.js' %}"></script>
+    <script src="{% static 'js/project.js' %}"></script>
+
 {% endblock %}
