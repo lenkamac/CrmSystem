@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 
 from userprofile.models import UserProfile
 
@@ -40,3 +40,12 @@ class UserProfileForm(forms.ModelForm):
             'location': forms.TextInput(attrs={'placeholder': 'Your location', 'class': INPUT_CLASSES}),
             'company': forms.TextInput(attrs={'placeholder': 'Your company', 'class': INPUT_CLASSES}),
         }
+
+
+
+class CustomPasswordChangeForm(PasswordChangeForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['old_password'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Enter current password'})
+        self.fields['new_password1'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Enter new password'})
+        self.fields['new_password2'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Confirm new password'})

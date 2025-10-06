@@ -2,11 +2,13 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib.auth.views import PasswordChangeView
 from django.shortcuts import redirect, render, get_object_or_404
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.db import IntegrityError
+from django.utils.decorators import method_decorator
 
-from userprofile.forms import UserProfileForm
+from userprofile.forms import UserProfileForm, CustomPasswordChangeForm
 from userprofile.models import UserProfile
 
 
@@ -91,6 +93,18 @@ def user_account(request):
         "user": request.user,
     }
     return render(request, "userprofile/account.html", context)
+
+
+# Change password
+@method_decorator(login_required, name='dispatch')
+class CustomPasswordChangeView(PasswordChangeView):
+    form_class = CustomPasswordChangeForm
+    template_name = 'userprofile/change_password.html'
+    success_url = reverse_lazy('userprofile:account')
+
+    def form_valid(self, form):
+        messages.success(self.request, 'Your password was successfully updated!')
+        return super().form_valid(form)
 
 
 # Logout
