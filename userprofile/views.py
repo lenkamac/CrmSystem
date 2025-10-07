@@ -67,7 +67,7 @@ def register(request):
 # Edit userprofile
 @login_required
 def edit_profile(request):
-    user_profile = get_object_or_404(UserProfile, user=request.user)
+    user_profile, created = UserProfile.objects.get_or_create(user=request.user)
 
     if request.method == 'POST':
         form = UserProfileForm(request.POST, request.FILES, instance=user_profile)

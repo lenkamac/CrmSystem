@@ -1,0 +1,53 @@
+.container {
+   padding-top: 50px;
+    margin-left: 280px;
+}
+
+.btn-account-edit {
+    width: auto;
+    background-color: #697272;
+    color: #e9ecf6;
+    font-weight: bold;
+    font-size: 18px;
+    border: none;
+    height: 40px;
+    border-radius: 5px;
+}
+.btn-account-edit i {
+    padding: 0 4px;
+    margin-left: 5px;
+
+}
+.btn-account-edit a {
+    font-weight: bold;
+    color: #e9ecf6;
+    font-size: 18px;
+    text-align: start;
+    padding: 2px;
+    margin-bottom: 4px;
+    text-decoration: none;
+}
+
+.btn-account-password {
+    width: auto;
+    background-color: #809b9b;
+    color: #e9ecf6;
+    font-weight: bold;
+    font-size: 18px;
+    border: none;
+    height: 40px;
+    border-radius: 5px;
+}
+.btn-account-password i {
+    padding: 0 4px;
+    margin-left: 5px;
+}
+.btn-account-password a {
+    font-weight: bold;
+    color: #e9ecf6;
+    font-size: 18px;
+    text-align: start;
+    padding: 2px;
+    margin-bottom: 4px;
+    text-decoration: none;
+}

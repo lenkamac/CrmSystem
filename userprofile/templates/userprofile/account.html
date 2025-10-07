@@ -2,7 +2,14 @@
 {% load static %}
 
 {% block content %}
-    <div class="container-fluid my-2">
+
+    {% block css %}
+    	<link rel="stylesheet" href="{% static 'userprofile/account.css' %}">
+    {% endblock %}
+
+    {% include 'core/partials/offcanvas_menu.html' %}
+
+    <div class="container w-100 mt-4">
 
         <div class="row mx-lg-2">
             <div class="col-lg-12">
@@ -26,40 +33,43 @@
         <div class="row mt-lg-4">
             <div class="col-lg-12">
                 <div class="text-center">
-                    <h2>Username: <span class="username">{{ request.user.username }}</span></h2>
+                    <h2>Username: <span class="username pt-lg-3">{{ request.user.username }}</span></h2>
                 </div>
             </div>
         </div>
 
-        <div class="row mt-lg-4">
-            <div class="col-lg-4">
-                <div class="row my-lg-3">
-                    <div class="col-lg-12">
-                        <div class="text-center">
-                            <h4>Profile</h4>
-                            <h6>{{ user_profile.first_name }} {{ user_profile.last_name }}</h6>
-                        </div>
-                    </div>
-                </div>
-
+        <div class="row mt-lg-4 mx-5 bg-white justify-content-center">
+            <div class="col">
                 <div class="row my-lg-3 py-lg-2">
                     <div class="col-lg-12">
                         <div class="text-center">
                             {% if user_profile.profile_pic %}
                                 <img src="{{ user_profile.profile_pic.url }}" alt="Profile picture" width="100px">
                             {% else %}
+                                <img src="{% static 'images/profile.png' %}" alt="Profile picture" width="450px">
                                 <p>No profile picture available</p>
                             {% endif %}
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="col">
+                <div class="row my-lg-3">
+                    <div class="col-lg-12 mt-lg-4">
+                        <div class="text-start">
+                            <h4>Profile</h4>
+                        </div>
+                    </div>
+                </div>
+
+
 
                 <div class="row my-lg-2 py-lg-1">
-                    <div class="col-lg-4">
+                    <div class="col-lg-5 pt-4">
                         <i class="bi bi-envelope"></i>
                         <span>Email:</span>
                     </div>
-                    <div class="col-lg-8">
+                    <div class="col-lg-7 pt-4">
                         {% if user.email %}
                             {{ user.email }}
                         {% else %}
@@ -69,11 +79,11 @@
                 </div>
 
                 <div class="row my-lg-2 py-lg-1">
-                    <div class="col-lg-4">
+                    <div class="col-lg-5">
                         <i class="bi bi-telephone"></i>
                         <span>Phone:</span>
                     </div>
-                    <div class="col-lg-8">
+                    <div class="col-lg-7">
                         {% if user_profile.phone_number %}
                             {{ user_profile.phone_number }}
                         {% else %}
@@ -83,11 +93,11 @@
                 </div>
 
                 <div class="row my-lg-2 py-lg-1">
-                    <div class="col-lg-4">
+                    <div class="col-lg-5">
                         <i class="bi bi-calendar4"></i>
                         <span>Date of birth:</span>
                     </div>
-                    <div class="col-lg-8">
+                    <div class="col-lg-7">
                         {% if user_profile.date_of_birth %}
                             {{ user_profile.date_of_birth }}
                         {% else %}
@@ -97,11 +107,11 @@
                 </div>
 
                 <div class="row my-lg-2 py-lg-1">
-                    <div class="col-lg-4">
+                    <div class="col-lg-5">
                         <img src="{% static 'images/portfolio.png' %}" alt="Bio" width="20px">
                         <span>Bio:</span>
                     </div>
-                    <div class="col-lg-8">
+                    <div class="col-lg-7">
                         {% if user_profile.bio %}
                             {{ user_profile.bio }}
                         {% else %}
@@ -111,11 +121,11 @@
                 </div>
 
                 <div class="row my-lg-2 py-lg-1">
-                    <div class="col-lg-4">
+                    <div class="col-lg-5">
                         <i class="bi bi-geo-alt-fill"></i>
                         <span>Location:</span>
                     </div>
-                    <div class="col-lg-8">
+                    <div class="col-lg-7">
                         {% if user_profile.location %}
                             {{ user_profile.location }}
                         {% else %}
@@ -125,11 +135,11 @@
                 </div>
 
                 <div class="row my-lg-2 py-lg-1">
-                    <div class="col-lg-4">
+                    <div class="col-lg-5">
                         <i class="bi bi-globe"></i>
                         <span>Website:</span>
                     </div>
-                    <div class="col-lg-8">
+                    <div class="col-lg-7">
                         {% if user_profile.website %}
                             {{ user_profile.website }}
                         {% else %}
@@ -139,11 +149,11 @@
                 </div>
 
                 <div class="row my-lg-2 py-lg-1">
-                    <div class="col-lg-4">
+                    <div class="col-lg-5">
                         <i class="bi bi-building"></i>
                         <span>Company:</span>
                     </div>
-                    <div class="col-lg-8">
+                    <div class="col-lg-7">
                         {% if user_profile.company %}
                             {{ user_profile.company }}
                         {% else %}
@@ -151,14 +161,33 @@
                         {% endif %}
                     </div>
                 </div>
+                <div class="row my-lg-2 py-lg-1 mt-lg-4 pt-4">
+                    <div class="col-12">
+                        <div class="text-start">
+                            <button class="btn-account-edit mx-lg-2">
+                                <i class="bi bi-pencil-square fs-4"></i>
+                                <a href="{% url 'userprofile:edit-profile' %}">Edit profile</a>
+                            </button>
+                            <button class="btn-account-password">
+                                <i class="bi bi-lock fs-4"></i>
+                                <a href="{% url 'userprofile:change-password' %}">Change Password</a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="row mt-lg-4">
-            <div class="col-12">
-                <div class="text-start">
-                    <i class="bi bi-pencil-square"></i><a href="{% url 'userprofile:edit-profile' %}" class="btn mx-lg-3">Edit profile</a>
-                    <i class="bi bi-lock"></i><a href="{% url 'userprofile:change-password' %}" class="btn mx-lg-3">Change Password</a>
+        <div class="row mt-lg-4 justify-content-center">
+
+        </div>
+
+        <div class="row mt-lg-2 mx-lg-3 justify-content-center">
+            <div class="col-lg-12">
+                <div class="text-start px-lg-5">
+                    <a href="{% url 'dashboard:dashboard' %}" class="back-to-dashboard">
+                        <i class="fa-solid fa-arrow-left px-3"></i>Back to the dashboard
+                    </a>
                 </div>
             </div>
         </div>
