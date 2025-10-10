@@ -1,0 +1,19 @@
+.container {
+    margin-left: 280px;
+}
+
+.card {
+    border: 1px solid #697272;
+    border-radius: 5px;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
+    height: 100px;
+    width: 200px;
+}
+
+.table {
+    border: 1px solid #697272;
+}
+
+.thead-lead th {
+    background-color: #8f9e9e;
+}

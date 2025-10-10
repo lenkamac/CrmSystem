@@ -27,53 +27,66 @@
             </div>
         </div>
 
-        <div class="row mb-4">
+        <div class="row mt-4 justify-content-center">
             <div class="col-md-3">
-                <div class="card mb-3">
+                <div class="card mt-4 mx-3">
                     <div class="card-body">
-                        <h5 class="card-title"><i class="fa fa-users px-2"></i>Leads</h5>
-                        <p class="card-text display-4">{{ lead_count }}</p>
+                        <h5 class="card-title text-center fs-4"><i class="fa fa-users px-2"></i>Leads</h5>
+                        <p class="card-text display-6 text-center">{{ lead_count }}</p>
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-3">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h3 class="card-title"><i class="fa fa-users px-2"></i>Clients</h3>
-                        <p class="card-text display-4">{{ client_count }}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="row">
-            <div class="col-md-6">
-                <h4>Latest Leads</h4>
-                <table>
+            <div class="col-md-9">
+                <h4 class="text-start">Latest Leads</h4>
+                <table class="table table-striped">
+                    <tr class="thead-lead">
+                        <th>Date</th>
+                        <th>Name</th>
+                        <th>Company</th>
+                        <th>Email</th>
+                        <th>Priority</th>
+                    </tr>
                     {% for lead in latest_leads %}
                         <tr>
-                            <td>{{ lead.created_at }}</td>
-                            <td><a href="{% url 'lead:detail' lead.pk %}">{{ lead.last_name }}, {{ lead.first_name }}</a></td> <!-- or use the field(s) you prefer -->
-                            <td>{{ lead.company }}</td>
-                            <td>{{ lead.email }}</td>
-                            <td>{{ lead.priority }}</td>
+                            <td class="text-start">{{ lead.created_at }}</td>
+                            <td class="text-start"><a href="{% url 'lead:detail' lead.pk %}">{{ lead.last_name }}, {{ lead.first_name }}</a></td> <!-- or use the field(s) you prefer -->
+                            <td class="text-start">{{ lead.company }}</td>
+                            <td class="text-start">{{ lead.email }}</td>
+                            <td class="text-start">{{ lead.priority }}</td>
                         </tr>
                     {% empty %}
                         <li class="list-group-item">No leads found.</li>
                     {% endfor %}
                 </table>
             </div>
-            <div class="col-md-6">
+
+        </div>
+
+
+        <div class="row mt-4">
+            <div class="col-md-3">
+                <div class="card mt-4 mx-3">
+                    <div class="card-body">
+                        <h3 class="card-title text-center fs-4"><i class="fa fa-users px-2"></i>Clients</h3>
+                        <p class="card-text display-6 text-center">{{ client_count }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
                 <h4>Latest Clients</h4>
-                <table>
+                <table class="table table-striped">
+                    <tr>
+                        <th>Date</th>
+                        <th>Name</th>
+                        <th>Company</th>
+                        <th>Email</th>
+                    </tr>
                     {% for client in latest_clients %}
                         <tr>
-                            <td>{{ client.created_at }}</td>
-                            <td><a href="{% url 'client:detail' client.pk %}">{{ client.last_name }}, {{ client.first_name }}</a></td> <!-- or use the field(s) you prefer -->
-                            <td>{{ client.company }}</td>
-                            <td>{{ client.email }}</td>
+                            <td class="text-start">{{ client.created_at }}</td>
+                            <td class="text-start"><a href="{% url 'client:detail' client.pk %}">{{ client.last_name }}, {{ client.first_name }}</a></td> <!-- or use the field(s) you prefer -->
+                            <td class="text-start">{{ client.company }}</td>
+                            <td class="text-start">{{ client.email }}</td>
                         </tr>
                     {% empty %}
                         <li class="list-group-item">No clients found.</li>
