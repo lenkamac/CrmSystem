@@ -1,15 +1,15 @@
 // Dashboard Chart Configuration and Initialization
 
 let currentChart = null; // Store current chart instance
+let chartData = {}; // Store chart data globally
 
 /**
- * Initialize chart with different types
- * @param {Array} dates - Array of date strings
- * @param {Array} leadCounts - Array of lead counts
- * @param {Array} clientCounts - Array of client counts
+ * Initialize chart with different types and data filters
+ * @param {Object} data - Object containing all datasets
  * @param {String} chartType - Type of chart ('line', 'bar', 'area', 'mixed')
+ * @param {String} dataFilter - Data filter type
  */
-function initChart(dates, leadCounts, clientCounts, chartType = 'line') {
+function initChart(data, chartType = 'bar', dataFilter = 'all') {
     const ctx = document.getElementById('leadsChart');
 
     if (!ctx) {
@@ -22,16 +22,61 @@ function initChart(dates, leadCounts, clientCounts, chartType = 'line') {
         currentChart.destroy();
     }
 
-    // Common dataset configurations
-    const leadDataset = {
-        label: 'Leads',
-        data: leadCounts,
-        borderColor: '#0f5132',
-        backgroundColor: chartType === 'bar' ? 'rgba(15, 81, 50, 0.7)' : 'rgba(15, 81, 50, 0.2)',
+    // Dataset configurations
+    const allLeadsDataset = {
+        label: 'All Leads',
+        data: data.leadCounts,
+        borderColor: '#6c757d',
+        backgroundColor: chartType === 'bar' ? 'rgba(108, 117, 125, 0.7)' : 'rgba(108, 117, 125, 0.2)',
         borderWidth: 3,
         pointRadius: chartType === 'line' ? 5 : 0,
         pointHoverRadius: 7,
-        pointBackgroundColor: '#0f5132',
+        pointBackgroundColor: '#6c757d',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
+        fill: chartType === 'area' || chartType === 'line',
+        tension: 0.4
+    };
+
+    const wonLeadsDataset = {
+        label: 'Won Leads',
+        data: data.wonLeadCounts,
+        borderColor: '#198754',
+        backgroundColor: chartType === 'bar' ? 'rgba(25, 135, 84, 0.7)' : 'rgba(25, 135, 84, 0.2)',
+        borderWidth: 3,
+        pointRadius: chartType === 'line' ? 5 : 0,
+        pointHoverRadius: 7,
+        pointBackgroundColor: '#198754',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
+        fill: chartType === 'area' || chartType === 'line',
+        tension: 0.4
+    };
+
+    const lostLeadsDataset = {
+        label: 'Lost Leads',
+        data: data.lostLeadCounts,
+        borderColor: '#dc3545',
+        backgroundColor: chartType === 'bar' ? 'rgba(220, 53, 69, 0.7)' : 'rgba(220, 53, 69, 0.2)',
+        borderWidth: 3,
+        pointRadius: chartType === 'line' ? 5 : 0,
+        pointHoverRadius: 7,
+        pointBackgroundColor: '#dc3545',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
+        fill: chartType === 'area' || chartType === 'line',
+        tension: 0.4
+    };
+
+    const contactedLeadsDataset = {
+        label: 'Contacted Leads',
+        data: data.contactedLeadCounts,
+        borderColor: '#ffc107',
+        backgroundColor: chartType === 'bar' ? 'rgba(255, 193, 7, 0.7)' : 'rgba(255, 193, 7, 0.2)',
+        borderWidth: 3,
+        pointRadius: chartType === 'line' ? 5 : 0,
+        pointHoverRadius: 7,
+        pointBackgroundColor: '#ffc107',
         pointBorderColor: '#fff',
         pointBorderWidth: 2,
         fill: chartType === 'area' || chartType === 'line',
@@ -39,8 +84,8 @@ function initChart(dates, leadCounts, clientCounts, chartType = 'line') {
     };
 
     const clientDataset = {
-        label: 'Clients',
-        data: clientCounts,
+        label: 'All Clients',
+        data: data.clientCounts,
         borderColor: '#0d6efd',
         backgroundColor: chartType === 'bar' ? 'rgba(13, 110, 253, 0.7)' : 'rgba(13, 110, 253, 0.2)',
         borderWidth: 3,
@@ -53,28 +98,56 @@ function initChart(dates, leadCounts, clientCounts, chartType = 'line') {
         tension: 0.4
     };
 
+    // Select datasets based on filter
+    let datasets = [];
+    switch(dataFilter) {
+        case 'all':
+            datasets = [allLeadsDataset, clientDataset];
+            break;
+        case 'all_leads':
+            datasets = [allLeadsDataset];
+            break;
+        case 'lead_status':
+            datasets = [wonLeadsDataset, lostLeadsDataset, contactedLeadsDataset];
+            break;
+        case 'won_leads':
+            datasets = [wonLeadsDataset];
+            break;
+        case 'lost_leads':
+            datasets = [lostLeadsDataset];
+            break;
+        case 'contacted_leads':
+            datasets = [contactedLeadsDataset];
+            break;
+        case 'clients':
+            datasets = [clientDataset];
+            break;
+        default:
+            datasets = [allLeadsDataset, clientDataset];
+    }
+
     // Configure chart type
     let type = 'line';
-    let datasets = [leadDataset, clientDataset];
 
     if (chartType === 'bar') {
         type = 'bar';
     } else if (chartType === 'area') {
         type = 'line';
-        leadDataset.fill = true;
-        clientDataset.fill = true;
-    } else if (chartType === 'mixed') {
+        datasets.forEach(ds => ds.fill = true);
+    } else if (chartType === 'mixed' && datasets.length > 1) {
         type = 'bar';
-        leadDataset.type = 'line';
-        leadDataset.order = 1;
-        clientDataset.type = 'bar';
-        clientDataset.order = 2;
+        datasets[0].type = 'line';
+        datasets[0].order = 1;
+        for (let i = 1; i < datasets.length; i++) {
+            datasets[i].type = 'bar';
+            datasets[i].order = 2;
+        }
     }
 
     currentChart = new Chart(ctx.getContext('2d'), {
         type: type,
         data: {
-            labels: dates,
+            labels: data.dates,
             datasets: datasets
         },
         options: {
@@ -154,16 +227,34 @@ function initChart(dates, leadCounts, clientCounts, chartType = 'line') {
 }
 
 /**
+ * Update chart based on current selections
+ */
+function updateChart() {
+    const chartType = document.getElementById('chartType')?.value || 'bar';
+    const dataFilter = document.getElementById('dataFilter')?.value || 'all';
+
+    initChart(chartData, chartType, dataFilter);
+}
+
+/**
  * Initialize chart type selector
  */
-function initChartTypeSelector(dates, leadCounts, clientCounts) {
+function initChartTypeSelector() {
     const chartTypeSelect = document.getElementById('chartType');
 
     if (chartTypeSelect) {
-        chartTypeSelect.addEventListener('change', function() {
-            const selectedType = this.value;
-            initChart(dates, leadCounts, clientCounts, selectedType);
-        });
+        chartTypeSelect.addEventListener('change', updateChart);
+    }
+}
+
+/**
+ * Initialize data filter selector
+ */
+function initDataFilterSelector() {
+    const dataFilterSelect = document.getElementById('dataFilter');
+
+    if (dataFilterSelect) {
+        dataFilterSelect.addEventListener('change', updateChart);
     }
 }
 
@@ -199,14 +290,28 @@ function updateDateTime() {
 
 /**
  * Initialize dashboard functionality
- * @param {Object} config - Configuration object with dates, lead counts, and client counts
+ * @param {Object} config - Configuration object with all data
  */
 function initDashboard(config) {
+    // Store data globally
+    chartData = {
+        dates: config.dates,
+        leadCounts: config.leadCounts,
+        wonLeadCounts: config.wonLeadCounts,
+        lostLeadCounts: config.lostLeadCounts,
+        contactedLeadCounts: config.contactedLeadCounts,
+        clientCounts: config.clientCounts,
+    };
+
     // Initialize chart if data is provided
-    if (config.dates && config.leadCounts && config.clientCounts) {
-        const initialChartType = document.getElementById('chartType')?.value || 'line';
-        initChart(config.dates, config.leadCounts, config.clientCounts, initialChartType);
-        initChartTypeSelector(config.dates, config.leadCounts, config.clientCounts);
+    if (config.dates) {
+        const initialChartType = document.getElementById('chartType')?.value || 'bar';
+        const initialDataFilter = document.getElementById('dataFilter')?.value || 'all';
+
+        initChart(chartData, initialChartType, initialDataFilter);
+
+        initChartTypeSelector();
+        initDataFilterSelector();
     }
 
     // Initialize period filter
