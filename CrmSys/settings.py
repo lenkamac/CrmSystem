@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'calendarapp',
     'client',
     'lead',
+    'product',
     'task',
     'widget_tweaks',
 ]

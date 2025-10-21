@@ -30,6 +30,7 @@ urlpatterns = ([
     path('dashboard/leads/', include('lead.urls')),
     path('dashboard/tasks/', include('task.urls')),
     path('dashboard/clients/', include('client.urls')),
+    path('dashboard/products/', include('product.urls')),
     path('dashboard/calendar/', include('calendarapp.urls')),
     path('login/', views.LoginView.as_view(template_name='userprofile/login.html',
                                            authentication_form=LoginForm), name='login'),
