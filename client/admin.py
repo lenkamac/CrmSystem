@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Client, ClientFile, Comment
+from .models import Client, ClientFile, Comment, Purchase
 
 
 # Register your models here.
@@ -15,6 +15,13 @@ class ClientAdmin(admin.ModelAdmin):
     is_converted.boolean = True
     is_converted.short_description = 'Converted from lead'
 
+class PurchaseAdmin(admin.ModelAdmin):
+    list_display = ('client', 'product', 'quantity', 'total_price', 'notes')
+    list_filter = ('client', 'product')
+    search_fields = ('client__company', 'product__name')
+
+
 admin.site.register(Client, ClientAdmin)
 admin.site.register(Comment)
 admin.site.register(ClientFile)
+admin.site.register(Purchase, PurchaseAdmin)

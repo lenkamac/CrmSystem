@@ -409,6 +409,83 @@
                         </div>
                     </div>
                 </div>
+                <!-- Product section -->
+                <div class="row mx-lg-2 bg-white border border-3 mt-lg-4">
+                    <div class="col-lg-12" style="background-color: #697272;">
+                        <h3 class="py-lg-2 my-0 text-center text-white">
+                            <i class="fa fa-shopping-cart px-lg-2" aria-hidden="true"></i>Products</h3>
+                    </div>
+                    <!-- Add Purchase Form -->
+                    <div class="col-12">
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ purchaseform.as_p }}
+                            <button type="submit" name="add_purchase" class="btn btn-primary">Add Purchase</button>
+                        </form>
+                    </div>
+
+                    <!-- Purchase History -->
+                    <div class="col-12 mt-3">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="text-start">Product</th>
+                                    <th scope="col" class="text-center">Quantity</th>
+                                    <th scope="col" class="text-center">Price</th>
+                                    <th scope="col" class="text-center">Total</th>
+                                    <th scope="col" class="text-center">Date</th>
+                                    <th scope="col" class="text-start">Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for purchase in purchases %}
+                                <tr>
+                                    <td class="text-start">{{ purchase.product.name }}</td>
+                                    <td class="text-center">{{ purchase.quantity }}</td>
+                                    <td class="text-center">€{{ purchase.purchase_price }}</td>
+                                    <td class="text-center">€{{ purchase.total|floatformat:2 }}</td>
+                                    <td class="text-center">{{ purchase.created_at|date:"Y-m-d H:i" }}</td>
+                                    <td class="text-start">
+                                        {% if purchase.notes %}
+                                            {{ purchase.notes|truncatewords:10 }}
+                                        {% else %}
+                                            <span class="text-muted">No notes</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="5" class="text-center">No purchases yet</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination for purchases -->
+                    {% if purchases.has_other_pages %}
+                    <nav>
+                        <ul class="pagination">
+                            {% if purchases.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?purchase_page={{ purchases.previous_page_number }}">Previous</a>
+                            </li>
+                            {% endif %}
+                            <li class="page-item disabled">
+                                <span class="page-link">Page {{ purchases.number }} of {{ purchases.paginator.num_pages }}</span>
+                            </li>
+                            {% if purchases.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?purchase_page={{ purchases.next_page_number }}">Next</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                    {% endif %}
+                </div>
+
+
+
                 <!-- File section -->
                 <div class="row mx-lg-2 bg-white border border-3 mt-lg-4">
                     <div class="col-lg-12" style="background-color: #697272;">

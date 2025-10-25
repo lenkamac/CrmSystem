@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from lead.models import Lead
-
+from product.models import Product
 
 # Create your models here.
 class Client(models.Model):
@@ -32,6 +32,7 @@ class Client(models.Model):
     modified_at = models.DateTimeField(auto_now=True)
     converted_from_lead = models.ForeignKey(Lead, on_delete=models.SET_NULL, null=True, blank=True, related_name="converted_client")
 
+
     class Meta:
         ordering = ['-created_at']
 
@@ -56,3 +57,37 @@ class ClientFile(models.Model):
 
     def __str__(self):
         return self.created_by.username
+
+
+class Purchase(models.Model):
+    client = models.ForeignKey(Client, related_name='purchases', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, related_name='purchases', on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+    notes = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(User, related_name='client_purchases', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.client} - {self.product.name} ({self.quantity})'
+
+    @property
+    def purchase_price(self):
+        """Calculate purchase price from product's net_price"""
+        return self.product.net_price
+
+    @property
+    def total_price(self):
+        """Calculate total price"""
+        return self.quantity * self.product.net_price
+
+    def save(self, *args, **kwargs):
+        # Only track sold items (no quantity field in Product anymore)
+        if not self.pk:  # Only on creation
+            # Just increment sold_quantity
+            self.product.sold_quantity += self.quantity
+            self.product.save()
+
+        super().save(*args, **kwargs)
+
+    class Meta:
+        ordering = ['-created_at']

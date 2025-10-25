@@ -11,8 +11,8 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 
-from client.forms import AddCommentForm, AddFileForm
-from client.models import Client, Comment, ClientFile
+from client.forms import AddCommentForm, AddFileForm, PurchaseForm
+from client.models import Client, Comment, ClientFile, Purchase
 from task.models import Task
 
 
@@ -45,6 +45,7 @@ class ClientDetailView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         context['form'] = AddCommentForm()
         context['fileform'] = AddFileForm()
+        context['purchaseform'] = PurchaseForm()
 
         comment_list = Comment.objects.filter(client_id=self.kwargs.get('pk')).order_by('-created_at')
         comment_paginator = Paginator(comment_list, 5)
@@ -56,10 +57,45 @@ class ClientDetailView(LoginRequiredMixin, DetailView):
         task_page_number = self.request.GET.get('task_page')
         tasks_page = task_paginator.get_page(task_page_number)
 
+        # Add purchases pagination with total calculation
+        purchase_list = Purchase.objects.filter(client_id=self.kwargs.get('pk')).select_related('product').order_by(
+            '-created_at')
+
+        # Add total to each purchase - use property instead of field
+        for purchase in purchase_list:
+            purchase.total = purchase.total_price  # Use the property
+
+        purchase_paginator = Paginator(purchase_list, 10)
+        purchase_page_number = self.request.GET.get('purchase_page')
+        purchases_page = purchase_paginator.get_page(purchase_page_number)
+
+
         context['comments'] = comments_page
         context['tasks'] = tasks_page
+        context['purchases'] = purchases_page
 
         return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+
+        # Handle purchase form submission
+        if 'add_purchase' in request.POST:
+            form = PurchaseForm(request.POST)
+            if form.is_valid():
+                purchase = form.save(commit=False)
+                purchase.client = self.object
+                purchase.created_by = request.user
+                try:
+                    purchase.save()
+                    messages.success(request, f'Purchase added successfully! Total: ${purchase.total_price:.2f}')
+                except Exception as e:
+                    messages.error(request, f'Error: {str(e)}')
+                return redirect('client:detail', pk=self.object.pk)
+
+        # Let other POST handlers continue (comments, files, etc.)
+        return super().get(request, *args, **kwargs)
+
 
     def get_queryset(self):
         queryset = super(ClientDetailView, self).get_queryset()
