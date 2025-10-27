@@ -6,5 +6,9 @@ class Product(models.Model):
     sold_quantity = models.IntegerField(default=0)  # Track total sold
     description = models.TextField(blank=True, null=True)
 
+    def get_total_price(self):
+        """Calculate total price based on net price and sold quantity"""
+        return self.net_price * self.sold_quantity
+
     def __str__(self):
         return self.name
