@@ -50,6 +50,55 @@
             </div>
         </div>
 
+        <!-- Purchase History Card -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0">Purchase History</h5>
+                    </div>
+                    <div class="card-body">
+                        {% if purchases %}
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Purchase Date</th>
+                                            <th>Client</th>
+                                            <th>Quantity</th>
+                                            <th>Unit Price</th>
+                                            <th>Total Price</th>
+                                            <th>Notes</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for purchase in purchases %}
+                                        <tr>
+                                            <td>{{ purchase.created_at|date:"Y-m-d H:i" }}</td>
+                                            <td>
+                                                <a href="{% url 'client:detail' purchase.client.id %}">
+                                                    {{ purchase.client.last_name }}, {{ purchase.client.first_name }}
+                                                </a>
+                                            </td>
+                                            <td>{{ purchase.quantity }}</td>
+                                            <td>${{ purchase.purchase_price }}</td>
+                                            <td>${{ purchase.total_price }}</td>
+                                            <td>{{ purchase.notes|default:"-" }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {% else %}
+                            <p class="text-muted">No purchases recorded for this product yet.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
 
     </div>
 {% endblock %}

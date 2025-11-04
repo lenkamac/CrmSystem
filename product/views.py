@@ -18,3 +18,9 @@ class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
     template_name = 'product/product-detail.html'
     context_object_name = 'product'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Get all purchases for this product
+        context['purchases'] = self.object.purchases.all().select_related('client', 'created_by')
+        return context
