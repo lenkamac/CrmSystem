@@ -1,9 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from django.db.models import Count
+from django.db.models import Count, Sum, F
 from django.db.models.functions import TruncDate
 from lead.models import Lead
-from client.models import Client
+from client.models import Client, Purchase
+from product.models import Product
 from datetime import timedelta
 from django.utils import timezone
 import json
@@ -25,6 +26,10 @@ def dashboard(request):
 
     # Get data type filter (what to display on the graph)
     data_filter = request.GET.get('data_filter', 'all')
+
+    # Get purchase filters
+    purchase_product_filter = request.GET.get('purchase_product', 'all')
+    purchase_period = request.GET.get('purchase_period', '30days')
 
     # Calculate date range based on selected period
     today = timezone.now()
@@ -153,6 +158,68 @@ def dashboard(request):
     lost_lead_count = Lead.objects.filter(created_by=request.user, status=Lead.LOST).count()
     contacted_lead_count = Lead.objects.filter(created_by=request.user, status=Lead.CONTACTED).count()
 
+    # ===== PURCHASE DATA FOR GRAPH =====
+    # Calculate purchase date range
+    purchase_start_date = None
+    if purchase_period == '7days':
+        purchase_start_date = today - timedelta(days=7)
+    elif purchase_period == '30days':
+        purchase_start_date = today - timedelta(days=30)
+    elif purchase_period == '90days':
+        purchase_start_date = today - timedelta(days=90)
+    elif purchase_period == '6months':
+        purchase_start_date = today - timedelta(days=180)
+    elif purchase_period == '1year':
+        purchase_start_date = today - timedelta(days=365)
+
+    # Base purchase queryset
+    purchases_query = Purchase.objects.filter(created_by=request.user)
+
+    # Apply date filter
+    if purchase_start_date:
+        purchases_query = purchases_query.filter(created_at__gte=purchase_start_date)
+
+    # Apply product filter
+    if purchase_product_filter != 'all':
+        purchases_query = purchases_query.filter(product_id=purchase_product_filter)
+
+    # Get purchase data grouped by date and product
+    purchase_data = (
+        purchases_query
+        .annotate(date=TruncDate('created_at'))
+        .values('date', 'product__name', 'product_id')
+        .annotate(
+            total_quantity=Sum('quantity'),
+            total_amount=Sum(F('quantity') * F('product__net_price'))
+        )
+        .order_by('date', 'product__name')
+    )
+
+    # Organize data by product
+    purchase_products = {}
+    purchase_dates_set = set()
+
+    for item in purchase_data:
+        date_str = item['date'].strftime('%Y-%m-%d')
+        product_name = item['product__name']
+        purchase_dates_set.add(date_str)
+
+        if product_name not in purchase_products:
+            purchase_products[product_name] = {'dates': [], 'quantities': [], 'amounts': []}
+
+        purchase_products[product_name]['dates'].append(date_str)
+        purchase_products[product_name]['quantities'].append(item['total_quantity'])
+        purchase_products[product_name]['amounts'].append(float(item['total_amount']))
+
+    # Get all products for filter dropdown
+    all_products = Product.objects.all().order_by('name')
+
+    # Calculate summary statistics
+    total_revenue = purchases_query.aggregate(
+        total=Sum(F('quantity') * F('product__net_price'))
+    )['total'] or 0
+    total_items = purchases_query.aggregate(Sum('quantity'))['quantity__sum'] or 0
+
     context = {
         'lead_count': lead_count,
         'client_count': client_count,
@@ -168,6 +235,16 @@ def dashboard(request):
         'lost_lead_counts': json.dumps(lost_lead_counts_filled),
         'contacted_lead_counts': json.dumps(contacted_lead_counts_filled),
         'selected_period': time_period,
+        # Purchase data
+        'purchase_chart_data': json.dumps({
+            'dates': sorted(list(purchase_dates_set)),
+            'products': purchase_products
+        }),
+        'all_products': all_products,
+        'selected_purchase_product': purchase_product_filter,
+        'selected_purchase_period': purchase_period,
+        'total_revenue': float(total_revenue),
+        'total_items': total_items,
     }
 
     return render(request, 'dashboard/dashboard.html', context)

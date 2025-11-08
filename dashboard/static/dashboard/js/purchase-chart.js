@@ -1,0 +1,267 @@
+/**
+ * Purchase Chart Module
+ * Handles the interactive product purchase chart using Plotly.js
+ */
+
+(function() {
+    'use strict';
+
+    // Store chart data globally within this module
+    let purchaseChartData = null;
+
+    /**
+     * Initialize the purchase chart
+     */
+    function initPurchaseChart(data) {
+        purchaseChartData = data;
+
+        if (!purchaseChartData || Object.keys(purchaseChartData.products).length === 0) {
+            showNoDataMessage();
+            return;
+        }
+
+        renderPurchaseChart();
+        attachEventListeners();
+    }
+
+    /**
+     * Render the purchase chart
+     */
+    function renderPurchaseChart() {
+        const chartType = document.getElementById('purchaseChartType').value;
+        const dataType = document.getElementById('purchaseDataType').value;
+
+        const traces = createTraces(chartType, dataType);
+        const layout = createLayout(dataType);
+        const config = createConfig();
+
+        Plotly.newPlot('purchaseChart', traces, layout, config);
+    }
+
+    /**
+     * Create chart traces for each product
+     */
+    function createTraces(chartType, dataType) {
+        const traces = [];
+        const colors = [
+            '#0d6efd', '#198754', '#dc3545', '#ffc107',
+            '#6f42c1', '#fd7e14', '#20c997', '#0dcaf0',
+            '#d63384', '#6610f2'
+        ];
+        let colorIndex = 0;
+
+        Object.keys(purchaseChartData.products).forEach(productName => {
+            const productData = purchaseChartData.products[productName];
+            const color = colors[colorIndex % colors.length];
+
+            const trace = {
+                x: productData.dates,
+                y: dataType === 'quantity' ? productData.quantities : productData.amounts,
+                name: productName,
+                type: getPlotlyChartType(chartType),
+                mode: chartType === 'line' ? 'lines+markers' : undefined,
+                fill: chartType === 'area' ? 'tonexty' : undefined,
+                marker: {
+                    color: color,
+                    size: chartType === 'line' ? 8 : undefined,
+                    line: chartType === 'line' ? {
+                        color: 'white',
+                        width: 1
+                    } : undefined
+                },
+                line: chartType === 'line' || chartType === 'area' ? {
+                    color: color,
+                    width: 3,
+                    shape: 'spline'
+                } : undefined,
+                hovertemplate: createHoverTemplate(dataType, productName)
+            };
+
+            traces.push(trace);
+            colorIndex++;
+        });
+
+        return traces;
+    }
+
+    /**
+     * Get Plotly chart type based on selection
+     */
+    function getPlotlyChartType(chartType) {
+        if (chartType === 'line' || chartType === 'area') {
+            return 'scatter';
+        }
+        return 'bar';
+    }
+
+    /**
+     * Create hover template
+     */
+    function createHoverTemplate(dataType, productName) {
+        if (dataType === 'quantity') {
+            return '<b>' + productName + '</b><br>' +
+                   'Date: %{x|%Y-%m-%d}<br>' +
+                   'Quantity: %{y}<br>' +
+                   '<extra></extra>';
+        } else {
+            return '<b>' + productName + '</b><br>' +
+                   'Date: %{x|%Y-%m-%d}<br>' +
+                   'Amount: $%{y:,.2f}<br>' +
+                   '<extra></extra>';
+        }
+    }
+
+    /**
+     * Create chart layout
+     */
+    function createLayout(dataType) {
+        return {
+            title: {
+                text: dataType === 'quantity'
+                    ? 'Product Purchases (Quantity)'
+                    : 'Product Purchases (Revenue)',
+                font: {
+                    size: 18,
+                    family: 'Arial, sans-serif',
+                    color: '#333'
+                }
+            },
+            xaxis: {
+                title: {
+                    text: 'Date',
+                    font: { size: 14, color: '#666' }
+                },
+                type: 'date',
+                tickformat: '%Y-%m-%d',
+                gridcolor: '#e5e5e5',
+                showgrid: true,
+                zeroline: false
+            },
+            yaxis: {
+                title: {
+                    text: dataType === 'quantity' ? 'Quantity Sold' : 'Revenue ($)',
+                    font: { size: 14, color: '#666' }
+                },
+                gridcolor: '#e5e5e5',
+                showgrid: true,
+                zeroline: false,
+                tickformat: dataType === 'amount' ? '$,.2f' : ','
+            },
+            hovermode: 'closest',
+            showlegend: true,
+            legend: {
+                x: 1.02,
+                xanchor: 'left',
+                y: 1,
+                yanchor: 'top',
+                bgcolor: 'rgba(255,255,255,0.9)',
+                bordercolor: '#ddd',
+                borderwidth: 1,
+                font: { size: 12 }
+            },
+            margin: {
+                t: 60,
+                r: 150,
+                b: 80,
+                l: 80
+            },
+            plot_bgcolor: '#fafafa',
+            paper_bgcolor: 'white',
+            font: {
+                family: 'Arial, sans-serif',
+                size: 12,
+                color: '#333'
+            }
+        };
+    }
+
+    /**
+     * Create chart configuration
+     */
+    function createConfig() {
+        return {
+            responsive: true,
+            displayModeBar: true,
+            displaylogo: false,
+            modeBarButtonsToRemove: ['lasso2d', 'select2d'],
+            toImageButtonOptions: {
+                format: 'png',
+                filename: 'purchase_chart_' + new Date().toISOString().split('T')[0],
+                height: 600,
+                width: 1200,
+                scale: 2
+            }
+        };
+    }
+
+    /**
+     * Show no data message
+     */
+    function showNoDataMessage() {
+        const chartDiv = document.getElementById('purchaseChart');
+        if (chartDiv) {
+            chartDiv.innerHTML =
+                '<div class="alert alert-info text-center my-5" role="alert">' +
+                '<i class="bi bi-info-circle fs-1"></i>' +
+                '<p class="mt-3 mb-0 fs-5">No purchase data available for the selected filters.</p>' +
+                '<p class="text-muted">Try adjusting your filter selections or add some purchases.</p>' +
+                '</div>';
+        }
+    }
+
+    /**
+     * Attach event listeners to filter controls
+     */
+    function attachEventListeners() {
+        // Update chart without page reload
+        const chartTypeSelect = document.getElementById('purchaseChartType');
+        const dataTypeSelect = document.getElementById('purchaseDataType');
+
+        if (chartTypeSelect) {
+            chartTypeSelect.addEventListener('change', renderPurchaseChart);
+        }
+
+        if (dataTypeSelect) {
+            dataTypeSelect.addEventListener('change', renderPurchaseChart);
+        }
+
+        // Reload page for product and period changes
+        const productSelect = document.getElementById('purchaseProduct');
+        const periodSelect = document.getElementById('purchasePeriod');
+
+        if (productSelect) {
+            productSelect.addEventListener('change', function() {
+                updateURLParameter('purchase_product', this.value);
+            });
+        }
+
+        if (periodSelect) {
+            periodSelect.addEventListener('change', function() {
+                updateURLParameter('purchase_period', this.value);
+            });
+        }
+    }
+
+    /**
+     * Update URL parameter and reload
+     */
+    function updateURLParameter(param, value) {
+        const url = new URL(window.location);
+        url.searchParams.set(param, value);
+        window.location.href = url.toString();
+    }
+
+    /**
+     * Initialize when DOM is ready
+     */
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check if purchase chart data exists (injected from Django template)
+        if (typeof window.purchaseChartData !== 'undefined') {
+            initPurchaseChart(window.purchaseChartData);
+        }
+    });
+
+    // Expose init function globally if needed
+    window.initPurchaseChart = initPurchaseChart;
+
+})();
