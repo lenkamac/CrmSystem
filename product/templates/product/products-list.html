@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+
 {% load static %}
 
 {% block title %}
@@ -13,7 +14,26 @@
                 <div class="col-12 text-center">
                     <h1 class="mb-4">Products</h1>
                 </div>
+                <div class="col-12 text-center">
+                    <a href="{% url 'product:add_product' %}" class="btn btn-primary">
+                        <i class="bi bi-plus-circle"></i> Add Product
+                    </a>
+                </div>
+                <div class="col-12">
+                    <div class="text-center">
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
             </div>
+
+
 
             <div class="row justify-content-center">
                 <div class="col-12">
@@ -46,8 +66,11 @@
                                                     <a href="{% url 'product:product_detail' product.id %}" class="btn btn-sm btn-info">
                                                         <i class="bi bi-eye"></i> View
                                                     </a>
-                                                    <a href="#" class="btn btn-sm btn-warning">
+                                                    <a href="{% url 'product:edit_product' product.id %}" class="btn btn-sm btn-warning">
                                                         <i class="bi bi-pencil"></i> Edit
+                                                    </a>
+                                                    <a href="{% url 'product:delete_product' product.id %}" class="btn btn-sm btn-danger">
+                                                        <i class="bi bi-trash"></i> Delete
                                                     </a>
                                                 </td>
                                             </tr>
@@ -65,5 +88,19 @@
                 </div>
             </div>
         </div>
+
+    <script>
+            // Automatically hide alert messages after 3 seconds (3000 milliseconds)
+        document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+          document.querySelectorAll('.alert').forEach(function(alert) {
+            // Fade out for a smooth effect (optional)
+            alert.style.transition = "opacity 0.5s linear";
+            alert.style.opacity = 0;
+            setTimeout(function() { alert.remove(); }, 500); // remove from DOM after fade out
+          });
+        }, 3000); // Show message for 3 seconds
+        });
+    </script>
 
 {% endblock %}
