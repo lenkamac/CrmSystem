@@ -1,0 +1,20 @@
+/* Product list*/
+.btn-view {
+    color: white;
+    font-weight: bold;
+    background-color: #688eb4;
+}
+
+/* Edit page */
+.card-header {
+    background-color: #697272;
+}
+
+.h3-edit {
+    color: white;
+}
+
+.form-label {
+    color: #353E46;
+    font-weight: bold;
+}

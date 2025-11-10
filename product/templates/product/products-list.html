@@ -7,6 +7,11 @@
 {% endblock %}
 
 {% block content %}
+
+    {% block css %}
+    	<link rel="stylesheet" href="{% static 'product/product.css' %}">
+    {% endblock %}
+
 	{% include 'core/partials/offcanvas_menu.html' %}
 
         <div class="container">
@@ -63,7 +68,7 @@
                                                 <td>{{ product.sold_quantity }}</td>
                                                 <td>€{{ product.get_total_price }}</td>
                                                 <td>
-                                                    <a href="{% url 'product:product_detail' product.id %}" class="btn btn-sm btn-info">
+                                                    <a href="{% url 'product:product_detail' product.id %}" class="btn btn-sm btn-view">
                                                         <i class="bi bi-eye"></i> View
                                                     </a>
                                                     <a href="{% url 'product:edit_product' product.id %}" class="btn btn-sm btn-warning">
