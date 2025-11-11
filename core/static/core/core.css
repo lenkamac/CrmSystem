@@ -1,0 +1,81 @@
+/* Index page */
+.main-h1 {
+    font-size:3rem;
+    color: #023564;
+    font-weight: bold;
+    margin-left: 250px;
+}
+@media (min-width: 2599px) {
+    .main-h1 {
+        font-size: 4rem;
+        margin-left: 250px;
+    }
+}
+
+.index-p {
+    font-size: 1.3rem;
+    color: #023564;
+    font-weight: bold;
+}
+@media (min-width: 2599px) {
+    .index-p {
+        font-size: 1.7rem;
+    }
+}
+
+.p-index {
+    font-size: 1.2rem;
+    color: #023564;
+    text-align: justify;
+}
+@media (min-width: 2599px) {
+    .p-index {
+        font-size: 1.6rem;
+    }
+}
+
+.h5-index {
+    font-size: 1.2rem;
+    color: #023564;
+    text-align: center;
+    font-weight: bold;
+}
+@media (min-width: 2599px) {
+    .h5-index {
+        font-size: 1.6rem;
+    }
+}
+
+/* image on index page*/
+.crm-img {
+    width: 50%;
+    height: auto;
+    margin-left: 250px;
+}
+@media (min-width: 2599px) {
+    .crm-img {
+        width: 50%;
+        height: auto;
+        margin-left: 450px;
+    }
+}
+
+
+.btn-log {
+    width: 75%;
+    height: 53px;
+    border-radius: 5px;
+    background-color: #517e7e;
+    color: white;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+@media (min-width: 2599px) {
+    .btn-log {
+        width: 70%;
+        height: 90px;
+        border-radius: 5px;
+        background-color: #517e7e;
+        font-size: 1.6rem;
+    }
+}

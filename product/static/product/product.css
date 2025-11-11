@@ -1,4 +1,11 @@
 /* Product list*/
+
+#btn-add-product {
+    color: white;
+    font-weight: bold;
+    background-color: #5d718d;
+}
+
 .btn-view {
     color: white;
     font-weight: bold;
@@ -7,7 +14,7 @@
 
 /* Edit page */
 .card-header {
-    background-color: #697272;
+    background-color: #364a69;
 }
 
 .h3-edit {
