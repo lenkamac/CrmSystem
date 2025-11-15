@@ -5,29 +5,52 @@
     font-weight: bold;
     margin-left: 250px;
 }
+@media (max-width: 767px) {
+    .main-h1 {
+        font-size: 1.5rem;
+        margin-left: 10px;
+    }
+}
+@media (min-width: 768px) and (max-width: 1099px) {
+    .main-h1 {
+        font-size: 1.7rem;
+        margin-left: 70px;
+    }
+}
 @media (min-width: 1100px){
     .main-h1 {
         font-size: 1.8rem;
-        margin-left: 220px;
+        margin-left: 140px;
     }
 }
 @media (min-width: 1401px) and (max-width: 2598px) {
     .main-h1 {
-        font-size: 2.5rem;
-        margin-left: 250px;
+        font-size: 2.8rem;
+        margin-left: 200px;
     }
 }
 @media (min-width: 2599px) {
     .main-h1 {
         font-size: 4rem;
-        margin-left: 250px;
+        margin-left: 310px;
     }
 }
 
 .index-p {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     color: #023564;
     font-weight: bold;
+}
+@media (max-width: 767px) {
+    .index-p {
+        font-size: 1rem;
+        padding-top: 5px;
+    }
+}
+@media (min-width: 768px) and (max-width: 1099px) {
+    .index-p {
+        font-size: 1.1rem;
+    }
 }
 @media (min-width: 1100px){
     .index-p {
@@ -50,19 +73,29 @@
     color: #023564;
     text-align: justify;
 }
+@media (max-width: 767px) {
+    .p-index {
+        font-size: 0.9rem;
+    }
+}
+@media (min-width: 768px) and (max-width: 1099px) {
+    .p-index {
+        font-size: 1rem;
+    }
+}
 @media (min-width: 1100px){
     .p-index {
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
 }
 @media (min-width: 1401px) and (max-width: 2598px) {
     .p-index {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
     }
 }
 @media (min-width: 2599px) {
     .p-index {
-        font-size: 1.6rem;
+        font-size: 1.7rem;
     }
 }
 
@@ -71,6 +104,16 @@
     color: #023564;
     text-align: center;
     font-weight: bold;
+}
+@media (max-width: 767px) {
+    .h5-index {
+        font-size: 0.8rem;
+    }
+}
+@media (min-width: 768px) and (max-width: 1099px) {
+    .h5-index {
+        font-size: 1rem;
+    }
 }
 @media (min-width: 1100px){
     .h5-index {
@@ -90,27 +133,80 @@
 
 /* image on index page*/
 .crm-img {
-    width: 50%;
+    width: 60%;
     height: auto;
     margin-left: 250px;
+}
+@media (max-width: 767px) {
+    .crm-img {
+        width: 50%;
+        margin-left: 60px;
+    }
+}
+@media (min-width: 768px) and (max-width: 1099px) {
+    .crm-img {
+        width: 50%;
+        height: auto;
+        margin-left: 180px;
+    }
 }
 @media (min-width: 1100px){
     .crm-img {
         width: 50%;
         height: auto;
-        margin-left: 250px;
+        margin-left: 220px;
     }
 }
 @media (min-width: 1401px) and (max-width: 2598px) {
     .crm-img {
         width: 60%;
         height: auto;
-        margin-left: 280px;
+        margin-left: 240px;
     }
 }
 @media (min-width: 2599px) {
     .crm-img {
+        width: 60%;
+        height: auto;
+        margin-left: 450px;
+    }
+}
+
+.crm-img-customer {
+    width: 60%;
+    height: auto;
+    margin-left: 250px;
+}
+@media (max-width: 767px) {
+    .crm-img-customer {
         width: 50%;
+        margin-left: 60px;
+    }
+}
+@media (min-width: 768px) and (max-width: 1099px) {
+    .crm-img-customer {
+        width: 50%;
+        height: auto;
+        margin-left: 90px;
+    }
+}
+@media (min-width: 1100px){
+    .crm-img-customer {
+        width: 50%;
+        height: auto;
+        margin-left: 220px;
+    }
+}
+@media (min-width: 1401px) and (max-width: 2598px) {
+    .crm-img-customer {
+        width: 60%;
+        height: auto;
+        margin-left: 180px;
+    }
+}
+@media (min-width: 2599px) {
+    .crm-img-customer {
+        width: 60%;
         height: auto;
         margin-left: 450px;
     }
@@ -125,6 +221,25 @@
     color: white;
     font-weight: bold;
     font-size: 1.3rem;
+}
+@media (max-width: 767px) {
+    .btn-log {
+        width: 90%;
+        height: 40px;
+        border-radius: 5px;
+        background-color: #517e7e;
+        font-size: 0.7rem;
+    }
+}
+@media (min-width: 768px) and (max-width: 1099px) {
+    .btn-log {
+        width: 70%;
+        height: 50px;
+        border-radius: 5px;
+        background-color: #517e7e;
+        font-size: 1.1rem;
+        margin-left:80px;
+    }
 }
 @media (min-width: 1100px){
     .btn-log {

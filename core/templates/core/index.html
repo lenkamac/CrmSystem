@@ -7,17 +7,17 @@
     	<link rel="stylesheet" href="{% static 'core/core.css' %}">
     {% endblock %}
 
-    <div class="container my-md-3 my-xxl-5 pt-xxl-2">
+    <div class="container my-xl-5 my-xxl-5 pt-xxl-2">
 
-            <div class="row mb-xxl-2" >
-                <div class="col-12 mb-md-4 mb-lg-2 mb-xl-3 mb-xxl-3">
-                    <div class="row align-items-center">
-                        <div class="col-md-4">
+            <div class="row my-xxl-2" >
+                <div class="col-12">
+                    <div class="row mx-xxl-1 my-xxl-2 align-items-center">
+                        <div class="col-md-4 col-lg-4 my-xxl-0 px-xxl-2">
                            <div class="text-end">
                                 <img src="{% static 'images/crm.png' %}" alt="crm" class="crm-img img-fluid">
                            </div>
                        </div>
-                        <div class="col-md-8">
+                        <div class="col-sm-4 col-md-8 col-lg-8">
                             <div class="text-start">
                                 <h1 class="main-h1">Welcome, Sales Manager!</h1>
                             </div>
@@ -25,16 +25,16 @@
                     </div>
                 </div>
             </div>
-            <div class="row my-xxl-4 px-xxl-5">
-                <div class="col-12 my-auto">
+            <div class="row my-sm-4 mb-md-2 mx-xxl-2 my-xxl-2 py-sm-3 px-xxl-5">
+                <div class="col-12">
                     <div class="text-center">
-                        <p class="index-p py-xxl-4">Your productivity hub for managing leads, clients, and deals.</p>
+                        <p class="index-p px-auto pt-md-2 py-xxl-4">Your productivity hub for managing leads, clients, and deals.</p>
                     </div>
                 </div>
             </div>
-            <div class="row mx-xxl-2">
+            <div class="row mx-xxl-2 mt-md-4">
                 <div class="col mb-4 py-lg-4 mx-xxl-2">
-                    <div class="mx-auto mb-2"><h5 class="h5-index py-3"><i class="fa-solid fa-user-plus px-3"></i>Manage Leads</h5></div>
+                    <div class="mx-auto mb-2"><h5 class="h5-index px-sm-2 py-3"><i class="fa-solid fa-user-plus px-3"></i>Manage Leads</h5></div>
                     <p class="p-index px-3">Effortlessly add, track, and nurture new leads. Stay in control of your sales funnel.</p>
                 </div>
                 <div class="col mb-4 py-lg-4 mx-xxl-1">
@@ -50,18 +50,17 @@
                     <p class="p-index px-3">Analyze sales activities and track your progress with built-in dashboards.</p>
                 </div>
             </div>
-           <div class="row my-lg-3 align-items-center">
-
+           <div class="row mx-lg-2 mt-md-5 py-md-5 my-lg-3 align-items-center">
                <div class="col-6">
-                   <div class="text-end">
-                       <a href="{% url 'login' %}" class="btn btn-log pt-md-2 pt-lg-2 pt-xxl-2">
+                   <div class="text-center">
+                       <a href="{% url 'login' %}" class="btn btn-log pt-md-3 pt-lg-2 pt-xxl-2">
                             Login and go to Dashboard <i class="fa-solid fa-arrow-right ms-2"></i>
                         </a>
                    </div>
                </div>
-               <div class="col-6">
+               <div class="col-6 py-md-5">
                    <div class="text-start">
-                       <img src="{% static 'images/customer-relationship-management-concept.jpg' %}" alt="crm-customer" class="crm-img img-fluid">
+                       <img src="{% static 'images/customer-relationship-management-concept.jpg' %}" alt="crm-customer" class="crm-img-customer img-fluid">
                    </div>
                </div>
            </div>
