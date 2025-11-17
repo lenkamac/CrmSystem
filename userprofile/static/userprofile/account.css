@@ -3,6 +3,95 @@
     margin-left: 280px;
 }
 
+
+.login-btn {
+    background-color: #697272;
+    color: #ffffff;
+    font-weight: bold;
+}
+.login-btn:hover {
+    background-color: #517e7e;
+}
+
+.btn-register {
+    background-color: #697272;
+    color: #ffffff;
+    font-weight: bold;
+    width: 200px;
+}
+.btn-register:hover {
+    background-color: #517e7e;
+}
+@media (max-width: 767px) {
+    .btn-register {
+        width: 100px;
+        font-size: 14px;
+    }
+}
+
+.span-term {
+    font-size: 16px;
+    padding-left: 12px;
+}
+@media (max-width: 767px) {
+    .span-term {
+        font-size: 12px;
+    }
+}
+@media (min-width: 768px) and (max-width: 1399px) {
+    .span-term {
+        font-size: 14px;
+    }
+}
+@media (min-width: 1400px) {
+    .span-term {
+        font-size: 16px;
+    }
+}
+@media (min-width: 1950px) and (max-width: 2598px) {
+    .span-term {
+        font-size: 20px;
+        padding-left: 14px;
+    }
+}
+@media (min-width: 2599px) {
+    .span-term {
+        font-size: 24px;
+        padding-left: 18px;
+    }
+}
+
+#id_accept_terms {
+    margin-left: 140px;
+}
+@media (max-width: 767px) {
+    #id_accept_terms {
+        margin-left: 0;
+        padding-left: 0;
+    }
+}
+@media (min-width: 768px) and (max-width: 1399px) {
+    #id_accept_terms {
+        margin-left: 95px;
+    }
+}
+@media (min-width: 1400px) {
+    #id_accept_terms {
+        margin-left: 155px;
+    }
+}
+@media (min-width: 1950px) and (max-width: 2598px) {
+    #id_accept_terms {
+        margin-left: 210px;
+    }
+}
+@media (min-width: 2599px) {
+   #id_accept_terms {
+        margin-left: 320px;
+    }
+}
+
+
 .btn-account-edit {
     width: auto;
     background-color: #697272;

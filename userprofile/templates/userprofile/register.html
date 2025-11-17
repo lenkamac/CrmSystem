@@ -1,68 +1,102 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+	Register
+{% endblock %}
 
 {% block content %}
 
-    <div class="container" style="max-width: 480px; margin: 2rem auto;">
-        <h2 style="margin-bottom: 1rem;">Create an account</h2>
+    {% block css %}
+    	<link rel="stylesheet" href="{% static 'userprofile/account.css' %}">
+    {% endblock %}
 
-        {% if messages %}
-            <ul>
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
+    <div class="container-register d-flex justify-content-center align-items-center mt-4" >
 
-    <form method="post" action="{% url 'userprofile:register' %}">
-    {% csrf_token %}
+        <div class="row w-75 w-md-50 justify-content-center">
+            <div class="col-12 col-md-10">
 
-        <!-- Username -->
-        <div style="margin-bottom: 0.75rem;">
-            <label for="id_username">Username</label>
-            <input type="text" id="id_username" name="username" required minlength="3"
-                   maxlength="150" autocomplete="username"
-            style="display:block;width:100%;padding:0.5rem;margin-top:0.25rem;"/>
+                <div class="text-center">
+                    <h2 class="fw-bold py-2 my-4">Create an account</h2>
+                </div>
+
+                {% if messages %}
+                    <ul>
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                <div class="border py-4 rounded shadow my-form">
+                    <form method="post" action="{% url 'userprofile:register' %}">
+                    {% csrf_token %}
+
+                        <!-- Username -->
+                        <div class="row mb-3 px-3">
+                            <label for="id_username" class="col-sm-2 col-form-label">Username</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="id_username" name="username" required minlength="3"
+                                   maxlength="150" autocomplete="username"/>
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="row mb-3 px-3">
+                            <label for="id_email" class="col-sm-2 col-form-label">Email</label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" id="id_email" name="email" required autocomplete="email"/>
+                            </div>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="row mb-3 px-3">
+                            <label for="id_password1" class="col-sm-2 col-form-label">Password</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="id_password1" name="password1" required minlength="8" autocomplete="new-password"/>
+                                <small>Use at least 8 characters.</small>
+                            </div>
+                        </div>
+
+                        <!-- Confirm Password -->
+                        <div class="row mb-3 px-3">
+                            <label for="id_password2" class="col-sm-2 col-form-label">Confirm password</label>
+                            <div class="col-sm-10">
+                                 <input type="password" class="form-control" id="id_password2" name="password2" required autocomplete="new-password"/>
+                            </div>
+                        </div>
+
+                        <!-- Terms -->
+                        <div class="row mb-3 mx-3">
+                            <div class="col-sm-10">
+                                <div class="form-check d-flex align-items-start">
+                                    <input type="checkbox"
+                                           id="id_accept_terms"
+                                           class="form-check-input mb-1"
+                                           name="accept_terms"
+                                           required />
+                                    <label for="id_accept_terms"
+                                           class="form-check-label span-term">
+                                        I agree to the terms and conditions
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-register">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-12">
+                <p class="text-center mt-4">
+                    Already have an account?
+                    <a href="{% url 'login' %}" class="fw-bold fs-5">Sign in</a>
+                </p>
+            </div>
         </div>
-
-        <!-- Email -->
-        <div style="margin-bottom: 0.75rem;">
-            <label for="id_email">Email</label>
-            <input type="email" id="id_email" name="email" required autocomplete="email"
-                   style="display:block;width:100%;padding:0.5rem;margin-top:0.25rem;"/>
-        </div>
-
-        <!-- Password -->
-        <div style="margin-bottom: 0.75rem;">
-            <label for="id_password1">Password</label>
-            <input type="password" id="id_password1" name="password1" required minlength="8" autocomplete="new-password"
-                   style="display:block;width:100%;padding:0.5rem;margin-top:0.25rem;"/>
-            <small>Use at least 8 characters.</small>
-        </div>
-
-        <!-- Confirm Password -->
-        <div style="margin-bottom: 1rem;">
-            <label for="id_password2">Confirm password</label>
-            <input type="password" id="id_password2" name="password2" required autocomplete="new-password"
-                   style="display:block;width:100%;padding:0.5rem;margin-top:0.25rem;"
-            />
-        </div>
-
-        <!-- Terms -->
-        <div style="margin-bottom: 1rem;">
-            <label style="display:flex;align-items:center;gap:0.5rem;">
-                <input type="checkbox" name="accept_terms" required />
-                    I agree to the terms and conditions
-            </label>
-        </div>
-
-        <button type="submit" style="padding:0.6rem 1rem;">Register</button>
-    </form>
-
-    <p style="margin-top:1rem;">
-        Already have an account?
-        <a href="{% url 'login' %}">Sign in</a>
-    </p>
-</div>
+    </div>
 
 
 
