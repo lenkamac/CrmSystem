@@ -208,8 +208,6 @@ h1 {
     color: #353E46;
 }
 
-
-
 h2 {
     color: #3D4851;
 }
@@ -236,6 +234,38 @@ h2 {
     background-color: #C7C8CB; /* Optional: Customize the background color */
     border-right: 1px solid #b9b9bb; /* Optional: Add a border */
      }
+@media (max-width: 767px) {
+    .offcanvas-custom {
+        width: 60px;
+    }
+}
+@media (min-width: 768px) and (max-width: 1099px) {
+    .offcanvas-custom {
+        width: 150px;
+    }
+}
+@media (min-width: 1100px){
+    .offcanvas-custom {
+        width: 180px;
+    }
+}
+@media (min-width: 1401px) and (max-width: 2400px) {
+    .offcanvas-custom {
+        width: 250px;
+    }
+}
+@media (min-width: 2401px) {
+    .offcanvas-custom {
+        width: 290px;
+    }
+}
+@media (min-width: 2561px) {
+    .offcanvas-custom {
+        width: 340px;
+    }
+}
+
+
 .offcanvas-a {
     text-decoration: none;
     color: black;
@@ -243,12 +273,43 @@ h2 {
     font-size: 1.6rem;
     text-align: center;
     padding: 20px;
-    margin: 5px;
+    margin: 7px;
 }
 .offcanvas-a:hover {
     color: #353E46;
     font-weight: bold;
 }
+@media (max-width: 767px) {
+    .offcanvas-a {
+        font-size: 0.8rem;
+        margin:0;
+        padding: 0;
+
+    }
+}
+@media (min-width: 768px) and (max-width: 1099px) {
+    .offcanvas-a {
+        font-size: 1.2rem;
+        margin:12px;
+        padding: 10px;
+    }
+}
+@media (min-width: 1100px){
+    .offcanvas-a {
+        font-size: 1.4rem;
+        margin:12px;
+        padding: 12px;
+    }
+}
+@media (min-width: 1700px) {
+    .offcanvas-a {
+        font-size: 1.6rem;
+        margin:10px;
+        padding: 12px;
+    }
+
+}
+
 .offcanvas-custom ul li a {
     color:black;
     font-size: 1.4rem;
@@ -261,6 +322,42 @@ h2 {
     color: #023564;
     font-weight: bold;
 }
+@media (max-width: 767px) {
+    .offcanvas-custom ul li a {
+        font-size: 0.7rem;
+        padding: 4px;
+        margin: 3px;
+    }
+}
+@media (min-width: 768px) and (max-width: 1099px) {
+    .offcanvas-custom ul li a {
+        font-size: 1rem;
+        padding: 5px;
+        margin: 12px;
+    }
+}
+@media (min-width: 1100px){
+    .offcanvas-custom ul li a {
+        font-size: 1.1rem;
+        padding: 6px;
+        margin: 12px;
+    }
+}
+@media (min-width: 1500px) {
+    .offcanvas-custom ul li a {
+        font-size: 1.2rem;
+        padding: 7px;
+        margin: 14px;
+    }
+}
+@media (min-width: 2350px) {
+    .offcanvas-custom ul li a {
+        font-size: 1.6rem;
+        padding:11px;
+        margin: 20px;
+    }
+}
+
 .offcanvas-custom ul li a i {
     margin-right: 15px; /* Space between icon and text */
     font-size: 1.4rem; /* Adjust font size */
@@ -269,6 +366,31 @@ h2 {
 .offcanvas-custom ul li a i:hover {
     color: #023564;
 }
+@media (max-width: 767px) {
+    .offcanvas-custom ul li a i {
+        font-size: 0.6rem;
+        margin-right: 5px;
+    }
+}
+@media (min-width: 768px) and (max-width: 1099px) {
+    .offcanvas-custom ul li a i {
+        font-size: 0.9rem;
+        margin-right: 10px;
+    }
+}
+@media (min-width: 1100px){
+    .offcanvas-custom ul li a i {
+        font-size: 1.1rem;
+        margin-right: 15px;
+    }
+}
+@media (min-width: 1700px) {
+    .offcanvas-custom ul li a i {
+        font-size: 1.3rem;
+    }
+}
+
+
 span {
     font-weight: bold;
     color: #23523c;
