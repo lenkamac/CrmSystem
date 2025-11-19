@@ -5,17 +5,24 @@
     min-height: 100vh;
   }
 
+ .calendar-container {
+     width: 100%;
+     margin: 150px;
+ }
+
+
   #calendar {
-    width: 75%;
+    width: 90%;
     min-height: 60vh;   /* Adjust as needed (e.g., 60vh, 80vh) */
-    height: 65vh;       /* You can use a fixed px or vh value */
+    height: 70vh;       /* You can use a fixed px or vh value */
     background: white;
     box-shadow: 0 4px 24px rgba(0,0,0,0.07);
     border-radius: 8px;
-    margin-left: 320px;
+    margin-left: 20px;
     margin-top: 25px;
     padding: 7px;
   }
+
 
   /* Make sure the day grid table uses collapsed borders */
 .fc-theme-standard .fc-scrollgrid,
@@ -37,11 +44,11 @@
 
 
   #upcoming-events-list {
-    margin-right: 35px;
+    margin-left: 8px;
   }
   #upcoming-events-list li {
-    font-size: 1.1rem;
-    margin-bottom: 10px;
+    font-size: 0.8rem;
+    margin-bottom: 5px;
     height: auto;
   }
 
@@ -88,15 +95,17 @@
 }
 
 #addEventBtn {
-  background: #0d3f3f;
-  color: #fff;
-  font-size: 1.1rem;
-  border: 1px solid #386471;
-  border-radius: 6px;
-  padding: 8px 16px;
-  font-weight: bold;
-  margin-left: 20px;
-  transition: background 0.2s, color 0.2s;
+    background: #0d3f3f;
+    color: #fff;
+    font-size: 1rem;
+    border: 1px solid #386471;
+    border-radius: 6px;
+    padding: 8px 8px;
+    font-weight: bold;
+    margin-left: 20px;
+    transition: background 0.2s, color 0.2s;
+    height: 40px;
+    text-align: center;
 }
 
 /* Example for a generic modal dialog */
@@ -176,4 +185,51 @@
 /* If using 'timeGrid' view and want a visible line on now indicator */
 .fc .fc-timegrid-now-indicator-line {
   border-top: 2px solid #43b29d !important;
+}
+
+/* Responsive styles for devices with max-width 768px */
+@media (max-width: 768px) {
+    body {
+        display: block; /* Remove flex centering to allow scrolling */
+        padding-top: 60px; /* Account for fixed navbar */
+    }
+
+    .calendar-container {
+        margin: 10px auto !important; /* Override the large desktop margin */
+        width: 95%;
+        padding: 0;
+    }
+
+    #calendar {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 10px;
+        height: auto;
+        min-height: 50vh;
+    }
+
+    #upcoming-events-list {
+        margin-left: 0;
+    }
+
+    /* Stack toolbar elements on small screens */
+    .fc .fc-toolbar {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .fc .fc-toolbar-chunk {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    #addEventBtn {
+        width: 50%;
+        margin-left: 0;
+        margin-bottom: 10px;
+        font-size: 0.7rem;
+        height: 30px;
+    }
 }

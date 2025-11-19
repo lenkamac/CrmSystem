@@ -1,8 +1,12 @@
 {% load static %}
 
 
-<nav class="navbar navbar-expand-lg fixed-top">
+<nav class="navbar navbar-expand-md fixed-top">
     <div class="container-fluid">
+        <!-- Hamburger Button: Visible only on small screens -->
+        <button class="btn btn-outline-light d-md-none me-2" type="button" id="sidebarToggle">
+            <i class="bi bi-list"></i>
+        </button>
         <a class="navbar-brand" href="{% url 'index' %}">Lenka's CRM System</a>
         <!-- Toggler for responsive menu -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -39,3 +43,24 @@
         </div>
     </div>
 </nav>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const toggleBtn = document.getElementById('sidebarToggle');
+        const sidebar = document.getElementById('sidebarMenu');
+
+        if (toggleBtn && sidebar) {
+            toggleBtn.addEventListener('click', function() {
+                sidebar.classList.toggle('show');
+            });
+
+            // Close sidebar when clicking outside (optional, if you implemented the overlay)
+            document.addEventListener('click', function(event) {
+                const isClickInside = sidebar.contains(event.target) || toggleBtn.contains(event.target);
+                if (!isClickInside && sidebar.classList.contains('show')) {
+                    sidebar.classList.remove('show');
+                }
+            });
+        }
+    });
+</script>

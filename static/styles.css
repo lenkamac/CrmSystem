@@ -233,12 +233,34 @@ h2 {
     z-index: 1045; /* Set appropriate z-index */
     background-color: #C7C8CB; /* Optional: Customize the background color */
     border-right: 1px solid #b9b9bb; /* Optional: Add a border */
+    transition: transform 0.3s ease-in-out; /* Add transition for smooth sliding */
      }
+/* Hide completely on small screens by default */
 @media (max-width: 767px) {
     .offcanvas-custom {
-        width: 60px;
+        width: 250px; /* Keep it readable when opened */
+        transform: translateX(-100%); /* Move off-screen to the left */
+    }
+
+    /* Class to show the menu via JS */
+    .offcanvas-custom.show {
+        transform: translateX(0);
+    }
+
+    /* Overlay background when menu is open (optional but recommended) */
+    .offcanvas-overlay {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 1040;
+    }
+    .offcanvas-overlay.show {
+        display: block;
     }
 }
+
+
 @media (min-width: 768px) and (max-width: 1099px) {
     .offcanvas-custom {
         width: 150px;
