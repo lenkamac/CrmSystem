@@ -233,3 +233,142 @@
         height: 30px;
     }
 }
+
+ @media (max-width: 1079px) {
+    body {
+        display: block; /* Remove flex centering to allow scrolling */
+        padding-top: 30px; /* Account for fixed navbar */
+    }
+
+    .calendar-container {
+        margin: 10px auto !important; /* Override the large desktop margin */
+        width: 75%;
+    }
+
+    #calendar {
+        width: 95%;
+        margin-left: 0;
+        margin-top: 10px;
+        height: auto;
+        min-height: 50vh;
+        font-size: 0.8rem;
+    }
+
+    #upcoming-events-list {
+        margin-left: 0;
+    }
+
+    /* Stack toolbar elements on small screens */
+    .fc .fc-toolbar {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .fc .fc-toolbar-chunk {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    #addEventBtn {
+        width: 50%;
+        margin-left: 0;
+        margin-bottom: 10px;
+        font-size: 0.8rem;
+        height: auto;
+        padding: 8px;
+    }
+}
+
+ @media (max-width: 1460px) {
+    body {
+        display: block; /* Remove flex centering to allow scrolling */
+        padding-top: 20px; /* Account for fixed navbar */
+    }
+
+    .calendar-container {
+        margin: 10px auto !important; /* Override the large desktop margin */
+        width: 75%;
+    }
+
+    #calendar {
+        width: 95%;
+        margin-left: 0;
+        margin-top: 10px;
+        height: auto;
+        min-height: 50vh;
+        font-size: 0.9rem;
+    }
+
+    #upcoming-events-list {
+        margin-left: 0;
+    }
+
+    /* Stack toolbar elements on small screens */
+    .fc .fc-toolbar {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .fc .fc-toolbar-chunk {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    #addEventBtn {
+        width: 50%;
+        margin-left: 0;
+        margin-bottom: 10px;
+        font-size: 0.9rem;
+        height: 30px;
+    }
+}
+
+ @media (min-width: 3100px) {
+    body {
+        display: block; /* Remove flex centering to allow scrolling */
+        padding-top: 30px; /* Account for fixed navbar */
+    }
+
+    .calendar-container {
+        margin: 20px auto !important; /* Override the large desktop margin */
+        width: 100%;
+    }
+
+    #calendar {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 10px;
+        height: auto;
+        min-height: 50vh;
+        font-size: 1.2rem;
+    }
+
+    #upcoming-events-list {
+        margin-left: 0;
+    }
+
+    /* Stack toolbar elements on small screens */
+    .fc .fc-toolbar {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .fc .fc-toolbar-chunk {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    #addEventBtn {
+        width: 50%;
+        margin-left: 0;
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+        height: 40px;
+    }
+}

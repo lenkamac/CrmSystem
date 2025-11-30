@@ -545,6 +545,12 @@ span {
   color: #697272;
   text-decoration: underline;
 }
+@media (min-width: 2980px) {
+    .back-to-dashboard {
+        font-size: 1.6rem;
+    }
+}
+
 .edit-btn {
     background-color: #ABABAF;
     font-weight: bold;

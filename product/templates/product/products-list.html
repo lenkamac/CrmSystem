@@ -14,13 +14,13 @@
 
 	{% include 'core/partials/offcanvas_menu.html' %}
 
-        <div class="container">
+        <div class="container px-md-5" id="product-list">
             <div class="row mt-4 justify-content-center">
                 <div class="col-12 text-center">
                     <h1 class="mb-4">Products</h1>
                 </div>
                 <div class="col-12 text-center">
-                    <a href="{% url 'product:add_product' %}" class="btn" id="btn-add-product">
+                    <a href="{% url 'product:add_product' %}" class="btn my-xxl-2" id="btn-add-product">
                         <i class="bi bi-plus-circle"></i> Add Product
                     </a>
                 </div>
@@ -40,34 +40,34 @@
 
 
 
-            <div class="row justify-content-center">
-                <div class="col-12">
-                    <div class="card shadow-sm" style="width: 100%; margin-bottom: 20px; margin-top: 20px; margin-left: 8.5%; margin-right: 8.5%;">
+            <div class="row justify-content-center mx-xxl-5 py-md-2 py-xxl-2">
+                <div class="col-12 col-lg-10">
+                    <div class="card products-card shadow-sm my-4">
                         <div class="card-header text-white">
-                            <h5 class="mb-0">All Products</h5>
+                            <h4 class="mb-0">All Products</h4>
                         </div>
                         <div class="card-body">
                             {% if products %}
-                                <div class="table-responsive">
-                                    <table class="table table-hover table-striped">
+                                <div class="table-responsive mx-xxl-3">
+                                    <table class="table table-hover table-striped align-middle">
                                         <thead>
                                             <tr>
-                                                <th class="col text-start">Name</th>
-                                                <th class="col text-center">Description</th>
-                                                <th class="col text-center">Net Price</th>
-                                                <th class="col text-center">Sold Quantity</th>
-                                                <th class="col text-center">Total Price</th>
+                                                <th class="text-start">Name</th>
+                                                <th class="text-center">Description</th>
+                                                <th class="text-center">Net Price</th>
+                                                <th class="text-center">Sold Quantity</th>
+                                                <th class="text-center">Total Price</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {% for product in products %}
                                             <tr>
-                                                <td>{{ product.name }}</td>
+                                                <td class="text-start">{{ product.name }}</td>
                                                 <td>{{ product.description|truncatewords:10 }}</td>
                                                 <td>${{ product.net_price }}</td>
                                                 <td>{{ product.sold_quantity }}</td>
                                                 <td>€{{ product.get_total_price }}</td>
-                                                <td>
+                                                <td class="text-center text-nowrap">
                                                     <a href="{% url 'product:product_detail' product.id %}" class="btn btn-sm btn-view">
                                                         <i class="bi bi-eye"></i> View
                                                     </a>

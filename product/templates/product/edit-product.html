@@ -9,12 +9,14 @@
     	<link rel="stylesheet" href="{% static 'product/product.css' %}">
     {% endblock %}
 
-    <div class="container mt-5 pt-5">
-        <div class="row">
-            <div class="col-md-8 offset-md-2">
-                <div class="card shadow">
+    {% include 'core/partials/offcanvas_menu.html' %}
+
+    <div class="container mt-5 py-md-4 bg-warning" id="edit-product">
+        <div class="row justify-content-center bg-danger my-md-3 mx-xxl-3">
+            <div class="col-md-8 w-75 bg-white offset-md-2">
+                <div class="card products-card shadow">
                     <div class="card-header text-dark">
-                        <h3 class="h3-edit mb-0">
+                        <h3>
                             <i class="bi bi-pencil-square"></i> Edit Product
                         </h3>
                     </div>
