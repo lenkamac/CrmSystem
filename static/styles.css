@@ -28,85 +28,6 @@ body {
     font-size: 1rem;
 }
 
-/* Responsive images and media */
-img, video, iframe {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-
-/* Responsive tables */
-table {
-    width: 100%;
-    max-width: 100%;
-}
-
-/* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {
-    html {
-        font-size: 16px;
-    }
-    .container {
-        max-width: 540px;
-    }
-}
-
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-    html {
-        font-size: 14px;
-    }
-    .container {
-        max-width: 720px;
-    }
-}
-
-/* Large devices (laptops, 992px and up) */
-@media (min-width: 992px) {
-    html {
-        font-size: 16px;
-    }
-    .container {
-        max-width: 900px;
-    }
-}
-
-/* Extra large devices (desktops, 1200px and up) */
-@media (min-width: 1350px) {
-    html {
-        font-size: 16px;
-    }
-    .container {
-        max-width: 1300px;
-    }
-}
-@media (min-width: 1650px) {
-    html {
-        font-size: 16px;
-    }
-    .container {
-        max-width: 1600px;
-    }
-}
-
-/* Extra extra large devices (large desktops, 1400px and up) */
-@media (min-width: 1921px) {
-    html {
-        font-size: 20px;
-    }
-    .container {
-        max-width: 2400px;
-    }
-}
-@media (min-width: 2561px) {
-    html {
-        font-size: 26px;
-    }
-    .container {
-        max-width: 3400px;
-    }
-}
-
 /* Navbar */
 .navbar {
     position: fixed;
@@ -176,11 +97,238 @@ table {
 .text-footer {
     color: #b0c4de;
 }
-@media(max-width: 550px) {
-    .text-footer {
-       font-size: 14px;
+
+/* Offcanvas style*/
+.offcanvas-custom {
+    position: fixed !important; /* Fix it on the left side */
+    top: 50px; /* Set the top offset */
+    left: 0;
+    bottom: 60px;
+    width: 250px; /* Set your desired width */
+    z-index: 1045; /* Set appropriate z-index */
+    background-color: #C7C8CB; /* Optional: Customize the background color */
+    border-right: 1px solid #b9b9bb; /* Optional: Add a border */
+    transition: transform 0.3s ease-in-out; /* Add transition for smooth sliding */
+     }
+.offcanvas-a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 1.6rem;
+    text-align: center;
+    padding: 20px;
+    margin: 7px;
+}
+.offcanvas-a:hover {
+    color: #353E46;
+    font-weight: bold;
+}
+.offcanvas-custom ul li a {
+    color:black;
+    font-size: 1.4rem;
+    text-decoration: none;
+    display: block;
+    padding: 10px 15px;
+    transition: color 0.2s;
+}
+.offcanvas-custom ul li a:hover {
+    color: #023564;
+    font-weight: bold;
+}
+
+/* main header */
+h1 {
+    color: #353E46;
+}
+h2 {
+    color: #3D4851;
+}
+
+
+/* Responsive images and media */
+img, video, iframe {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Responsive tables */
+table {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (max-width: 575px) {
+    html {
+        font-size: 14px;
+    }
+
+    body {
+        padding-bottom: 20px;
+    }
+
+    .container {
+        max-width: 500px;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        line-height: 1.2;
+    }
+
+    .navbar {
+        font-size: 0.6rem;
+        height: 43px;
+    }
+    .navbar-brand {
+        font-size: 0.8rem;
+        color: #f8fafc !important; /* Light text */
+    }
+    .navbar-brand:hover {
+        color: #ABABAF;
+    }
+    .nav-item {
+        background-color: #C7C8CB;
+        margin-right: 20px;
+
+        .navbar-toggler {
+            margin-right: 10px;
+            margin-bottom: 0;
+            padding: 0;
+            filter: invert(1);
+        }
+
+        .nav-link {
+            color: #cbd5e1 !important; /* Light text */
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: #f8fafc !important;
+        }
+    }
+
+    .offcanvas-custom {
+        width: 150px; /* Keep it readable when opened */
+        transform: translateX(-100%); /* Move off-screen to the left */
+        top: 40px; /* Set the top offset */
+        left: 0;
+        bottom: 20px;
+    }
+    /* Class to show the menu via JS */
+    .offcanvas-custom.show {
+        transform: translateX(0);
+    }
+    /* Overlay background when menu is open (optional but recommended) */
+    .offcanvas-overlay {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 1040;
+    }
+    .offcanvas-overlay.show {
+        display: block;
+    }
+
+    .footer {
+        height: 20px;
+        padding: 5px;
+        font-size: 0.6rem;
+        bottom: 0;
     }
 }
+@media (min-width: 576px) {
+    html {
+        font-size: 16px;
+    }
+    .container {
+        min-width: 540px;
+    }
+    .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+        margin-bottom: 0.7rem;
+        font-weight: 500;
+        line-height: 1.2;
+    }
+    .footer {
+        height: 25px;
+        font-size: 0.8rem;
+        bottom: 0;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+    .container {
+        min-width: 700px;
+    }
+    .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+        margin-bottom: 0.8rem;
+        font-weight: 500;
+        line-height: 1.3;
+    }
+    .footer {
+        height: 30px;
+        font-size: 1rem;
+        bottom: 0;
+    }
+}
+
+/* Large devices (laptops, 992px and up) */
+@media (min-width: 992px) {
+    html {
+        font-size: 16px;
+    }
+    .container {
+        max-width: 900px;
+    }
+}
+
+/* Extra large devices (desktops, 1200px and up) */
+@media (min-width: 1350px) {
+    html {
+        font-size: 16px;
+    }
+    .container {
+        max-width: 1300px;
+    }
+}
+@media (min-width: 1650px) {
+    html {
+        font-size: 16px;
+    }
+    .container {
+        max-width: 1600px;
+    }
+}
+
+/* Extra extra large devices (large desktops, 1400px and up) */
+@media (min-width: 1921px) {
+    html {
+        font-size: 20px;
+    }
+    .container {
+        max-width: 2400px;
+    }
+}
+@media (min-width: 2561px) {
+    html {
+        font-size: 26px;
+    }
+    .container {
+        max-width: 3400px;
+    }
+}
+
+
+
+
 
 
 /* main content*/
@@ -203,14 +351,6 @@ main {
     }
 }
 
-/* main header */
-h1 {
-    color: #353E46;
-}
-
-h2 {
-    color: #3D4851;
-}
 
 .span-detail {
     font-weight: bold;
@@ -223,42 +363,8 @@ h2 {
     color: #353E46;
 }
 
-/* Offcanvas style*/
-.offcanvas-custom {
-    position: fixed !important; /* Fix it on the left side */
-    top: 50px; /* Set the top offset */
-    left: 0;
-    bottom: 60px;
-    width: 250px; /* Set your desired width */
-    z-index: 1045; /* Set appropriate z-index */
-    background-color: #C7C8CB; /* Optional: Customize the background color */
-    border-right: 1px solid #b9b9bb; /* Optional: Add a border */
-    transition: transform 0.3s ease-in-out; /* Add transition for smooth sliding */
-     }
+
 /* Hide completely on small screens by default */
-@media (max-width: 767px) {
-    .offcanvas-custom {
-        width: 250px; /* Keep it readable when opened */
-        transform: translateX(-100%); /* Move off-screen to the left */
-    }
-
-    /* Class to show the menu via JS */
-    .offcanvas-custom.show {
-        transform: translateX(0);
-    }
-
-    /* Overlay background when menu is open (optional but recommended) */
-    .offcanvas-overlay {
-        display: none;
-        position: fixed;
-        top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0,0,0,0.5);
-        z-index: 1040;
-    }
-    .offcanvas-overlay.show {
-        display: block;
-    }
-}
 
 
 @media (min-width: 768px) and (max-width: 1099px) {
@@ -288,19 +394,7 @@ h2 {
 }
 
 
-.offcanvas-a {
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
-    font-size: 1.6rem;
-    text-align: center;
-    padding: 20px;
-    margin: 7px;
-}
-.offcanvas-a:hover {
-    color: #353E46;
-    font-weight: bold;
-}
+
 @media (max-width: 767px) {
     .offcanvas-a {
         font-size: 0.8rem;
@@ -332,18 +426,7 @@ h2 {
 
 }
 
-.offcanvas-custom ul li a {
-    color:black;
-    font-size: 1.4rem;
-    text-decoration: none;
-    display: block;
-    padding: 10px 15px;
-    transition: color 0.2s;
-}
-.offcanvas-custom ul li a:hover {
-    color: #023564;
-    font-weight: bold;
-}
+
 @media (max-width: 767px) {
     .offcanvas-custom ul li a {
         font-size: 0.7rem;

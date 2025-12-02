@@ -9,26 +9,33 @@
 
     {% include 'core/partials/offcanvas_menu.html' %}
 
-    <div class="container calendar-container my-md-3 my-lg-4">
-        <div class="row mt-xxl-3 mx-xxl-4 py-2 px-xxl-5">
+    <div class="container calendar-container">
+        <div class="row justify-content-center">
             <div class="col-12">
-                <h2 class="text-center my-2 pt-xxl-4">Calendar</h2>
+                <h2 class="text-center fw-bolder">Calendar</h2>
             </div>
         </div>
-        <div class="row my-xxl-4 py-2 justify-content-center">
-            <div class="col-12 col-md-8 col-lg-9">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-9 px-3 pt-2">
                 <div id="calendar"></div>
             </div>
-            <div class="col-12 col-md-4 col-lg-3 mt-3 mt-lg-0 mt-xxl-3 pt-xxl-2 text-center" style="background-color: #c0c6c6;">
-                <h4 class="text-center py-sm-1 py-md-3 py-xxl-0 pt-xxl-2 px-xxl-2">Upcoming Events</h4>
-                <button class="btn py-md-2 my-md-1" data-bs-toggle="modal" data-bs-target="#addEventModal"
-                        id="addEventBtn"><i class="fa-solid fa-plus"></i>Add Event
-                </button>
-                <div class="text-start pt-md-3 px-md-1">
-                    <ul id="upcoming-events-list" class="list-group"></ul>
-                    <div id="upcoming-pagination" class="mt-2 text-center"></div>
+            <div class="col-12 text-center" style="background-color: #c0c6c6;">
+                <div class="row pt-sm-2">
+                    <div class="col-12">
+                        <h4 class="text-center fw-bolder">Upcoming Events</h4>
+                    </div>
+                    <div class="col-12 text-center">
+                        <button class="btn" data-bs-toggle="modal" data-bs-target="#addEventModal"
+                            id="addEventBtn"><i class="fa-solid fa-plus px-2"></i>Add Event
+                        </button>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <div class="text-start">
+                            <ul id="upcoming-events-list" class="list-group"></ul>
+                            <div id="upcoming-pagination" class="mt-2 text-center"></div>
+                        </div>
+                    </div>
                 </div>
-
             </div>
 
             <!-- Event Action Modal -->
