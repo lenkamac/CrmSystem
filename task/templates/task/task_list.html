@@ -11,11 +11,11 @@
 
     {% include 'core/partials/offcanvas_menu.html' %}
 
-    <div class="container mx-auto bg-warning" id="task-list">
+    <div class="container mx-auto" id="task-list">
         <div class="row justify-content-center">
-            <div class="col-12">
+            <div class="col-12 py-3">
                 <div class="text-center">
-                    <h1 class="fw-bolder pt-2">Tasks</h1>
+                    <h1 class="mt-sm-0 fw-bolder">Tasks</h1>
                 </div>
             </div>
             <div class="col-12">
@@ -34,21 +34,18 @@
                    {% endif %}
                </div>
             </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-12">
-                <div class="row justify-content-center mx-lg-5 my-lg-3">
-                    <a href="{% url 'task:task_add' %}" class="btn px-5" style="background-color: #0a3622; color: white;
-                     width: 220px; height: 40px; border-radius: 10px; font-size: 18px;">
+
+            <div class="col-12 my-1 px-3 py-1 text-center">
+                    <a href="{% url 'task:task_add' %}" class="btn justify-content-center align-items-center" id="btn-add-task">
                         <i class="fas fa-plus"></i> New Task
                     </a>
-                </div>
+
             </div>
         </div>
 
-        <div class="row mx-lg-3 justify-content-center">
-            <div class="col-lg-12">
-                <div class="row justify-content-center w-100 mx-lg-5 my-lg-3">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="row justify-content-center w-100 mx-auto px-3 py-2">
                     <!-- Filters -->
                     <div class="card mb-4">
                         <div class="card-body">
@@ -101,137 +98,148 @@
             </div>
         </div>
 
-        <div class="row mx-lg-3 justify-content-center">
-            <div class="col-lg-12">
-                <div class="row justify-content-center w-100 my-lg-3 mx-lg-5">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="card tasks-card shadow-sm">
+                    <div class="card-header text-white">
+                        <h5>All Tasks</h5>
+                    </div>
                     <!-- Tasks List -->
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead class="th-custom">
-                                <tr>
-                                    <th>Title</th>
-                                    <th class="text-center">Status</th>
-                                    <th class="text-center">Priority</th>
-                                    <th class="text-center">Assigned To</th>
-                                    <th class="text-center">Due Date</th>
-                                    <th class="text-center">Due Time</th>
-                                    <th class="text-center">Related To</th>
-                                    <th class="text-center">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for task in tasks %}
-                                <tr>
-                                    <td class="text-start" style="width: auto;">
-                                        <a href="#" class="text-decoration-none">
-                                            {{ task.title }}
-                                        </a>
-                                    </td>
-                                    <td class="text-center">
-                                        {% if task.status == 'todo' %}
-                                            <span class="badge bg-secondary">To Do</span>
-                                        {% elif task.status == 'in_progress' %}
-                                            <span class="badge bg-primary">In Progress</span>
-                                        {% elif task.status == 'completed' %}
-                                            <span class="badge bg-success">Completed</span>
-                                        {% else %}
-                                            <span class="badge bg-danger">Canceled</span>
-                                        {% endif %}
-                                    </td>
-                                    <td>
-                                        {% if task.priority == 'high' %}
-                                            <span class="badge bg-danger">High</span>
-                                        {% elif task.priority == 'medium' %}
-                                            <span class="badge bg-warning">Medium</span>
-                                        {% elif task.priority == 'low' %}
-                                            <span class="badge bg-info">Low</span>
-                                        {% else %}
-                                            <span>------</span>
-                                        {% endif %}
-                                    </td>
-                                    <td class="text-center">
-                                        {% if task.assigned_to %}
-                                            {{ task.assigned_to.get_full_name|default:task.assigned_to.username }}
-                                        {% else %}
-                                            <span class="text-muted">Unassigned</span>
-                                        {% endif %}
-                                    </td>
-                                    <td class="text-center">
-                                        {% if task.due_date %}
-                                            {{ task.due_date }}
-                                        {% else %}
-                                            <span class="text-muted">No due date</span>
-                                        {% endif %}
-                                    </td>
-                                    <td class="text-center">
-                                        {% if task.due_time %}
-                                            {{ task.due_time }}
-                                        {% else %}
-                                            <span class="text-muted">--:--</span>
-                                        {% endif %}
-                                    </td>
-                                    <td>
-                                        {% if task.lead %}
-                                            <span>Lead:</span> {{ task.lead.first_name }} {{ task.lead.last_name }}
-                                        {% elif task.client %}
-                                            <span>Client:</span> {{ task.client.first_name }} {{ task.client.last_name }}
-                                        {% else %}
-                                            <span class="text-muted">None</span>
-                                        {% endif %}
-                                    </td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <a href="{% url 'task:task_detail' task.pk %}" class="btn btn-sm btn-outline-primary">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                            <a href="{% url 'task:task_edit' task.pk %} " class="btn btn-sm btn-outline-secondary">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <a href="{% url 'task:task_delete' task.pk %}" class="btn btn-sm btn-outline-danger">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                {% empty %}
-                                <tr>
-                                    <td colspan="7" class="text-center py-4">
-                                        <p class="text-muted mb-0">No tasks found</p>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+                    <div class="card-body">
+                        {% if tasks %}
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle">
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th class="text-center">Status</th>
+                                            <th class="text-center">Priority</th>
+                                            <th class="text-center">Assigned To</th>
+                                            <th class="text-center">Due Date</th>
+                                            <th class="text-center">Due Time</th>
+                                            <th class="text-center">Related To</th>
+                                            <th class="text-center">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for task in tasks %}
+                                        <tr>
+                                            <td class="text-start" style="width: auto;">
+                                                <a href="#" class="text-decoration-none">
+                                                    {{ task.title }}
+                                                </a>
+                                            </td>
+                                            <td class="text-center">
+                                                {% if task.status == 'todo' %}
+                                                    <span class="badge bg-secondary">To Do</span>
+                                                {% elif task.status == 'in_progress' %}
+                                                    <span class="badge bg-primary">In Progress</span>
+                                                {% elif task.status == 'completed' %}
+                                                    <span class="badge bg-success">Completed</span>
+                                                {% else %}
+                                                    <span class="badge bg-danger">Canceled</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {% if task.priority == 'high' %}
+                                                    <span class="badge bg-danger">High</span>
+                                                {% elif task.priority == 'medium' %}
+                                                    <span class="badge bg-warning">Medium</span>
+                                                {% elif task.priority == 'low' %}
+                                                    <span class="badge bg-info">Low</span>
+                                                {% else %}
+                                                    <span>------</span>
+                                                {% endif %}
+                                            </td>
+                                            <td class="text-center">
+                                                {% if task.assigned_to %}
+                                                    {{ task.assigned_to.get_full_name|default:task.assigned_to.username }}
+                                                {% else %}
+                                                    <span class="text-muted">Unassigned</span>
+                                                {% endif %}
+                                            </td>
+                                            <td class="text-center">
+                                                {% if task.due_date %}
+                                                    {{ task.due_date }}
+                                                {% else %}
+                                                    <span class="text-muted">No due date</span>
+                                                {% endif %}
+                                            </td>
+                                            <td class="text-center">
+                                                {% if task.due_time %}
+                                                    {{ task.due_time }}
+                                                {% else %}
+                                                    <span class="text-muted">--:--</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {% if task.lead %}
+                                                    <span>Lead:</span> {{ task.lead.first_name }} {{ task.lead.last_name }}
+                                                {% elif task.client %}
+                                                    <span>Client:</span> {{ task.client.first_name }} {{ task.client.last_name }}
+                                                {% else %}
+                                                    <span class="text-muted">None</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <a href="{% url 'task:task_detail' task.pk %}" class="btn btn-sm btn-outline-primary">
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
+                                                    <a href="{% url 'task:task_edit' task.pk %} " class="btn btn-sm btn-outline-secondary">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                    <a href="{% url 'task:task_delete' task.pk %}" class="btn btn-sm btn-outline-danger">
+                                                        <i class="fas fa-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {% empty %}
+                                        <tr>
+                                            <td colspan="7" class="text-center py-4">
+                                                <p class="text-muted mb-0">No tasks found</p>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
 
-                        <!-- Pagination -->
-                        {% if tasks.has_other_pages %}
-                        <nav aria-label="Page navigation" class="mt-4">
-                            <ul class="pagination justify-content-center">
-                                {% if tasks.has_previous %}
-                                <li class="page-item">
-                                    <a class="page-link" href="?page={{ tasks.previous_page_number }}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}{% if request.GET.priority %}&priority={{ request.GET.priority }}{% endif %}{% if request.GET.assigned_to %}&assigned_to={{ request.GET.assigned_to }}{% endif %}">&laquo;</a>
-                                </li>
+                                <!-- Pagination -->
+                                {% if tasks.has_other_pages %}
+                                    <nav aria-label="Page navigation" class="mt-4">
+                                        <ul class="pagination justify-content-center">
+                                            {% if tasks.has_previous %}
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page={{ tasks.previous_page_number }}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}{% if request.GET.priority %}&priority={{ request.GET.priority }}{% endif %}{% if request.GET.assigned_to %}&assigned_to={{ request.GET.assigned_to }}{% endif %}">&laquo;</a>
+                                            </li>
+                                            {% endif %}
+
+                                            {% for i in tasks.paginator.page_range %}
+                                                {% if tasks.number == i %}
+                                                <li class="page-item active">
+                                                    <span class="page-link">{{ i }}</span>
+                                                </li>
+                                                {% else %}
+                                                <li class="page-item">
+                                                    <a class="page-link" href="?page={{ i }}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}{% if request.GET.priority %}&priority={{ request.GET.priority }}{% endif %}{% if request.GET.assigned_to %}&assigned_to={{ request.GET.assigned_to }}{% endif %}">{{ i }}</a>
+                                                </li>
+                                                {% endif %}
+                                            {% endfor %}
+
+                                            {% if tasks.has_next %}
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page={{ tasks.next_page_number }}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}{% if request.GET.priority %}&priority={{ request.GET.priority }}{% endif %}{% if request.GET.assigned_to %}&assigned_to={{ request.GET.assigned_to }}{% endif %}">&raquo;</a>
+                                            </li>
+                                            {% endif %}
+                                        </ul>
+                                    </nav>
                                 {% endif %}
-
-                                {% for i in tasks.paginator.page_range %}
-                                    {% if tasks.number == i %}
-                                    <li class="page-item active">
-                                        <span class="page-link">{{ i }}</span>
-                                    </li>
-                                    {% else %}
-                                    <li class="page-item">
-                                        <a class="page-link" href="?page={{ i }}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}{% if request.GET.priority %}&priority={{ request.GET.priority }}{% endif %}{% if request.GET.assigned_to %}&assigned_to={{ request.GET.assigned_to }}{% endif %}">{{ i }}</a>
-                                    </li>
-                                    {% endif %}
-                                {% endfor %}
-
-                                {% if tasks.has_next %}
-                                <li class="page-item">
-                                    <a class="page-link" href="?page={{ tasks.next_page_number }}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}{% if request.GET.priority %}&priority={{ request.GET.priority }}{% endif %}{% if request.GET.assigned_to %}&assigned_to={{ request.GET.assigned_to }}{% endif %}">&raquo;</a>
-                                </li>
-                                {% endif %}
-                            </ul>
-                        </nav>
+                            </div>
+                        {% else %}
+                            <div class="alert alert-info">
+                                <i class="bi bi-info-circle"></i> No tasks found.
+                            </div>
                         {% endif %}
                     </div>
                 </div>
