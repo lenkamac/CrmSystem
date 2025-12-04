@@ -7,6 +7,10 @@
 
 {% block content %}
 
+    {% block css %}
+    	<link rel="stylesheet" href="{% static 'client/css/client.css' %}">
+    {% endblock %}
+
     {% include 'core/partials/offcanvas_menu.html' %}
 
     <style>
@@ -18,12 +22,12 @@
          }
     </style>
 
-    <div class="container">
+    <div class="container mx-auto pt-3 bg-danger" id="client-container">
 
-        <div class="row mx-lg-5 justify-content-center">
+        <div class="row mt-0 justify-content-center">
             <div class="col-lg-12">
                 <div class="text-center">
-                    <h1>Clients</h1>
+                    <h1 class="fw-bolder">Clients</h1>
                 </div>
             </div>
             <div class="col-lg-12">
@@ -44,86 +48,75 @@
             </div>
         </div>
 
-        <div class="row mt-lg-2 mx-lg-5 justify-content-center">
-            <div class="col-lg-12">
-                <div class="row my-lg-3 mx-lg-3 py-lg-4 justify-content-center">
-                    <div class="col-lg-12 w-100 justify-content-center">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="row justify-content-center">
+                    <div class="col-12 justify-content-center">
                         <!-- Filters --><!-- Add this above your table -->
-                        <div class="row my-lg-3">
-                            <div class="col-lg-12">
+                        <div class="row my-3">
+                            <div class="col-12">
                                 <form method="get">
-                                    <div class="row">
-                                        <div class="col-lg-6">
+                                    <div class="row justify-content-sm-center">
+                                        <div class="col-sm-12 col-md-6">
                                             <div class="row">
-                                                <div class="col-lg-8">
+                                                <div class="col-10">
                                                     <input type="text" name="q" class="form-control"
                                                    placeholder="Find lead by name, email, or company"
                                                    value="{{ request.GET.q|default:'' }}">
                                                 </div>
-                                                <div class="col-lg-4">
-                                                    <button type="submit" class="btn mx-lg-0"
-                                                            style="background-color: #4f8a8b;color: white;">Search
+                                                <div class="col-2">
+                                                    <button type="submit" class="btn btn-search justify-content-center align-items-center">Search
                                                     </button>
                                                 </div>
                                             </div>
 
                                         </div>
-
-                                        <div class="col-lg-6">
-                                            <div class="row justify-content-end">
-                                                <a class="btn add-button mx-lg-2" href="{% url 'client:add' %}">Add client</a>
-
-                                                <a class="btn export-button mx-lg-2"
-                                                   href="{% url 'client:export' %}"
-                                                   style="background-color: #353E46; color: white;">Export to csv</a>
-
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="row py-2 justify-content-center justify-content-sm-start">
+                                                <a class="btn add-button mx-2 fw-bolder" href="{% url 'client:add' %}">Add client</a>
+                                                <a class="btn export-button mx-2" href="{% url 'client:export' %}">Export to csv</a>
                                                 <!-- Button to delete selected clients -->
                                                 <button type="submit"
-                                                        form="bulk-client-delete-form"
-                                                        class="btn-delete-selected mx-lg-2" id="delete-selected-btn"
-                                                        onclick="return confirm('Are you sure you want to delete selected clients?');">
+                                                    form="bulk-client-delete-form"
+                                                    class="btn-delete-selected mx-2" id="delete-selected-btn"
+                                                    onclick="return confirm('Are you sure you want to delete selected clients?');">
                                                     Delete Selected
                                                 </button>
                                             </div>
                                         </div>
-
                                     </div>
-
                                 </form>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-lg-12 w-100">
+                    <div class="col-12">
                         <form id="bulk-client-delete-form" method="post" action="{% url 'client:delete_bulk' %}">
                             {% csrf_token %}
                             <div class="row justify-content-center">
-                                <div class="col-lg-12 my-lg-3">
+                                <div class="col-12 my-3">
                                     <div class="table-responsive-custom">
                                         <table class="table">
                                             <thead class="th-custom">
                                                 <tr>
-                                                    <th scope="col">
+                                                    <th scope="col" class="text-start">
                                                         <!-- Select All checkbox -->
                                                         <label for="select-all"></label>
                                                         <input type="checkbox" id="select-all" />
                                                     </th>
-                                                    <th scope="col">Created at</th>
-                                                    <th scope="col">Company</th>
-                                                    <th scope="col">Name</th>
-                                                    <th scope="col">Email</th>
-                                                    <th scope="col">Status</th>
-                                                    <th scope="col">Detail</th>
-                                                    <th scope="col">Edit</th>
-                                                    <th scope="col">Delete</th>
+                                                    <th scope="col" class="text-start">Created at</th>
+                                                    <th scope="col" class="text-start">Company</th>
+                                                    <th scope="col" class="text-start">Name</th>
+                                                    <th scope="col" class="text-start">Email</th>
+                                                    <th scope="col" class="text-center">Status</th>
+                                                    <th scope="col" class="text-center">Action</th>
                                                 </tr>
                                             </thead>
-
                                             {% if object_list %}
                                                 <tbody>
                                                     {% for client in object_list %}
                                                         <tr>
-                                                            <td>
+                                                            <td class="text-start">
                                                                 <label>
                                                                     <input type="checkbox"
                                                                            name="client_ids"
@@ -131,22 +124,16 @@
                                                                            value="{{ client.id }}"/>
                                                                 </label>
                                                             </td>
-                                                            <td>{{ client.created_at|date:"M-d-Y H:i" }}</td>
-                                                            <td>{{ client.company }}</td>
-                                                            <td>{{ client.last_name }}, {{ client.first_name }}</td>
-                                                            <td>{{ client.email }}</td>
-                                                            <td>{{ client.get_status_display }}</td>
-                                                            <td>
-                                                                <a class="a-detail" href="{% url 'client:detail' client.pk %}"><i class="fa-solid fa-circle-info"></i></a>
-                                                            </td>
-                                                            <td>
-                                                                <a class="edit" href="{% url 'client:edit' client.pk %}"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                            </td>
-                                                            <td>
-                                                                <button type="submit" class="delete-icon bg-transparent border-0">
-                                                                    <img src="{% static 'images/empty.png' %}"
-                                                                         alt="empty"
-                                                                         height="22">
+                                                            <td class="text-start">{{ client.created_at|date:"M-d-Y H:i" }}</td>
+                                                            <td class="text-start">{{ client.company }}</td>
+                                                            <td class="text-start">{{ client.last_name }}, {{ client.first_name }}</td>
+                                                            <td class="text-start">{{ client.email }}</td>
+                                                            <td class="text-center">{{ client.get_status_display }}</td>
+                                                            <td class="text-center">
+                                                                <a href="{% url 'client:detail' client.pk %}"><i class="bi bi-info-circle"></i></a>
+                                                                <a href="{% url 'client:edit' client.pk %}" class="px-2"><i class="bi bi-pencil-square"></i></a>
+                                                                <button type="submit" class="bg-transparent border-0">
+                                                                    <i class="bi bi-trash3"></i>
                                                                 </button>
                                                             </td>
                                                         </tr>
@@ -159,7 +146,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row justify-content-center">
 
                                 {% if is_paginated %}
                                     <nav aria-label="Page navigation">
@@ -206,9 +193,9 @@
             </div>
         </div>
 
-        <div class="row mt-lg-2 mx-lg-3 justify-content-center">
+        <div class="row justify-content-center">
             <div class="col-lg-12">
-                <div class="text-start px-lg-5">
+                <div class="text-start">
                     <a href="{% url 'dashboard:dashboard' %}" class="back-to-dashboard">
                         <i class="fa-solid fa-arrow-left px-3"></i>Back to the dashboard
                     </a>
