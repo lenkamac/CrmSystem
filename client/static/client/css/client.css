@@ -4,14 +4,14 @@
 }
 
 
-
 /* Responsive design*/
 @media (max-width: 575px) {
     #client-container {
         font-size: 0.6rem;
         margin: 25px auto;
         width: 100%;
-        padding: 25px;
+        padding: 35px;
+        height: 100vh;
     }
     table thead th {
         font-size: 0.7rem;
