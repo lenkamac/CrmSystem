@@ -12,15 +12,15 @@
 
     {% include 'core/partials/offcanvas_menu.html' %}
 
-    <div class="container px-md-5 bg-warning" id="product-detail">
+    <div class="container mx-auto" id="product-detail">
         <div class="row mt-4 justify-content-center">
             <div class="col-12 text-center">
-                <h1 class="mb-4">{{ product.name }}</h1>
+                <h1 class="mb-sm-2 fw-bolder">{{ product.name }}</h1>
             </div>
         </div>
 
         <!-- Product Information Card -->
-        <div class="row mb-4">
+        <div class="row mb-4 justify-content-center">
             <div class="col-12">
                 <div class="card products-card shadow-sm">
                     <div class="card-header text-white">
@@ -28,21 +28,18 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-6">
-                                <p><strong>Product ID:</strong> {{ product.id }}</p>
-                                <p><strong>Name:</strong> {{ product.name }}</p>
-                                <p><strong>Net Price:</strong> ${{ product.net_price }}</p>
+                            <div class="col-6 text-start">
+                                <div class="col-sm-12 fw-bolder py-1">Product ID: <span>{{ product.id }}</span></div>
+                                <div class="col-sm-12 fw-bolder">Name: <span>{{ product.name }}</span></div>
+                                <div class="col-sm-12 fw-bolder py-1">Net Price: <span>${{ product.net_price }}</span></div>
                             </div>
-                            <div class="col-md-6">
-                                <p><strong>Total Sold Quantity:</strong> {{ product.sold_quantity }}</p>
-                                <p><strong>Total Revenue:</strong> €{{ product.get_total_price }}</p>
+                            <div class="col-6 bg-white">
+                                <div class="col-sm-12 fw-bolder py-1">Total Sold Quantity: <span>{{ product.sold_quantity }}</span></div>
+                                <div class="col-sm-12 fw-bolder">Total Revenue: <span>€{{ product.get_total_price }}</span></div>
                             </div>
-                        </div>
                         {% if product.description %}
-                        <div class="row mt-3">
-                            <div class="col-12">
-                                <p><strong>Description:</strong></p>
-                                <p>{{ product.description }}</p>
+                            <div class="col-12 border border-2">
+                                <p class="fw-bolder">Description:<br> <span class="fw-normal">{{ product.description }}</span></p>
                             </div>
                         </div>
                         {% endif %}
@@ -52,31 +49,31 @@
         </div>
 
         <!-- Purchase History Card -->
-        <div class="row mb-4">
+        <div class="row justify-content-center">
             <div class="col-12">
                 <div class="card products-card shadow-sm">
                     <div class="card-header text-white">
-                        <h4 class="mb-0">Purchase History</h4>
+                        <h5>Purchase History</h5>
                     </div>
                     <div class="card-body">
                         {% if purchases %}
                             <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
+                                <table class="table table-hover table-striped align-middle">
+                                    <thead class="th-custom">
                                         <tr>
-                                            <th>Purchase Date</th>
-                                            <th>Client</th>
-                                            <th>Quantity</th>
-                                            <th>Unit Price</th>
-                                            <th>Total Price</th>
-                                            <th>Notes</th>
+                                            <th class="text-start text-nowrap">Purchase Date</th>
+                                            <th class="text-start">Client</th>
+                                            <th class="text-center">Quantity</th>
+                                            <th class="text-center text-nowrap">Unit Price</th>
+                                            <th class="text-center text-nowrap">Total Price</th>
+                                            <th class="text-start">Notes</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {% for purchase in purchases %}
                                         <tr>
-                                            <td>{{ purchase.created_at|date:"Y-m-d H:i" }}</td>
-                                            <td>
+                                            <td class="text-start text-nowrap">{{ purchase.created_at|date:"Y-m-d H:i" }}</td>
+                                            <td class="text-start text-nowrap">
                                                 <a href="{% url 'client:detail' purchase.client.id %}">
                                                     {{ purchase.client.last_name }}, {{ purchase.client.first_name }}
                                                 </a>
@@ -84,7 +81,7 @@
                                             <td>{{ purchase.quantity }}</td>
                                             <td>${{ purchase.purchase_price }}</td>
                                             <td>${{ purchase.total_price }}</td>
-                                            <td>{{ purchase.notes|default:"-" }}</td>
+                                            <td class="text-start text-nowrap">{{ purchase.notes|default:"-" }}</td>
                                         </tr>
                                         {% endfor %}
                                     </tbody>
@@ -99,19 +96,21 @@
         </div>
 
         <!-- Back to Products and Edit/Delete Buttons -->
-        <div class="row justify-content-center">
-            <div class="col-6 text-start">
+        <div class="row align-items-center">
+            <div class="col text-start">
                 <a href="{% url 'product:product_list' %}" class="btn back-to-dashboard mb-3">
                     <i class="bi bi-arrow-left"></i> Back to Products
                 </a>
             </div>
-            <div class="col-6 text-end">
-                <div class="row justify-content-end mt-3">
-                    <div class="col">
-                        <a href="{% url 'product:edit_product' product.id %}" class="btn btn-edit-product">
+            <div class="col">
+                <div class="row ">
+                    <div class="col-6">
+                        <a href="{% url 'product:edit_product' product.id %}" class="btn btn-edit-product text-nowrap">
                             <i class="bi bi-pencil"></i> Edit Product
                         </a>
-                        <a href="{% url 'product:delete_product' product.id %}" class="btn btn-delete-product">
+                    </div>
+                    <div class="col-6 px-0">
+                        <a href="{% url 'product:delete_product' product.id %}" class="btn btn-delete-product text-nowrap ms-2">
                             <i class="bi bi-trash"></i> Delete Product
                         </a>
                     </div>

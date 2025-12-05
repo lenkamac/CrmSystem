@@ -89,7 +89,7 @@
                                 </div>
                                 <div class="col-md-2">
                                     <label class="form-label">&nbsp;</label>
-                                    <button type="submit" class="btn btn-secondary d-block">Apply Filters</button>
+                                    <button type="submit" class="btn btn-secondary fw-bolder d-block">Apply Filters</button>
                                 </div>
                             </form>
                         </div>
@@ -109,22 +109,22 @@
                         {% if tasks %}
                             <div class="table-responsive">
                                 <table class="table table-hover align-middle">
-                                    <thead>
+                                    <thead class="th-custom">
                                         <tr>
-                                            <th>Title</th>
+                                            <th class="text-start">Title</th>
                                             <th class="text-center">Status</th>
                                             <th class="text-center">Priority</th>
-                                            <th class="text-center">Assigned To</th>
-                                            <th class="text-center">Due Date</th>
-                                            <th class="text-center">Due Time</th>
-                                            <th class="text-center">Related To</th>
+                                            <th class="text-center text-nowrap">Assigned To</th>
+                                            <th class="text-center text-nowrap">Due Date</th>
+                                            <th class="text-center text-nowrap">Due Time</th>
+                                            <th class="text-center text-nowrap">Related To</th>
                                             <th class="text-center">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {% for task in tasks %}
                                         <tr>
-                                            <td class="text-start" style="width: auto;">
+                                            <td class="text-start text-nowrap" style="width: auto;">
                                                 <a href="#" class="text-decoration-none">
                                                     {{ task.title }}
                                                 </a>
@@ -151,28 +151,28 @@
                                                     <span>------</span>
                                                 {% endif %}
                                             </td>
-                                            <td class="text-center">
+                                            <td class="text-center text-nowrap">
                                                 {% if task.assigned_to %}
                                                     {{ task.assigned_to.get_full_name|default:task.assigned_to.username }}
                                                 {% else %}
                                                     <span class="text-muted">Unassigned</span>
                                                 {% endif %}
                                             </td>
-                                            <td class="text-center">
+                                            <td class="text-center text-nowrap">
                                                 {% if task.due_date %}
                                                     {{ task.due_date }}
                                                 {% else %}
                                                     <span class="text-muted">No due date</span>
                                                 {% endif %}
                                             </td>
-                                            <td class="text-center">
+                                            <td class="text-center text-nowrap">
                                                 {% if task.due_time %}
                                                     {{ task.due_time }}
                                                 {% else %}
                                                     <span class="text-muted">--:--</span>
                                                 {% endif %}
                                             </td>
-                                            <td>
+                                            <td class="text-center text-nowrap">
                                                 {% if task.lead %}
                                                     <span>Lead:</span> {{ task.lead.first_name }} {{ task.lead.last_name }}
                                                 {% elif task.client %}

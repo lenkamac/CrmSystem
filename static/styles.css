@@ -251,7 +251,10 @@ tbody tr td {
     background-color: #697272;
     color: white;
 }
-.form-label {}
+.form-label {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
 
 /* custom button*/
 .add-button {
@@ -314,6 +317,9 @@ tbody tr td {
     font-weight: bold;
     font-size: 22px;
     color: #b02a37;
+}
+.btn-update {
+    background-color: orange;
 }
 
 .btn-search {
@@ -400,6 +406,52 @@ tbody tr td {
    color: blue;
    font-weight: bold;
 }
+
+/* custom.css, link it in your base.html */
+.login-form input {
+    min-width: 0; /* so inputs don't overflow on very small screens */
+    width: 25%;
+}
+
+/* main content*/
+main {
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+.main-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 400px; /* Adjust as needed */
+    position: relative;
+    background: #EFEFE6;
+    padding-top: 20px;
+}
+
+/* Styling for files*/
+.download-a {
+    padding-right: 5px;
+    padding-top: 2px;
+    font-size: 18px;
+    color: #414141;
+}
+.download-icon {
+    height: 40px;
+    width: 40px;
+}
+.files-p {
+    border-left: 3px solid #3b4869;
+    height: auto;
+    padding: 0 4px;
+    margin-top: 5px;
+    background-color: white;
+}
+.download-a:hover {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+
+
 
 /* Small devices (landscape phones, 576px and up) */
 @media (max-width: 575px) {
@@ -509,6 +561,18 @@ tbody tr td {
     .back-to-dashboard {
         font-size: 1rem;
     }
+    .btn-update {
+        font-size: 0.9rem;
+        height: 30px;
+    }
+    .btn-secondary {
+        font-size: 0.9rem;
+        height: 30px;
+    }
+    .btn-primary {
+        font-size: 0.9rem;
+        height: 30px;
+    }
 
     .th-custom tr th {
         font-size: 0.8rem;
@@ -522,204 +586,9 @@ tbody tr td {
     table tbody td a {
         font-size: 0.6rem;
     }
-}
 
-
-
-
-
-@media (min-width: 576px) {
-    html {
-        font-size: 16px;
-    }
-    .container {
-        min-width: 540px;
-    }
-    .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
-        margin-bottom: 0.7rem;
-        font-weight: 500;
-        line-height: 1.2;
-    }
-    .footer {
-        height: 25px;
+    .form-label {
         font-size: 0.8rem;
-        bottom: 0;
     }
-}
-
-
-
-
-/* main content*/
-main {
-    margin: 0 auto;
-    padding: 30px 20px;
-}
-.main-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 400px; /* Adjust as needed */
-    position: relative;
-    background: #EFEFE6;
-    padding-top: 20px;
-}
-
-
-
-.span-detail {
-    font-weight: bold;
-    font-size: 1.2rem;
-    color: #353E46;
-    margin-left: 10px;
-}
-.span-value {
-    font-size: 1.1rem;
-    color: #353E46;
-}
-
-
-/* Hide completely on small screens by default */
-
-
-
-span {
-    font-weight: bold;
-    color: #23523c;
-    margin-left: 10px;
-}
-@media (max-width: 1280px) {
-    .offcanvas-custom {
-        width: 180px;
-    }
-    .offcanvas-custom ul li a {
-        font-size: 1rem;
-    }
-    .offcanvas-custom ul li a i {
-        font-size: 1rem;
-    }
-    .dashb-span {
-        font-size: 1rem;
-    }
-    .img-dashboard {
-        padding-right: 0;
-        height: 22px;
-    }
-}
-@media (max-width: 550px) {
-    .offcanvas-custom {
-        width: 100px;
-    }
-    .offcanvas-custom ul li a {
-        font-size: 0.6rem;
-    }
-    .offcanvas-custom ul li a i {
-        font-size: 0.6rem;
-    }
-    .img-dashboard {
-        height: 15px;
-        padding-right: 0;
-    }
-    .span {
-        font-size: 0.6rem;
-    }
-    .dashb-span {
-        font-size: 0.7rem;
-    }
-    .img-dashboard {
-        padding-right: 0;
-        height: 18px;
-    }
-}
-
-
-
-
-
-
-
-
-/* custom a edit*/
-.a-edit {
-    color: white;
-    text-decoration: none;
-}
-
-/* custom back to a*/
-.custom-back-a {
-    color: #113649;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 18px;
-}
-.custom-back-a:hover {
-    color: #23523c;
-    font-weight: bold;
-    font-size: 22px;
-}
-
-
-
-.card-detail {
-    background-color: white;
-    border-radius: 5px;
-    height: auto;
-    border: 1px solid gray;
-    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
-}
-.card-detail-header {
-    background-color: #697272;
-    color: white;
-}
-
-
-
-
-
-
-/* Styling for files*/
-.download-a {
-    padding-right: 5px;
-    padding-top: 2px;
-    font-size: 18px;
-    color: #414141;
-}
-.download-icon {
-    height: 40px;
-    width: 40px;
-}
-.files-p {
-    border-left: 3px solid #3b4869;
-    height: auto;
-    padding: 0 4px;
-    margin-top: 5px;
-    background-color: white;
-}
-.download-a:hover {
-    font-weight: bold;
-    font-size: 20px;
-}
-
-/* table for task on detail page*/
-#task-table {
-    border: none !important;
-}
-#task-table th, tr td {
-    border: none !important;
-}
-
-
-/* Page content adjustment for fixed nav/footer */
-.container {
-    margin-top: 80px; /* Adjust for the fixed navbar */
-    margin-bottom: 80px; /* Adjust for the fixed footer */
-}
-
-
-
-
-/* custom.css, link it in your base.html */
-.login-form input {
-    min-width: 0; /* so inputs don't overflow on very small screens */
-    width: 25%;
 }
 

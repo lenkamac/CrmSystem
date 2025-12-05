@@ -186,7 +186,6 @@
             </div>
         </div>
 
-
         <!-- ===== PRODUCT PURCHASES GRAPH ===== -->
         <div class="row mt-2 justify-content-center">
             <div class="col-12 border border-3">
@@ -277,6 +276,7 @@
     <script src="{% static 'vendor/plotly/plotly.min.js' %}"></script>
     <!-- Dashboard Chart Script -->
     <script src="{% static 'dashboard/js/chart.js' %}"></script>
+    <!-- Update Dashboard Date/Time -->
     <script>
         function updateDateTime() {
             const now = new Date();
@@ -289,8 +289,8 @@
         updateDateTime();
         setInterval(updateDateTime, 1000);
     </script>
-    <!-- Initialize Dashboard -->
 
+    <!-- Initialize Dashboard -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             initDashboard({
