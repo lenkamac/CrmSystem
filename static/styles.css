@@ -387,6 +387,20 @@ tbody tr td {
     font-size: 16px;
 }
 
+/* Priority colors */
+.priority-high {
+   color: red; /* Rot */
+   font-weight: bold;
+}
+.priority-medium {
+   color: orange;
+   font-weight: bold;
+}
+.priority-low {
+   color: blue;
+   font-weight: bold;
+}
+
 /* Small devices (landscape phones, 576px and up) */
 @media (max-width: 575px) {
     html {
@@ -498,6 +512,15 @@ tbody tr td {
 
     .th-custom tr th {
         font-size: 0.8rem;
+    }
+    table thead th {
+        font-size: 0.7rem;
+    }
+    table tbody td {
+        font-size: 0.8rem;
+    }
+    table tbody td a {
+        font-size: 0.6rem;
     }
 }
 

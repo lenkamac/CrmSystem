@@ -13,13 +13,5 @@
         padding: 35px;
         height: 100vh;
     }
-    table thead th {
-        font-size: 0.7rem;
-    }
-    table tbody td {
-        font-size: 0.8rem;
-    }
-    table tbody td a {
-        font-size: 0.6rem;
-    }
+
 }

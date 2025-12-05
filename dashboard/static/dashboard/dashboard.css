@@ -1,19 +1,29 @@
-.container {
-    margin-left: 280px;
+.dashboard-p {
+    font-size: 1.5rem;
 }
 
-.card {
-    border: 1px solid #697272;
+.dashboard-card {
     border-radius: 5px;
-    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
-    height: 100px;
-    width: 200px;
+    border: 2px solid gray;
+    width: 25%;
+    margin: 15px auto;
 }
 
-.table {
-    border: 1px solid #697272;
+/* Responsive design*/
+@media (max-width: 575px) {
+    .dashboard-container {
+        font-size: 0.6rem;
+        margin: 25px auto;
+        width: 100%;
+        padding: 15px;
+        height: auto;
+    }
+    .dashboard-card {
+        height: 80px;
+    }
+    .dashboard-card h4 {
+        font-size: 1.2rem;
+    }
+
 }
 
-.thead-lead th {
-    background-color: #8f9e9e;
-}
