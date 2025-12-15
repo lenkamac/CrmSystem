@@ -24,7 +24,7 @@
     </style>
 
     <!-- Content -->
-	<div class="container-fluid my-lg-4">
+	<div class="container my-3" id="lead-detail-container">
         <div class="row mx-lg-2">
             <div class="col-lg-12">
                <div class="text-center">
@@ -44,81 +44,115 @@
             </div>
         </div>
 
-        <div class="row bg-transparent mt-lg-4 py-lg-4" style="margin-left: 250px;">
-
-             <div class="col-lg-3">
-                 <div class="card card-detail mt-lg-4">
-
+        <div class="row bg-transparent mt-3">
+             <div class="col-sm-12">
+                 <div class="card card-detail">
                      <div class="card-detail-header">
-                         <h3 class="card-title text-center my-0 py-lg-2">
-                             <i class="fa-solid fa-id-card px-lg-2"></i>
+                         <h3 class="card-title text-center fw-bolder py-2 mx-2 mt-2">
+                             <i class="fa-solid fa-id-card"></i>
                              {{ lead.last_name }}, {{ lead.first_name }}
                          </h3>
                      </div>
-                     <div class="card-body d-flex flex-column">
-                         <p class="fs-6 py-lg-2"><span class="fw-bolder">Company:</span> {{ lead.company }}</p>
-                         <p class="fs-6 py-lg-2"><span class="fw-bolder">Email:</span> {{ lead.email }}</p>
-                         <p class="fs-6 py-lg-2"><span class="fw-bolder">Phone:</span> {{ lead.phone }}</p>
-                        <p class="fs-6 py-lg-2"><span class="fw-bolder">Address:</span>
-                            {% if lead.address %}
-                                <span style="margin-left: 8px; font-weight: normal;">{{ lead.address }},
-                                    {{ lead.zipcode }} {{ lead.city }}</span>
-                            {% else %}
-                                n/a
-                            {% endif %}
-                        </p>
-                        <p class="fs-6 py-lg-2"><span class="fw-bolder">Country:</span>
-                            {% if lead.country %}
-                                {{ lead.country }}
-                            {% else %}
-                                n/a
-                            {% endif %}
-                        </p>
-                         {% if lead.description %}
-                            <p class="fs-6 py-lg-2"><span class="fw-bolder">Description:</span>
-                               <br>
-                                <span style="font-weight: normal; display: block;" title="{{ lead.description|escape }}">
-                                    {{ lead.description|truncatewords:10 }}
-                                </span>
-                            </p>
-                         {% endif %}
-                        <p class="fs-6 py-lg-2"><span class="fw-bolder">Status:</span> {{ lead.status }}</p>
-                        <p class="fs-6 py-lg-2"><span class="fw-bolder">Priority:</span>
-                            {{ lead.get_priority_display }}
-                        </p>
-                        <p class="fs-6 py-lg-2"><span class="fw-bolder">Status Sale:</span> {{ lead.status_sale }}</p>
-                        <p class="fs-6 py-lg-2"><span class="fw-bolder">Website:</span>
-                            {% if lead.website %}
-                                {{ lead.website }}
-                            {% else %}
-                                n/a
-                            {% endif %}
-                        </p>
+                     <div class="card-body">
+                        <table class="table table-sm mb-0 align-middle lead-detail-table">
+                            <tbody>
+                                <tr class="pb-1">
+                                    <td class="fs-6 fw-bolder" style="width: 160px;">Company:</td>
+                                    <td class="fw-normal pe-2">{{ lead.company }}</td>
+                                </tr>
+                                <tr class="pb-1">
+                                    <td class="fs-6 fw-bolder" style="width: 160px;">Email:</td>
+                                    <td class="fw-normal pe-2">{{ lead.email }}</td>
+                                </tr>
+                                <tr class="pb-1">
+                                    <td class="fs-6 fw-bolder" style="width: 160px;">Phone:</td>
+                                    <td class="fw-normal pe-2">{{ lead.phone }}</td>
+                                </tr>
+                                <tr class="pb-1">
+                                    <td class="fs-6 fw-bolder" style="width: 160px;">Address:</td>
+                                    <td class="fw-normal pe-2">
+                                        {% if lead.address %}
+                                            {{ lead.address }}, <br>
+                                            {{ lead.zipcode }} {{ lead.city }}
+                                        {% else %}
+                                            <span class="text-muted">n/a</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr class="pb-1">
+                                    <td class="fs-6 fw-bolder" style="width: 160px;">Country:</td>
+                                    <td class="fw-normal pe-2">
+                                        {% if lead.country %}
+                                            {{ lead.country }}
+                                        {% else %}
+                                            <span class="text-muted">n/a</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr class="pb-1">
+                                    <td class="fs-6 fw-bolder" style="width: 160px;">Description:</td>
+                                    <td class="fw-normal pe-2">
+                                        {% if lead.description %}
+                                            <span style="font-weight: normal; display: block;" title="{{ lead.description|escape }}">
+                                            {{ lead.description|truncatewords:10 }}
+                                        </span>
+                                        {% else %}
+                                            <span class="text-muted">n/a</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr class="pb-1">
+                                    <td class="fs-6 fw-bolder" style="width: 160px;">Status:</td>
+                                    <td class="fw-normal pe-2">{{ lead.status }}</td>
+                                </tr>
+                                <tr class="pb-1">
+                                    <td class="fs-6 fw-bolder" style="width: 160px;">Priority:</td>
+                                    <td class="fw-normal pe-2">{{ lead.get_priority_display }}</td>
+                                </tr>
+                                <tr class="pb-1">
+                                    <td class="fs-6 fw-bolder" style="width: 160px;">Status Sale:</td>
+                                    <td class="fw-normal pe-2">{{ lead.status_sale }}</td>
+                                </tr>
+                                <tr class="pb-1">
+                                    <td class="fs-6 fw-bolder" style="width: 160px;">Website:</td>
+                                    <td class="fw-normal pe-2">
+                                        {% if lead.website %}
+                                            {{ lead.website }}
+                                        {% else %}
+                                            <span class="text-muted">n/a</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                      </div>
-                     <div class="card-footer">
-                         <p class="fs-6 py-lg-2"><span class="fw-bolder">Created at:</span>
-                             {{ lead.created_at|date:"M-d-Y H:i" }}
-                         </p>
-                         <p class="fs-6 py-lg-2"><span class="fw-bolder">Modifed at:</span>
-                             {{ lead.modified_at|date:"M-d-Y H:i" }}
-                         </p>
+                     <div class="card-footer mt-2">
+                         <div class="row justify-content-start">
+                             <div class="col-12 pb-1">
+                                 <span class="fw-bolder">Created at:</span> {{ lead.created_at|date:"M-d-Y H:i" }}
+                             </div>
+                             <div class="col-12">
+                                  <span class="fw-bolder">Modifed at:</span> {{ lead.modified_at|date:"M-d-Y H:i" }}
+                             </div>
+                         </div>
+
                      </div>
                  </div>
              </div>
 
-            <div class="col-lg-9">
+            <div class="col-sm-12 mt-3">
                 <!-- Comment section -->
-                <div class="row mx-lg-2 bg-white border border-3 mt-lg-4">
-                    <div class="col-lg-12" style="background-color: #697272;">
-                        <h3 class="my-0 py-lg-2 text-white text-center">
+                <div class="row bg-white border rounded-3 border-2  justify-content-sm-center">
+                    <div class="col-lg-12 rounded-3" style="background-color: #697272;">
+                        <h3 class="text-white text-center pt-2">
                             <i class="fa-solid fa-comment mx-lg-2 px-lg-2"></i>Comments
                         </h3>
                     </div>
-                    <div class="col-lg-12 mt-lg-3 pt-lg-2">
-                        <div class="row mx-lg-2 mt-3 bg-transparent">
+                    <div class="col-lg-12 mt-3 pt-2">
+                        <div class="row mx-2 mt-0 bg-transparent">
                             {% for comment in comments %}
                                 <div class="col-lg-12 mb-lg-0" style="height: 30px;">
-                                    <p class="fw-bolder mb-lg-0" style="font-size: 18px;">
+                                    <p class="fw-bolder fs-5 mb-0">
                                         @{{ comment.created_by }} {{ comment.created_at|date:"M-d-Y H:i" }}
                                     </p>
                                 </div>
@@ -128,8 +162,8 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
-                                    <div class="row mb-lg-5 justify-content-start">
-                                        <div class="col-lg-1">
+                                    <div class="row justify-content-center justify-content-sm-start">
+                                        <div class="col-12">
                                             <!-- Delete Button -->
                                             <form method="post" action="{% url 'lead:delete_comment' lead.id comment.id %}"
                                                   style="display: inline;">
@@ -140,12 +174,10 @@
                                                     Delete
                                                 </button>
                                             </form>
-                                        </div>
-                                        <div class="col-lg-1">
                                             <!-- Edit Button -->
                                            <a href="#" data-bs-toggle="modal" data-bs-target="#editCommentModal-{{ comment.id }}"
-                                              class="btn-edit px-lg-3"
-                                              style="font-size: 18px; text-decoration: none;">Edit
+                                              class="btn-edit px-3"
+                                              style="text-decoration: none;">Edit
                                            </a>
                                             <!-- Edit Comment Modal -->
                                            <div class="modal fade" id="editCommentModal-{{ comment.id }}" tabindex="-1"
@@ -176,7 +208,7 @@
                                 <p class="not-found-message">No comments found for this lead.</p>
                             {% endfor %}
                         </div>
-                        <div class="row mx-lg-2">
+                        <div class="row mx-2 justify-content-center mt-2">
                             <!-- Pagination -->
                             <div class="col-lg-12">
                                 <div class="row justify-content-center">
@@ -220,7 +252,7 @@
                     </div>
                 </div>
                 <!--Task section-->
-                <div class="row mx-lg-2 bg-white border border-3 mt-lg-4">
+                <div class="row bg-white rounded-3 border border-3 mt-lg-4">
                     <div class="col-lg-12" style="background-color: #697272;">
                         <h3 class="py-lg-2 my-0 text-center text-white">
                             <i class="fa fa-thumb-tack px-lg-2" aria-hidden="true"></i>Tasks</h3>
@@ -518,6 +550,8 @@
         </div>
     </div>
 
+
     <script src="{% static 'js/project.js' %}"></script>
+
 
 {% endblock %}

@@ -22,7 +22,7 @@
          }
     </style>
 
-	<div class="container mx-auto pt-3 bg-danger" id="lead-container">
+	<div class="container mx-auto pt-3" id="lead-container">
 
         <div class="row mt-0 justify-content-center">
             <div class="col-12">
@@ -53,7 +53,7 @@
                 <div class="row justify-content-center">
                     <div class="col-12 justify-content-center">
                         <!-- Filters --><!-- Add this above your table -->
-                        <div class="row my-lg-3">
+                        <div class="row my-3">
                             <div class="col-12">
                                 <form method="get">
                                     <div class="row justify-content-sm-center">
@@ -110,7 +110,7 @@
                                                     <th scope="col" class="text-start">Name</th>
                                                     <th scope="col" class="text-start">Email</th>
                                                     <th scope="col" class="text-center">Status</th>
-                                                    <th scope="col" class="text-center">Status sales</th>
+                                                    <th scope="col" class="text-center text-nowrap">Status sales</th>
                                                     <th scope="col">Action</th>
                                                 </tr>
                                             </thead>
@@ -127,12 +127,12 @@
                                                                            value="{{ lead.id }}"/>
                                                                 </label>
                                                             </td>
-                                                            <td class="text-start">{{ lead.created_at|date:"M-d-Y H:i" }}</td>
-                                                            <td class="text-start">{{ lead.company }}</td>
-                                                            <td class="text-start">{{ lead.last_name }}, {{ lead.first_name }}</td>
-                                                            <td class="text-start">{{ lead.email }}</td>
-                                                            <td class="text-center">{{ lead.get_status_display }}</td>
-                                                            <td class="text-center">
+                                                            <td class="text-start text-nowrap">{{ lead.created_at|date:"M-d-Y H:i" }}</td>
+                                                            <td class="text-start text-nowrap">{{ lead.company }}</td>
+                                                            <td class="text-start text-nowrap">{{ lead.last_name }}, {{ lead.first_name }}</td>
+                                                            <td class="text-start text-nowrap">{{ lead.email }}</td>
+                                                            <td class="text-center text-nowrap">{{ lead.get_status_display }}</td>
+                                                            <td class="text-center text-nowrap">
                                                                 {% if lead.status_sale %}
                                                                     {{ lead.status_sale }}
                                                                     {% else %}
