@@ -3,6 +3,30 @@
     font-size: 1.1rem;
 }
 
+/* Lead detail page */
+.card-title {
+    background-color: #697272;
+    color: white;
+    border-radius: 5px;
+}
+.card-footer {
+    background-color: #697272;
+    color: white;
+}
+
+.client-detail-table,
+.client-detail-table th,
+.client-detail-table td,
+.client-detail-table tbody,
+.client-detail-table tr {
+  border: 0 !important;
+}
+
+.client-detail-table td {
+    text-align: left;
+    font-size: 1rem;
+}
+
 
 /* Responsive design*/
 @media (max-width: 575px) {
@@ -10,8 +34,11 @@
         font-size: 0.6rem;
         margin: 25px auto;
         width: 100%;
-        padding: 35px;
-        height: 100vh;
+        padding: 25px;
+        height: 100vh;;
+    }
+    .client-detail-table td {
+        font-size: 0.9rem;
     }
 
 }
