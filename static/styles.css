@@ -190,13 +190,13 @@ table {
     border: 1px solid #3b4869;
     text-align: center;
 }
-tbody tr td a {
+.tbody tr td a {
     text-decoration: none;
     font-size: 1.1rem;
     color: #23523c;
     font-weight: bold;
 }
-tbody tr td {
+.tbody tr td {
     border: 1px solid #3b4869;
     font-size: 16px;
     text-align: center;
@@ -217,6 +217,12 @@ tbody tr td {
     color: darkorange;
     font-size: 1.2rem;
     -webkit-text-stroke-width: 0.5px;
+}
+.bi-download {
+    font-size: 1.2rem;
+}
+.icon-bold {
+  -webkit-text-stroke: 0.8px currentColor;
 }
 
 /* status */
@@ -431,12 +437,8 @@ main {
 .download-a {
     padding-right: 5px;
     padding-top: 2px;
-    font-size: 18px;
+    font-size: 1.2rem;
     color: #414141;
-}
-.download-icon {
-    height: 40px;
-    width: 40px;
 }
 .files-p {
     border-left: 3px solid #3b4869;
@@ -444,14 +446,16 @@ main {
     padding: 0 4px;
     margin-top: 5px;
     background-color: white;
+    font-size: 1.1rem;
+}
+.download-a {
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 .download-a:hover {
     font-weight: bold;
     font-size: 20px;
 }
-
-
-
 
 /* Small devices (landscape phones, 576px and up) */
 @media (max-width: 575px) {
@@ -545,14 +549,25 @@ main {
     .bi-pencil-square {
         font-size: 0.6rem;
     }
+    .bi-download {
+        font-size: 0.6rem;
+    }
 
     .add-button {
         font-size: 1rem;
         height: 30px;
+        width: 60px;
     }
     .export-button {
         font-size: 1rem;
         height: 30px;
+    }
+    .btn-edit {
+        font-size: 1rem;
+        height: 30px;
+    }
+    .btn-delete {
+        font-size: 1rem;
     }
     .btn-delete-selected {
         font-size: 1rem;
@@ -573,6 +588,10 @@ main {
         font-size: 0.9rem;
         height: 30px;
     }
+    .comment-btn {
+        font-size: 0.9rem;
+        height: 30px;
+    }
 
     .th-custom tr th {
         font-size: 0.8rem;
@@ -587,8 +606,16 @@ main {
         font-size: 0.6rem;
     }
 
+    .files-p {
+        font-size: 0.8rem;
+    }
+    .download-a {
+        font-size: 0.9rem;
+    }
+
     .form-label {
         font-size: 0.8rem;
     }
+
 }
 

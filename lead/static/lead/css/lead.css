@@ -60,5 +60,7 @@
     .lead-detail-table td {
         font-size: 0.9rem;
     }
-
+    #convert {
+        font-size: 1rem;
+    }
 }
