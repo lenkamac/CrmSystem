@@ -42,7 +42,6 @@
 .lead-detail-table tr {
   border: 0 !important;
 }
-
 .lead-detail-table td {
     text-align: left;
     font-size: 1rem;
@@ -61,6 +60,14 @@
         font-size: 0.9rem;
     }
     #convert {
+        font-size: 0.8rem;
+    }
+}
+@media (max-width: 768px) {
+    #convert {
         font-size: 1rem;
+    }
+    #cancel-button {
+
     }
 }

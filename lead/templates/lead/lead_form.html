@@ -47,10 +47,10 @@
                     {% endfor %}
 
                     <!-- Submit Button -->
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <div class="d-flex gap-2 d-md-flex justify-content-md-end">
                         <button type="submit" class="form-submit-btn py-lg-2">Submit</button>
-                        <button type="button" class="btn btn-secondary py-lg-2" onclick="window.location.href='{% url 'lead:list' %}'">
-                            Cancel
+                        <button type="button" class="btn btn-cancel btn-secondary fw-bolder py-lg-2 d-flex align-items-center justify-content-center" onclick="window.location.href='{% url 'lead:list' %}'">
+                            <span style="font-size: 1.2rem;text-align: center;">Cancel</span>
                         </button>
 
                     </div>
