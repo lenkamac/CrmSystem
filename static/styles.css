@@ -618,4 +618,162 @@ main {
     }
 
 }
+@media (max-width: 768px) {
+    .container {
+        max-width: 720px;
+    }
+    .offcanvas-custom {
+        width: 170px;
+        transform: translateX(-100%); /* Start off-screen */
+        position: fixed;
+        top: 40px;
+        left: 0;
+        bottom: 30px;
+        z-index: 1045;
+        transition: transform 0.3s ease-in-out;
+        display: block !important; /* Ensure it's not display:none */
+    }
+    .offcanvas-custom.show {
+        transform: translateX(0); /* Slide into view */
+    }
+
+    /* Smaller font sizes for mobile/tablet */
+    .offcanvas-custom .offcanvas-a {
+        font-size: 1.2rem;
+        padding: 10px;
+    }
+
+    .offcanvas-custom ul li a {
+        font-size: 1rem;
+        padding: 8px 12px;
+    }
+    /* Add space between the icon and text */
+    .offcanvas-custom ul li a i {
+        margin-right: 8px;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        line-height: 1.2;
+    }
+
+    .navbar {
+        font-size: 0.8rem;
+        height: 43px;
+    }
+    .navbar-brand {
+        font-size: 0.8rem;
+        color: #f8fafc !important; /* Light text */
+    }
+    .navbar-brand:hover {
+        color: #ABABAF;
+    }
+    .nav-item {
+        background-color: #C7C8CB;
+        margin-right: 20px;
+
+        .navbar-toggler {
+            margin-right: 10px;
+            margin-bottom: 0;
+            padding: 0;
+            filter: invert(1);
+        }
+
+        .nav-link {
+            color: #cbd5e1 !important; /* Light text */
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: #f8fafc !important;
+        }
+    }
+
+
+    .footer {
+        height: 30px;
+        padding: 5px;
+        font-size: 0.7rem;
+        bottom: 0;
+    }
+
+    .bi-trash3 {
+        font-size: 0.6rem;
+    }
+    .bi-info-circle {
+        font-size: 0.6rem;
+    }
+    .bi-pencil-square {
+        font-size: 0.6rem;
+    }
+    .bi-download {
+        font-size: 0.6rem;
+    }
+
+    .add-button {
+        font-size: 1rem;
+        height: 30px;
+        width: 60px;
+    }
+    .export-button {
+        font-size: 1rem;
+        height: 30px;
+    }
+    .btn-edit {
+        font-size: 1rem;
+        height: 30px;
+    }
+    .btn-delete {
+        font-size: 1rem;
+    }
+    .btn-delete-selected {
+        font-size: 1rem;
+        height: 30px;
+    }
+    .back-to-dashboard {
+        font-size: 1rem;
+    }
+    .btn-update {
+        font-size: 0.9rem;
+        height: 30px;
+    }
+    .btn-secondary {
+        font-size: 0.9rem;
+        height: 30px;
+    }
+    .btn-primary {
+        font-size: 0.9rem;
+        height: 30px;
+    }
+    .comment-btn {
+        font-size: 0.9rem;
+        height: 30px;
+    }
+
+    .th-custom tr th {
+        font-size: 0.8rem;
+    }
+    table thead th {
+        font-size: 0.7rem;
+    }
+    table tbody td {
+        font-size: 0.8rem;
+    }
+    table tbody td a {
+        font-size: 0.6rem;
+    }
+
+    .files-p {
+        font-size: 0.8rem;
+    }
+    .download-a {
+        font-size: 0.9rem;
+    }
+
+    .form-label {
+        font-size: 0.8rem;
+    }
+}
 
