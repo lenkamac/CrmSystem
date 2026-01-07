@@ -314,15 +314,35 @@ function loadUpcomingEvents(page=1) {
             ul.innerHTML = '';
             data.events.forEach(event => {
                 const li = document.createElement('li');
-                li.classList.add('list-group-item');
-                let display = `<strong>${event.title}</strong><br>
-                    <span>Start: ${formatDateDisplay(event.start)}</span>`;
+                li.classList.add('list-group-item',  'd-flex', 'justify-content-between', 'align-items-center', 'flex-wrap');
+
+                let display = `
+                    <div class="event-info flex-grow-1 text-start">
+                        <strong>${event.title}</strong><br>
+                        <small>Start: ${formatDateDisplay(event.start)}</small>
+                `;
                 if (event.end) {
-                    display += `<br><span>End: ${formatDateDisplay(event.end)}</span>`;
+                    display += `<br><small>End: ${formatDateDisplay(event.end)}</small>`;
                 }
                 if (event.description) {
-                    display += `<br><small class="text-muted">${event.description}</small>`;
+                    display += `<br><small class="text-muted d-block text-truncate" style="max-width: 200px;">${event.description}</small>`;
                 }
+                display += `</div>`;
+
+                // Action Buttons
+                display += `
+                    <div class="event-actions d-flex gap-1 mt-1 mt-sm-0">
+                        <button class="btn btn-sm btn-outline-info p-1" onclick="showEventDetail('${event.id}')" title="View">
+                            <i class="bi bi-info-circle"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-primary p-1" onclick="openEditModal('${event.id}')" title="Edit">
+                            <i class="bi bi-pencil-square"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger p-1" onclick="deleteEvent('${event.id}')" title="Delete">
+                            <i class="bi bi-trash3"></i>
+                        </button>
+                    </div>
+                `;
                 li.innerHTML = display;
                 ul.appendChild(li);
             });
@@ -354,4 +374,97 @@ function loadUpcomingEvents(page=1) {
 
 function refreshUpcomingEvents() {
     loadUpcomingEvents(1); // Always load first page, or pass desired page
+}
+
+// --- Global functions for Action Buttons ---
+
+function showEventDetail(eventId) {
+    // Fetch event data using the global URL variable
+    fetch(calendarEventsUrl)
+        .then(response => response.json())
+        .then(events => {
+            // Find event ensuring ID comparison matches (string to string)
+            const event = events.find(e => String(e.id) === String(eventId));
+
+            if (event) {
+                // Fill in the details modal with the event's data
+                document.getElementById('detailEventTitle').textContent = event.title || '';
+                document.getElementById('detailEventStart').textContent = event.start ? formatDateDisplay(event.start) : '';
+                document.getElementById('detailEventEnd').textContent = event.end ? formatDateDisplay(event.end) : 'No end';
+                document.getElementById('detailEventDesc').textContent = event.description || 'No description';
+
+                // Show the details modal using Bootstrap's modern instance method
+                var detailModalEl = document.getElementById('eventDetailModal');
+                var modalInstance = bootstrap.Modal.getOrCreateInstance(detailModalEl);
+                modalInstance.show();
+            } else {
+                console.error("Event detail not found for ID:", eventId);
+            }
+        })
+        .catch(err => console.error("Error loading event details:", err));
+}
+
+function openEditModal(eventId) {
+    // Fetch the list of events to find the specific one
+    fetch(calendarEventsUrl)
+        .then(response => response.json())
+        .then(events => {
+            // Ensure ID comparison works (casting to string)
+            const event = events.find(e => String(e.id) === String(eventId));
+
+            if (event) {
+                document.getElementById('editEventId').value = event.id;
+                document.getElementById('editEventTitle').value = event.title;
+
+                // Format dates for the datetime-local / flatpickr inputs
+                const startVal = toDatetimeLocal(event.start);
+                const endVal = event.end ? toDatetimeLocal(event.end) : '';
+
+                document.getElementById('editEventStart').value = startVal;
+                document.getElementById('editEventEnd').value = endVal;
+                document.getElementById('editEventDesc').value = event.description || "";
+
+                // If you are using flatpickr, we need to update its internal state
+                if (document.getElementById('editEventStart')._flatpickr) {
+                    document.getElementById('editEventStart')._flatpickr.setDate(startVal);
+                }
+                if (document.getElementById('editEventEnd')._flatpickr) {
+                    document.getElementById('editEventEnd')._flatpickr.setDate(endVal);
+                }
+
+                // Show the modal
+                var editModalEl = document.getElementById('editEventModal');
+                var modalInstance = bootstrap.Modal.getOrCreateInstance(editModalEl);
+                modalInstance.show();
+            } else {
+                console.error("Event not found with ID:", eventId);
+            }
+        })
+        .catch(err => console.error("Error loading event for edit:", err));
+}
+
+function deleteEvent(eventId) {
+    if (confirm('Are you sure you want to delete this event?')) {
+        fetch(`delete_event/${eventId}/`, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken'),
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Event deleted.');
+                refreshUpcomingEvents();
+                // Also refresh the calendar if it exists on the page
+                const calendarEl = document.getElementById('calendar');
+                if (calendarEl) {
+                    location.reload(); // Quickest way to sync both views
+                }
+            } else {
+                alert('Failed to delete event.');
+            }
+        })
+        .catch(() => alert('Error deleting event.'));
+    }
 }

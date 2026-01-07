@@ -28,6 +28,14 @@
     font-size: 1rem;
     margin-bottom: 5px;
     height: auto;
+    border-radius: 6px;
+  }
+
+  .event-actions .btn {
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
   }
 
 
@@ -245,6 +253,12 @@
         font-size: 0.7rem;
         height: 30px;
     }
+    .event-info strong {
+          font-size: 0.9rem;
+      }
+      .event-info small {
+          font-size: 0.75rem;
+      }
 
     .fc .fc-button {
         padding: 6px 8px;
