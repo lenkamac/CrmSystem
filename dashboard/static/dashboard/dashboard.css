@@ -26,4 +26,19 @@
     }
 
 }
+@media (max-width: 768px) {
+    .dashboard-container {
+        font-size: 0.6rem;
+        margin: 25px auto;
+        width: 100%;
+        padding: 15px;
+        height: auto;
+    }
+    .dashboard-card {
+        height: 80px;
+    }
+    .dashboard-card h4 {
+        font-size: 1.2rem;
+    }
+}
 

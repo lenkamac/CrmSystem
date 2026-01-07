@@ -239,7 +239,7 @@
     }
 
     #addEventBtn {
-        width: 50%;
+        width: auto;
         margin-left: 0;
         margin-bottom: 10px;
         font-size: 0.7rem;

@@ -19,6 +19,7 @@
 
 #btn-add-product {
     width: 180px;
+    height: 40px;
     font-size: 1.2rem;
     color: white;
     font-weight: bold;
@@ -69,10 +70,13 @@
     }
 
     #btn-add-product {
-        width: 110px;
+        width: auto;
         font-size: 0.8rem;
-        padding: 3px;
         margin: 5px 10px;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+        padding: 0 15px;
 
     }
     .products-card {
@@ -94,15 +98,90 @@
     }
     .btn-view {
         font-size: 0.6rem;
-        height: 22px;
+        height: 20px;
+        padding: 3px 10px;
     }
     .btn-warning {
-        font-size: 0.6rem;
-        height: 22px;
+        font-size: 0.7rem;
+        height: 20px;
+        padding: 4px 10px;
+        width: auto;
     }
     .btn-delete {
         font-size: 0.6rem;
         height: 20px;
+        padding: 4px 10px;
+        width: auto;
+    }
+    .bi-trash {
+        font-size: 0.6rem;
+    }
+    .btn-edit-product {
+        font-size: 0.7rem;
+    }
+    .btn-delete-product {
+        font-size: 0.7rem;
+    }
+    .btn-danger {
+        font-size: 0.6rem;
+    }
+}
+
+@media (max-width: 768px) {
+    #product-list {
+       font-size: 0.6rem;
+        margin: auto;
+        width: 100%;
+        padding: 25px;
+    }
+    #product-detail {
+        margin: auto;
+        width: 100%;
+    }
+    #btn-add-product {
+        width: auto;
+        height: 25px;
+        font-size: 0.8rem;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+        padding: 4px;
+
+    }
+    .products-card {
+        margin: 0;
+        padding:5px;
+    }
+    .card-header {
+        text-align: start;
+        height: 32px;
+    }
+    table thead th {
+        font-size: 0.7rem;
+    }
+    table tbody td {
+        font-size: 0.8rem;
+    }
+    table tbody td a {
+        font-size: 0.6rem;
+    }
+    .btn-view {
+        font-size: 0.7rem;
+        height: 20px;
+        width: auto;
+        padding: 4px 10px;
+    }
+    .btn-warning {
+        font-size: 0.7rem;
+        height: 22px;
+        width: auto;
+        padding: 4px 10px;
+    }
+    .btn-delete {
+        font-size: 0.6rem;
+        height: 20px;
+        width: auto;
+        padding: 4px 10px;
     }
     .bi-trash {
         font-size: 0.6rem;

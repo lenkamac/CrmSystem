@@ -17,7 +17,7 @@
         <div class="container mx-auto" id="product-list">
             <div class="row justify-content-center">
                 <div class="col-12 py-3 text-center">
-                    <h1 class="mt-sm-0 fw-bolder">Products</h1>
+                    <h1 class="mt-sm-0 pt-sm-3 fw-bolder">Products</h1>
                 </div>
                 <div class="col-12 text-center">
                     <a href="{% url 'product:add_product' %}" class="btn justify-content-center align-items-center" id="btn-add-product">
@@ -61,7 +61,7 @@
                                         <tbody>
                                             {% for product in products %}
                                             <tr>
-                                                <td class="text-start">{{ product.name }}</td>
+                                                <td class="text-start text-nowrap">{{ product.name }}</td>
                                                 <td>{{ product.description|truncatewords:10 }}</td>
                                                 <td>${{ product.net_price }}</td>
                                                 <td>{{ product.sold_quantity }}</td>

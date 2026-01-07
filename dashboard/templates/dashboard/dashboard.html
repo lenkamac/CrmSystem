@@ -20,9 +20,9 @@
                     <h1>Welcome to the dashboard "<span style="color: #0f5132;">{{ user.username }}</span>"</h1>
                 </div>
             </div>
-            <div class="col-sm-2">
+            <div class="col-sm-12">
                 <div class="text-center mt-3">
-                    <div id="dashboard-datetime" class="text-sm-center fw-semibold" style="font-size: 1.1rem;"></div>
+                    <div id="dashboard-datetime" class="fs-6 fw-bolder"></div>
                 </div>
             </div>
         </div>
@@ -30,8 +30,8 @@
         <div class="row mt-2 justify-content-center">
             <div class="col-sm-12">
                 <div class="card dashboard-card text-center shadow-sm" style="background-color: #7eaad7;">
-                    <div class="card-body">
-                        <h4><i class="fa fa-users px-2"></i>Leads</h4>
+                    <div class="card-body py-sm-1">
+                        <h4 class="pt-sm-1"><i class="fa fa-users px-2"></i>Leads</h4>
                         <p class="dashboard-p">{{ lead_count }}</p>
                     </div>
                 </div>
@@ -78,8 +78,8 @@
         <div class="row mt-2 justify-content-sm-center">
             <div class="col-sm-12">
                 <div class="card dashboard-card text-center shadow-sm" style="background-color: #a7caad;">
-                    <div class="card-body">
-                        <h4><i class="fa fa-users px-2"></i>Clients</h4>
+                    <div class="card-body py-sm-1">
+                        <h4 class="pt-sm-1"><i class="fa fa-users px-2"></i>Clients</h4>
                         <p class="dashboard-p">{{ client_count }}</p>
                     </div>
                 </div>

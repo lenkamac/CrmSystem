@@ -556,7 +556,12 @@ main {
     .add-button {
         font-size: 1rem;
         height: 30px;
-        width: 60px;
+        width: auto;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+        padding: 0 15px;
     }
     .export-button {
         font-size: 1rem;
@@ -620,7 +625,7 @@ main {
 }
 @media (max-width: 768px) {
     .container {
-        max-width: 720px;
+        max-width: 745px;
     }
     .offcanvas-custom {
         width: 170px;
@@ -663,7 +668,7 @@ main {
         height: 43px;
     }
     .navbar-brand {
-        font-size: 0.8rem;
+        font-size: 1rem;
         color: #f8fafc !important; /* Light text */
     }
     .navbar-brand:hover {
@@ -715,11 +720,22 @@ main {
     .add-button {
         font-size: 1rem;
         height: 30px;
-        width: 60px;
+        width: auto;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+        padding: 0 15px;
     }
     .export-button {
         font-size: 1rem;
         height: 30px;
+        width: auto;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+        padding: 0 15px;
     }
     .btn-edit {
         font-size: 1rem;
