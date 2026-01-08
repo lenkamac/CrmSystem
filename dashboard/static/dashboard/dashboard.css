@@ -1,7 +1,6 @@
 .dashboard-p {
     font-size: 1.5rem;
 }
-
 .dashboard-card {
     border-radius: 5px;
     border: 2px solid gray;
@@ -42,3 +41,11 @@
     }
 }
 
+@media (max-width: 991px) {
+    .dashboard-card {
+        height: 90px;
+    }
+    .dashboard-p {
+        padding-bottom: 8px;
+    }
+}

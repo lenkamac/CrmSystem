@@ -12,12 +12,12 @@
     {% include 'core/partials/offcanvas_menu.html' %}
 
     <!-- Page Content -->
-    <div class="container dashboard-container mx-auto">
+    <div class="container py-md-2 dashboard-container mx-auto">
 
-        <div class="row justify-content-center">
+        <div class="row pt-md-3 justify-content-center">
             <div class="col-sm-12">
-                <div class="text-center">
-                    <h1>Welcome to the dashboard "<span style="color: #0f5132;">{{ user.username }}</span>"</h1>
+                <div class="text-center pt-md-3">
+                    <h1>Welcome to the dashboard "<span style="color: #3ba48c;">{{ user.username }}</span>"</h1>
                 </div>
             </div>
             <div class="col-sm-12">
@@ -31,7 +31,7 @@
             <div class="col-sm-12">
                 <div class="card dashboard-card text-center shadow-sm" style="background-color: #7eaad7;">
                     <div class="card-body py-sm-1">
-                        <h4 class="pt-sm-1"><i class="fa fa-users px-2"></i>Leads</h4>
+                        <h4 class="pt-sm-1 pt-md-2"><i class="fa fa-users px-2"></i>Leads</h4>
                         <p class="dashboard-p">{{ lead_count }}</p>
                     </div>
                 </div>
@@ -132,7 +132,7 @@
 
                 <!-- Time Period Filter -->
                 <div class="row mb-4 pb-3 gy-3">
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 col-md-6">
                         <!-- Chart Type Selector -->
                         <div class="d-flex align-items-center justify-content-between justify-content-md-start">
                             <label for="chartType" class="me-2 fs-6 fw-semibold text-nowrap">Chart Type:</label>
@@ -144,7 +144,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 col-md-6">
                         <!-- Data Filter -->
                         <div class="d-flex align-items-center justify-content-between justify-content-md-start">
                             <label for="dataFilter" class="me-2 fs-6 fw-semibold text-nowrap">Show:</label>
@@ -163,9 +163,9 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-12 col-md-4">
-                        <form method="get" id="periodFilterForm" class="d-flex align-items-center justify-content-between justify-content-md-end">
-                            <label for="period" class="me-2 fs-6 fw-semibold">Time Period:</label>
+                    <div class="col-12 col-md-5">
+                        <form method="get" id="periodFilterForm" class="d-flex align-items-sm-center justify-content-between justify-content-md-start">
+                            <label for="period" class="me-2 fs-6 fw-semibold text-nowrap">Time Period:</label>
                             <select name="period" id="period" class="form-select form-select-sm" style="width: auto;">
                                 <option value="all" {% if selected_period == 'all' %}selected{% endif %}>All Time</option>
                                 <option value="7days" {% if selected_period == '7days' %}selected{% endif %}>Last 7 Days</option>
