@@ -1132,6 +1132,28 @@ main {
         font-size: 1.1rem;
     }
 }
+@media (max-width: 1599.98px) {
+    .container {
+        max-width: 1550px;
+        padding-left: 250px;
+    }
+    .offcanvas-custom {
+        width: 220px;
+        bottom: 45px;
+    }
+}
+@media (max-width: 1799.98px) {
+    .container {
+        max-width: 1750px;
+        padding-left: 270px;
+    }
+    .offcanvas-custom {
+        width: 240px;
+    }
+    .offcanvas-a {
+        font-size: 1.3rem;
+    }
+}
 @media (min-width: 2150px) {
     .container {
         min-width: 1990px;
