@@ -4,7 +4,7 @@
 .dashboard-card {
     border-radius: 5px;
     border: 2px solid gray;
-    width: 25%;
+    width: 50%;
     margin: 15px auto;
 }
 
@@ -40,7 +40,6 @@
         font-size: 1.2rem;
     }
 }
-
 @media (max-width: 991px) {
     .dashboard-card {
         height: 90px;
@@ -49,3 +48,27 @@
         padding-bottom: 8px;
     }
 }
+@media (max-width: 1199.98px) {
+    .dashboard-card {
+        width: 25%;
+    }
+}
+@media (max-width: 1399.98px) {
+    .dashboard-card {
+        width: 25%;
+    }
+}
+@media (min-width:2150px) {
+    .dashboard-card {
+        width: 50%;
+    }
+    #dashboard-datetime {
+        font-size: 1.5rem !important;
+        padding-top: 0;
+    }
+    .dashboard-p {
+        font-size: 2rem;
+    }
+}
+
+

@@ -14,21 +14,21 @@
     <!-- Page Content -->
     <div class="container py-md-2 dashboard-container mx-auto">
 
-        <div class="row pt-md-3 justify-content-center">
-            <div class="col-sm-12">
-                <div class="text-center pt-md-3">
+        <div class="row pt-md-3 pt-xxl-3 justify-content-center">
+            <div class="col-12 col-xxl-9">
+                <div class="text-center text-xxl-end pt-md-3">
                     <h1>Welcome to the dashboard "<span style="color: #3ba48c;">{{ user.username }}</span>"</h1>
                 </div>
             </div>
-            <div class="col-sm-12">
-                <div class="text-center mt-3">
+            <div class="col-12 col-xxl-3">
+                <div class="text-center text-xxl-end mt-3  pt-xxl-3">
                     <div id="dashboard-datetime" class="fs-6 fw-bolder"></div>
                 </div>
             </div>
         </div>
 
-        <div class="row mt-2 justify-content-center">
-            <div class="col-sm-12">
+        <div class="row mt-2 justify-content-sm-center pt-xxl-4">
+            <div class="col-12 col-xxl-4 pt-xxl-4">
                 <div class="card dashboard-card text-center shadow-sm" style="background-color: #7eaad7;">
                     <div class="card-body py-sm-1">
                         <h4 class="pt-sm-1 pt-md-2"><i class="fa fa-users px-2"></i>Leads</h4>
@@ -36,7 +36,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12">
+            <div class="col-12 col-xxl-8">
                 <div class="row justify-content-sm-center">
                     <div class="col-sm-12">
                         <h4 class="text-sm-start fw-bolder">Latest Leads</h4>
@@ -76,7 +76,7 @@
         </div>
 
         <div class="row mt-2 justify-content-sm-center">
-            <div class="col-sm-12">
+            <div class="col-12 col-xxl-4 pt-xxl-4">
                 <div class="card dashboard-card text-center shadow-sm" style="background-color: #a7caad;">
                     <div class="card-body py-sm-1">
                         <h4 class="pt-sm-1"><i class="fa fa-users px-2"></i>Clients</h4>
@@ -84,9 +84,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12">
+            <div class="col-12 col-xxl-8 pt-xxl-4">
                 <div class="row justify-content-sm-center">
-                    <div class="col-sm-12">
+                    <div class="col-12">
                         <h4 class="fw-bolder text-sm-start">Latest Clients</h4>
                     </div>
                     <div class="col-sm-12">
@@ -124,11 +124,11 @@
         <!-- Interactive Clients and Leads Graph -->
         <div class="row mt-2 justify-content-start">
             <div class="col-12 border border-3">
-                <row class="mb-3 pt-4">
+                <div class="row mb-3 pt-4 pt-xxl-2">
                     <div class="col-12">
                         <h4 class="my-4 text-center fw-bolder">Leads & Clients Over Time</h4>
                     </div>
-                </row>
+                </div>
 
                 <!-- Time Period Filter -->
                 <div class="row mb-4 pb-3 gy-3">
@@ -192,6 +192,7 @@
                 <div class="row mb-3 pt-4">
                     <h4 class="fw-bolder text-center"><i class="bi bi-graph-up"></i> Product Purchases Over Time</h4>
                 </div>
+
                 <!-- Purchase Summary -->
                 <div class="row mb-4 justify-content-center">
                     <div class="col">
@@ -212,6 +213,7 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- Purchase Filters -->
                 <div class="row mb-4">
                     <div class="col-md-3">

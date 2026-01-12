@@ -19,11 +19,6 @@
     cursor: pointer;
 }
 
-#lead-container {
-    margin-left: 235px;
-    font-size: 1.1rem;
-}
-
 /* Lead detail page */
 .card-title {
     background-color: #697272;
@@ -67,7 +62,21 @@
     #convert {
         font-size: 1rem;
     }
-    #cancel-button {
+    #lead-container {
+        font-size: 0.6rem;
+        margin: 25px auto;
+        width: 100%;
+        padding: 25px;
+        height: 100vh;
+    }
+}
 
+@media (max-width: 991px) {
+    #lead-container {
+        font-size: 0.7rem;
+        margin: 25px auto;
+        width: 100%;
+        padding: 25px;
+        height: 100vh;
     }
 }
