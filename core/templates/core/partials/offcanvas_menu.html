@@ -33,5 +33,20 @@
                 </a>
             </li>
         </ul>
+
+        {% if request.user.is_authenticated %}
+            <hr class="text-secondary">
+            <ul class="list-unstyled">
+                <li class="text-start">
+                    <a href="{% url 'userprofile:account' %}">
+                        <i class="bi bi-person-circle px-md-2"></i>Account</a>
+                </li>
+
+                <li class="text-start">
+                    <a href="{% url 'logout' %}" class="text-danger">
+                        <i class="bi bi-box-arrow-right px-md-2"></i>Logout</a>
+                </li>
+            </ul>
+        {% endif %}
     </div>
 </div>

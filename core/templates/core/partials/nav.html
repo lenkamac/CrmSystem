@@ -16,13 +16,7 @@
         <div class="collapse navbar-collapse flex-grow-0">
             <ul class="navbar-nav text-end">
                 {% if request.user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'userprofile:account' %}">Account</a>
-                    </li>
 
-                    <li class="nav-item">
-                        <a href="{% url 'logout' %}" class="nav-link-delete">Logout</a>
-                    </li>
 
                 {% else %}
 
