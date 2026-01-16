@@ -12,7 +12,7 @@
     {% include 'core/partials/offcanvas_menu.html' %}
 
     <div class="container mx-auto" id="task-list">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center pt-lg-4">
             <div class="col-12 py-3">
                 <div class="text-center">
                     <h1 class="mt-sm-0 fw-bolder">Tasks</h1>
@@ -36,10 +36,9 @@
             </div>
 
             <div class="col-12 my-1 px-3 py-1 text-center">
-                    <a href="{% url 'task:task_add' %}" class="btn justify-content-center align-items-center" id="btn-add-task">
-                        <i class="fas fa-plus"></i> New Task
-                    </a>
-
+                <a href="{% url 'task:task_add' %}" class="btn justify-content-center align-items-center" id="btn-add-task">
+                    <i class="fas fa-plus"></i> New Task
+                </a>
             </div>
         </div>
 
