@@ -1,6 +1,6 @@
-.container {
-   padding-top: 50px;
-    margin-left: 280px;
+#account-container {
+    width: 100%;
+    height: 100vh;
 }
 
 
@@ -22,99 +22,41 @@
 .btn-register:hover {
     background-color: #517e7e;
 }
-@media (max-width: 767px) {
-    .btn-register {
-        width: 100px;
-        font-size: 14px;
-    }
-}
 
 .span-term {
     font-size: 16px;
     padding-left: 12px;
 }
-@media (max-width: 767px) {
-    .span-term {
-        font-size: 12px;
-    }
-}
-@media (min-width: 768px) and (max-width: 1399px) {
-    .span-term {
-        font-size: 14px;
-    }
-}
-@media (min-width: 1400px) {
-    .span-term {
-        font-size: 16px;
-    }
-}
-@media (min-width: 1950px) and (max-width: 2598px) {
-    .span-term {
-        font-size: 20px;
-        padding-left: 14px;
-    }
-}
-@media (min-width: 2599px) {
-    .span-term {
-        font-size: 24px;
-        padding-left: 18px;
-    }
-}
+
 
 #id_accept_terms {
     margin-left: 140px;
 }
-@media (max-width: 767px) {
-    #id_accept_terms {
-        margin-left: 0;
-        padding-left: 0;
-    }
-}
-@media (min-width: 768px) and (max-width: 1399px) {
-    #id_accept_terms {
-        margin-left: 95px;
-    }
-}
-@media (min-width: 1400px) {
-    #id_accept_terms {
-        margin-left: 155px;
-    }
-}
-@media (min-width: 1950px) and (max-width: 2598px) {
-    #id_accept_terms {
-        margin-left: 210px;
-    }
-}
-@media (min-width: 2599px) {
-   #id_accept_terms {
-        margin-left: 320px;
-    }
-}
-
 
 .btn-account-edit {
     width: auto;
     background-color: #697272;
     color: #e9ecf6;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 1rem;
     border: none;
-    height: 40px;
     border-radius: 5px;
+    height: 40px;
+    text-align: center;
 }
-.btn-account-edit i {
-    padding: 0 4px;
-    margin-left: 5px;
 
-}
 .btn-account-edit a {
     font-weight: bold;
     color: #e9ecf6;
-    font-size: 18px;
-    text-align: start;
-    padding: 2px;
+    font-size: 1.2rem;
+    text-align: center;
+    padding-bottom: 3px;
     margin-bottom: 4px;
     text-decoration: none;
+}
+.bi-pencil-square {
+    color: darkorange;
+    font-size: 1rem;
 }
 
 .btn-account-password {
@@ -122,21 +64,52 @@
     background-color: #809b9b;
     color: #e9ecf6;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 1.2rem;
     border: none;
     height: 40px;
     border-radius: 5px;
 }
-.btn-account-password i {
-    padding: 0 4px;
-    margin-left: 5px;
-}
 .btn-account-password a {
     font-weight: bold;
     color: #e9ecf6;
-    font-size: 18px;
+    font-size: 1.2rem;
     text-align: start;
     padding: 2px;
     margin-bottom: 4px;
     text-decoration: none;
+}
+
+@media (max-width: 575.98px) {
+    #account-container {
+        font-size: 0.6rem;
+        margin: auto;
+        width: 100%;
+        padding: 25px;
+    }
+    .btn-account-edit {
+        width: auto;
+        font-size: 0.8rem;
+        margin: 5px 10px;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+        padding: 0 15px;
+    }
+    .btn-account-password {
+        width: auto;
+        font-size: 0.7rem;
+        margin: 5px 10px;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+        padding: 0 15px;
+    }
+}
+@media (max-width: 768px) {
+    #account-container {
+        font-size: 0.6rem;
+        margin: auto;
+        width: 100%;
+        padding: 25px;
+    }
 }
