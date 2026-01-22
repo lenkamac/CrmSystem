@@ -105,7 +105,7 @@
         padding: 0 15px;
     }
 }
-@media (max-width: 768px) {
+@media (max-width: 767.98px) {
     #account-container {
         font-size: 0.6rem;
         margin: auto;

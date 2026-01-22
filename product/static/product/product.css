@@ -57,7 +57,7 @@
 
 
 /* Responsive design*/
-@media (max-width: 575px) {
+@media (max-width: 575.98px) {
     #product-list {
        font-size: 0.6rem;
         margin: auto;
@@ -132,7 +132,7 @@
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767.98px) {
     #product-list {
        font-size: 0.6rem;
         margin: auto;
