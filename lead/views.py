@@ -201,7 +201,11 @@ def leads_bulk_delete(request):
 # Convert lead to client
 def convert_lead_to_client(request, lead_id):
     # Retrieve the Lead instance by ID
-    lead = get_object_or_404(Lead, id=lead_id)
+    lead = get_object_or_404(Lead, id=lead_id, created_by=request.user)
+
+    if lead.converted_to_client:
+        messages.info(request, "This lead is already converted.")
+        return redirect("lead:detail", pk=lead.id)
 
     # Create a new Client based on the Lead
     Client.objects.create(
@@ -212,12 +216,19 @@ def convert_lead_to_client(request, lead_id):
         phone=lead.phone,
         status=lead.status_sale,
         description=lead.description,
-        created_at=lead.created_at,
-        created_by=lead.created_by,
+        website=lead.website,
+        address=lead.address,
+        city=lead.city,
+        zipcode=lead.zipcode,
+        country=lead.country,
+        created_by=request.user,
+        converted_from_lead=lead,
     )
 
-    # Delete the Lead instance from the database
-    lead.delete()
+    lead.converted_to_client = True
+    lead.save(update_fields=["converted_to_client"])
+
+
 
     # Set success message and redirect (adjust URL as needed)
     messages.success(request, f"Lead {lead.last_name} {lead.first_name} has been converted to a client.")
