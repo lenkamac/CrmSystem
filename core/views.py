@@ -6,7 +6,7 @@ from django.db import transaction
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
-from django.views.generic import CreateView, DetailView, ListView, UpdateView
+from django.views.generic import CreateView, DetailView, ListView, UpdateView, DeleteView
 
 from .forms import ProjectTeamAddForm, TeamForm, TeamMemberAddForm, ProjectForm
 from .models import Project, ProjectTeamAssignment, Team, TeamMembership
@@ -60,6 +60,21 @@ class TeamUpdateView(LoginRequiredMixin, UpdateView):
 
     def form_valid(self, form):
         messages.success(self.request, "Team updated.")
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse("core:teams_manage")
+
+class TeamDeleteView(LoginRequiredMixin, DeleteView):
+    model = Team
+    template_name = "core/teams/team_confirm_delete.html"
+    context_object_name = "team"
+
+    def get_queryset(self):
+        return Team.objects.filter(created_by=self.request.user)
+
+    def form_valid(self, form):
+        messages.success(self.request, "Team deleted.")
         return super().form_valid(form)
 
     def get_success_url(self):

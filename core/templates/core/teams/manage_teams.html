@@ -50,6 +50,7 @@
               <td class="text-end">
                 <a class="btn btn-sm btn-outline-secondary" href="{% url 'core:team_edit' team.pk %}">Edit</a>
                 <a class="btn btn-sm btn-outline-primary" href="{% url 'core:team_members' team.pk %}">Members</a>
+                <a class="btn btn-sm btn-outline-danger" href="{% url 'core:team_delete' team.pk %}">Delete</a>
 
                 <form class="d-inline" method="post" action="{% url 'core:team_toggle_active' team.pk %}">
                   {% csrf_token %}
