@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Create Project{% endblock %}
+
+{% block content %}
+
+    {% block css %}
+    	<link rel="stylesheet" href="{% static 'styles.css' %}">
+    {% endblock %}
+
+    {% include 'core/partials/offcanvas_menu.html' %}
+
+<div class="container py-4" style="max-width: 860px;">
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <h1 class="h3 mb-0">Create Project</h1>
+    <a class="btn btn-outline-secondary" href="{% url 'core:project_list' %}">Back</a>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary" type="submit">Create</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

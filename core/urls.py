@@ -5,3 +5,28 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('contact/', views.contact, name='contact'),
 ]
+
+app_name = "core"
+
+urlpatterns += [
+    path("teams/", views.TeamListView.as_view(), name="teams_manage"),
+    path("teams/add/", views.TeamCreateView.as_view(), name="team_add"),
+    path("teams/<int:pk>/edit/", views.TeamUpdateView.as_view(), name="team_edit"),
+    path("teams/<int:pk>/toggle-active/", views.team_toggle_active, name="team_toggle_active"),
+    path("teams/<int:pk>/members/", views.TeamMembersView.as_view(), name="team_members"),
+    path("teams/<int:team_pk>/members/add/", views.team_member_add, name="team_member_add"),
+    path(
+        "teams/<int:team_pk>/members/<int:membership_pk>/toggle-active/",
+        views.team_member_toggle_active,
+        name="team_member_toggle_active",
+    ),
+    path("projects/", views.ProjectListView.as_view(), name="project_list"),
+    path("projects/add/", views.ProjectCreateView.as_view(), name="project_add"),
+    path("projects/<int:pk>/", views.ProjectDetailView.as_view(), name="project_detail"),
+    path("projects/<int:project_pk>/teams/add/", views.project_team_add, name="project_team_add"),
+    path(
+        "projects/<int:project_pk>/teams/<int:assignment_pk>/remove/",
+        views.project_team_remove,
+        name="project_team_remove",
+    ),
+]

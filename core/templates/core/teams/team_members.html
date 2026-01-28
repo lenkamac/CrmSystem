@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %}Team Members - {{ team.name }}{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <div>
+      <h1 class="h3 mb-1">{{ team.name }}</h1>
+      <div class="text-muted">Manage memberships</div>
+    </div>
+    <a class="btn btn-outline-secondary" href="{% url 'core:teams_manage' %}">Back to teams</a>
+  </div>
+
+  {% if messages %}
+    <div class="mb-3">
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags|default:'info' }} mb-2">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <div class="card mb-3">
+    <div class="card-header">Add member</div>
+    <div class="card-body">
+      <form method="post" action="{% url 'core:team_member_add' team.pk %}" class="row g-2 align-items-end">
+        {% csrf_token %}
+        <div class="col-md-6">
+          <label class="form-label">User</label>
+          {{ add_form.user }}
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Role</label>
+          {{ add_form.role }}
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-primary w-100" type="submit">Add</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">Members</div>
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th class="text-end">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for m in memberships %}
+            <tr>
+              <td>{{ m.user.username }}</td>
+              <td>{{ m.get_role_display }}</td>
+              <td>
+                {% if m.is_active %}
+                  <span class="badge text-bg-success">Active</span>
+                {% else %}
+                  <span class="badge text-bg-secondary">Inactive</span>
+                {% endif %}
+              </td>
+              <td class="text-end">
+                <form method="post" action="{% url 'core:team_member_toggle_active' team.pk m.pk %}">
+                  {% csrf_token %}
+                  {% if m.is_active %}
+                    <button class="btn btn-sm btn-outline-danger" type="submit">Remove</button>
+                  {% else %}
+                    <button class="btn btn-sm btn-outline-success" type="submit">Re-add</button>
+                  {% endif %}
+                </form>
+              </td>
+            </tr>
+          {% empty %}
+            <tr><td colspan="4" class="text-center py-4 text-muted">No memberships.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

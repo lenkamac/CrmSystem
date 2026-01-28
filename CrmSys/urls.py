@@ -26,6 +26,8 @@ urlpatterns = ([
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
     path('dashboard/', include('dashboard.urls')),
+    path('dashboard/teams/', include('core.urls')),
+    path('dashboard/projects/', include('core.urls')),
     path('dashboard/account/', include('userprofile.urls')),
     path('dashboard/leads/', include('lead.urls')),
     path('dashboard/tasks/', include('task.urls')),
