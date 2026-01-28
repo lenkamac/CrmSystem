@@ -18,6 +18,38 @@ def index(request):
 def contact(request):
     return render(request, 'core/contact.html')
 
+class ProjectUpdateView(LoginRequiredMixin, UpdateView):
+    model = Project
+    form_class = ProjectForm
+    template_name = "core/projects/project_form.html"
+    context_object_name = "project"
+
+    def get_queryset(self):
+        return Project.objects.filter(created_by=self.request.user)
+
+    def form_valid(self, form):
+        messages.success(self.request, "Project updated.")
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse("core:project_detail", kwargs={"pk": self.object.pk})
+
+
+class ProjectDeleteView(LoginRequiredMixin, DeleteView):
+    model = Project
+    template_name = "core/projects/project_confirm_delete.html"
+    context_object_name = "project"
+
+    def get_queryset(self):
+        return Project.objects.filter(created_by=self.request.user)
+
+    def form_valid(self, form):
+        messages.success(self.request, "Project deleted.")
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse("core:project_list")
+
 class ProjectListView(LoginRequiredMixin, ListView):
     model = Project
     template_name = "core/projects/project_list.html"

@@ -13,7 +13,7 @@
 
 <div class="container py-4" style="max-width: 860px;">
   <div class="d-flex align-items-center justify-content-between mb-3">
-    <h1 class="h3 mb-0">Create Project</h1>
+    <h1 class="h3 mb-0">{% if object %}Edit Project{% else %}Create Project{% endif %}</h1>
     <a class="btn btn-outline-secondary" href="{% url 'core:project_list' %}">Back</a>
   </div>
 
@@ -22,7 +22,9 @@
       <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button class="btn btn-primary" type="submit">Create</button>
+        <button class="btn btn-primary" type="submit">
+          {% if object %}Save changes{% else %}Create{% endif %}
+        </button>
       </form>
     </div>
   </div>

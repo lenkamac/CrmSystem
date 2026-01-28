@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Delete Project{% endblock %}
+
+{% block content %}
+    {% block css %}
+    	<link rel="stylesheet" href="{% static 'styles.css' %}">
+    {% endblock %}
+
+    {% include 'core/partials/offcanvas_menu.html' %}
+
+<div class="container py-4" style="max-width: 760px;">
+  <h1 class="h3 mb-3">Delete project</h1>
+
+  <div class="alert alert-warning">
+    <div class="fw-semibold mb-1">This will permanently delete:</div>
+    <ul class="mb-0">
+      <li>The project: <strong>{{ project.name }}</strong></li>
+      <li>Its team assignments</li>
+      <li>Its conversations/messages (if linked to the project)</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <form method="post">
+        {% csrf_token %}
+        <div class="d-flex gap-2">
+          <button class="btn btn-danger" type="submit">Yes, delete</button>
+          <a class="btn btn-outline-secondary" href="{% url 'core:project_detail' project.pk %}">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

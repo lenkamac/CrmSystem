@@ -22,6 +22,8 @@ urlpatterns += [
     ),
     path("projects/", views.ProjectListView.as_view(), name="project_list"),
     path("projects/add/", views.ProjectCreateView.as_view(), name="project_add"),
+    path("projects/<int:pk>/edit/", views.ProjectUpdateView.as_view(), name="project_edit"),
+    path("projects/<int:pk>/delete/", views.ProjectDeleteView.as_view(), name="project_delete"),
     path("teams/<int:pk>/delete/", views.TeamDeleteView.as_view(), name="team_delete"),
     path("projects/<int:pk>/", views.ProjectDetailView.as_view(), name="project_detail"),
     path("projects/<int:project_pk>/teams/add/", views.project_team_add, name="project_team_add"),
